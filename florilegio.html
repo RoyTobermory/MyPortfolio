@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floralegio V1 - Libro Digital</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .book-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            perspective: 1500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        .book {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .cover-page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-origin: left center;
+            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 10;
+        }
+
+        .cover-page.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .pages-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .pages-container.visible {
+            opacity: 1;
+        }
+
+        .page {
+            width: 50%;
+            height: 100%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 2px;
+            overflow: hidden;
+        }
+
+        .page-left {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .page-right {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .page img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: inherit;
+        }
+
+        .loading {
+            color: #666;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .control-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .page-info {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .title {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .book-container {
+                width: 90vw;
+                height: 70vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <div class="title">Floralegio V1</div>
+        <div class="book" id="book">
+            <div class="cover-page" id="coverPage">
+                <div class="loading">Cargando libro...</div>
+            </div>
+            <div class="pages-container" id="pagesContainer">
+                <div class="page page-left" id="pageLeft">
+                    <div class="loading">Cargando...</div>
+                </div>
+                <div class="page page-right" id="pageRight">
+                    <div class="loading">Cargando...</div>
+                </div>
+            </div>
+        </div>
+        <div class="controls">
+            <button class="control-btn" id="prevBtn" onclick="previousPage()">← Anterior</button>
+            <div class="page-info" id="pageInfo">Portada</div>
+            <button class="control-btn" id="nextBtn" onclick="nextPage()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let pdfDoc = null;
+        let currentPage = 0;
+        let totalPages = 0;
+        let pageImages = [];
+        let showingCover = true;
+
+        // URL de tu PDF en GitHub
+        const pdfUrl = 'https://raw.githubusercontent.com/RoyTobermory/MyPortfolio/78a1569f715807bff0608a9602a9057fa60fbfe0/flor/FloralegioV1.pdf';
+
+        // Configurar PDF.js
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        async function loadPDF() {
+            try {
+                pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+                totalPages = pdfDoc.numPages;
+                console.log('PDF cargado:', totalPages, 'páginas');
+                
+                await renderAllPages();
+                updatePageInfo();
+                updateControls();
+            } catch (error) {
+                console.error('Error cargando PDF:', error);
+                document.getElementById('coverPage').innerHTML = 
+                    '<div class="loading" style="color: red;">Error cargando el libro. Verifica la URL del PDF.</div>';
+            }
+        }
+
+        async function renderAllPages() {
+            pageImages = [];
+            
+            for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                try {
+                    const page = await pdfDoc.getPage(pageNum);
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    const viewport = page.getViewport({ scale: 1.5 });
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    
+                    await page.render({
+                        canvasContext: ctx,
+                        viewport: viewport
+                    }).promise;
+                    
+                    pageImages.push(canvas.toDataURL());
+                } catch (error) {
+                    console.error(`Error renderizando página ${pageNum}:`, error);
+                    pageImages.push(null);
+                }
+            }
+            
+            // Mostrar portada
+            if (pageImages[0]) {
+                document.getElementById('coverPage').innerHTML = 
+                    `<img src="${pageImages[0]}" alt="Portada" style="max-width: 100%; max-height: 100%; object-fit: contain;">`;
+            }
+            
+            updatePageDisplay();
+        }
+
+        function updatePageDisplay() {
+            const pageLeft = document.getElementById('pageLeft');
+            const pageRight = document.getElementById('pageRight');
+            
+            if (showingCover) {
+                return;
+            }
+            
+            // Calcular qué páginas mostrar
+            const leftPageIndex = currentPage;
+            const rightPageIndex = currentPage + 1;
+            
+            // Página izquierda
+            if (leftPageIndex < totalPages && pageImages[leftPageIndex]) {
+                pageLeft.innerHTML = `<img src="${pageImages[leftPageIndex]}" alt="Página ${leftPageIndex + 1}">`;
+            } else {
+                pageLeft.innerHTML = '<div class="loading">Página en blanco</div>';
+            }
+            
+            // Página derecha
+            if (rightPageIndex < totalPages && pageImages[rightPageIndex]) {
+                pageRight.innerHTML = `<img src="${pageImages[rightPageIndex]}" alt="Página ${rightPageIndex + 1}">`;
+            } else {
+                pageRight.innerHTML = '<div class="loading">Página en blanco</div>';
+            }
+        }
+
+        function nextPage() {
+            if (showingCover) {
+                // Voltear portada
+                document.getElementById('coverPage').classList.add('flipped');
+                setTimeout(() => {
+                    document.getElementById('pagesContainer').classList.add('visible');
+                    showingCover = false;
+                    currentPage = 1; // Empezar desde página 2 (índice 1)
+                    updatePageDisplay();
+                    updatePageInfo();
+                    updateControls();
+                }, 600);
+            } else {
+                if (currentPage + 2 < totalPages) {
+                    currentPage += 2;
+                    updatePageDisplay();
+                    updatePageInfo();
+                    updateControls();
+                }
+            }
+        }
+
+        function previousPage() {
+            if (!showingCover && currentPage > 1) {
+                currentPage -= 2;
+                updatePageDisplay();
+                updatePageInfo();
+                updateControls();
+            } else if (!showingCover && currentPage <= 1) {
+                // Volver a la portada
+                document.getElementById('pagesContainer').classList.remove('visible');
+                document.getElementById('coverPage').classList.remove('flipped');
+                showingCover = true;
+                currentPage = 0;
+                updatePageInfo();
+                updateControls();
+            }
+        }
+
+        function updatePageInfo() {
+            const pageInfo = document.getElementById('pageInfo');
+            if (showingCover) {
+                pageInfo.textContent = 'Portada';
+            } else {
+                const leftPage = currentPage + 1;
+                const rightPage = Math.min(currentPage + 2, totalPages);
+                pageInfo.textContent = `Páginas ${leftPage}-${rightPage} de ${totalPages}`;
+            }
+        }
+
+        function updateControls() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = showingCover;
+            nextBtn.disabled = !showingCover && currentPage + 2 >= totalPages;
+        }
+
+        // Cargar el PDF al iniciar
+        loadPDF();
+    </script>
+</body>
+</html>
