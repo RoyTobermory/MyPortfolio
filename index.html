@@ -3,50 +3,437 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Portfolio - Artista Digital</title>
+    <title>R.Mondragon</title>
+    <link rel="icon" type="image/png" href="img/Icon.png">
     <link rel="stylesheet" href="css/estilos.css">
+    <style>
+        .welcome-screen {
+            min-height: 100vh;
+            background: linear-gradient(45deg, #7bafbd 0%, #6496a6 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 40px;
+            position: relative;
+        }
+
+        .welcome-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('img/forest-background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-content {
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .option-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            padding: 30px 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Hacer que TODOS los botones tengan el mismo hover */
+        .option-card:hover,
+        .logo-card:hover,
+        .linktree-card:hover,
+        .proyectos-card:hover,
+        .florilegio-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Hacer que TODOS los íconos/contenedores escalen igual */
+        .option-card:hover .option-icon,
+        .logo-card:hover .logo-container,
+        .linktree-card:hover .linktree-container,
+        .proyectos-card:hover .proyectos-container,
+        .florilegio-card:hover .florilegio-container {
+            transform: scale(1.1);
+        }
+
+        .option-icon {
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 2.4rem;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+        }
+
+        .option-card:hover .option-icon {
+            background: #2c3e50;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .option-text {
+            font-size: 1rem;
+            color: white;
+            text-align: center;
+            line-height: 1.4;
+            font-weight: bold;
+            max-width: 140px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+        }
+
+        .logo-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            padding: 30px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .logo-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-container {
+            width: 90px;
+            height: 90px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .logo-card:hover .logo-container {
+            transform: scale(1.1);
+        }
+
+        .special-logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .special-logo-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-card:hover .special-logo-image {
+            opacity: 0;
+        }
+
+        .logo-card:hover .special-logo-hover {
+            opacity: 1;
+        }
+
+        /* Iconos */
+        .icon-paint::before { content: "🎨"; }
+        .icon-stories::before { content: "📖"; }
+        .icon-blog::before { content: "✍️"; }
+        .icon-book::before { content: "📚"; }
+
+        .option-icon::before {
+            font-size: 2.4rem;
+        }
+
+        /* Estilos para el nuevo botón de Linktree */
+        .linktree-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            padding: 30px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .linktree-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            padding: 30px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .linktree-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .linktree-container {
+            width: 90px;
+            height: 90px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .linktree-card:hover .linktree-container {
+            transform: scale(1.1);
+        }
+
+        /* Estilos para el botón de Proyectos */
+        .proyectos-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            padding: 30px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .proyectos-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .proyectos-container {
+            width: 90px;
+            height: 90px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .proyectos-card:hover .proyectos-container {
+            transform: scale(1.1);
+        }
+
+        .proyectos-image {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Estilos para el botón de Florilegio */
+        .florilegio-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            padding: 30px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .florilegio-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .florilegio-container {
+            width: 90px;
+            height: 90px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .florilegio-card:hover .florilegio-container {
+            transform: scale(1.1);
+        }
+
+        .florilegio-image {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .options-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 40px 30px;
+                max-width: 800px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-screen {
+                padding: 100px 20px 40px;
+            }
+            
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px 30px;
+                max-width: 500px;
+            }
+            
+            .option-icon, .logo-container {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .option-text {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-screen {
+                padding: 90px 20px 40px;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                max-width: 300px;
+            }
+            
+            .option-card, .logo-card {
+                padding: 25px 15px;
+            }
+            
+            .option-icon, .logo-container {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- El menú se inserta automáticamente aquí -->
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="main-content">
-        <!-- SECCIÓN HERO -->
-        <section class="hero">
-            <div class="hero-container">
-                <h1>Bienvenido a Mi Portfolio</h1>
-                <p>Artista digital especializado en 3D, Concept Art e Ilustración</p>
-                <a href="portfolio.html" class="cta-button">Ver Mi Trabajo</a>
+    <main class="welcome-screen">
+        <div class="welcome-content">
+            <div class="options-grid">
+                <a href="sobre-mi.html" class="logo-card">
+                    <div class="logo-container">
+                        <img src="img/Logo.png" alt="Logo especial" class="special-logo-image">
+                        <img src="img/LogoHover.png" alt="Logo Hover especial" class="special-logo-hover">
+                    </div>
+                    <div class="option-text">¿Quién es<br>Rodrigo Mondragón?</div>
+                </a>
+                
+                <a href="todos-mis-proyectos.html" class="proyectos-card">
+                    <div class="proyectos-container">
+                        <img src="img/Cono4.png" alt="Proyectos" class="proyectos-image">
+                    </div>
+                    <div class="option-text">Proyectos</div>
+                </a>
+                
+                <a href="https://linktr.ee/roy.mondragon" target="_blank" class="option-card">
+                    <div class="option-icon icon-stories"></div>
+                    <div class="option-text">Cuentos</div>
+                </a>
+                
+                <a href="https://medium.com/@roy.mondragon" target="_blank" class="option-card">
+                    <div class="option-icon icon-blog"></div>
+                    <div class="option-text">Blog</div>
+                </a>
+                
+                <a href="https://heyzine.com/flip-book/52b9428d33.html" target="_blank" class="florilegio-card">
+                    <div class="florilegio-container">
+                        <img src="img/Anna17.png" alt="Florilegio" class="florilegio-image">
+                    </div>
+                    <div class="option-text">Florilegio</div>
+                </a>
+                
+                <a href="https://linktr.ee/roy.mondragon" target="_blank" class="linktree-card">
+                    <div class="linktree-container">
+                        <img src="img/LinktreeLogo.png" alt="Linktree Logo" class="linktree-image">
+                    </div>
+                    <div class="option-text">Linktree</div>
+                </a>
             </div>
-        </section>
-
-        <!-- SECCIÓN DE SERVICIOS -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">Mis Especialidades</h2>
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-icon">🎲</div>
-                        <h3>Modelado 3D</h3>
-                        <p>Creación de modelos 3D realistas y estilizados para videojuegos, animaciones y visualizaciones.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">🎨</div>
-                        <h3>Concept Art</h3>
-                        <p>Desarrollo visual de personajes, ambientes y props para proyectos creativos.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">✏️</div>
-                        <h3>Ilustración</h3>
-                        <p>Ilustraciones digitales para libros, revistas, branding y proyectos personales.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
 
     <!-- El footer se inserta automáticamente aquí -->
     
     <script src="js/menu.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.option-card, .logo-card');
+            
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
 </body>
 </html>

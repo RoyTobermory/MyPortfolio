@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 404 - Página no encontrada - Rodrigo Mondragón</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            background: linear-gradient(135deg, #de3b27, #ff6b35, #ff8c69);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .white-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 800px;
+        }
+
+        .cone-image {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .back-button:hover {
+            background: #de3b27;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(222, 59, 39, 0.3);
+            text-decoration: none;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .white-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+
+            .error-title {
+                font-size: 2rem;
+            }
+
+            .cone-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="white-section">
+        <img src="" alt="Cono de construcción" class="cone-image" id="cone-image">
+        
+        <div class="content">
+            <h1 class="error-title">Error 404</h1>
+            <p class="error-message">
+                Whoops, parece que aún estamos trabajando en esta página. Vuelve más tarde.
+            </p>
+            <a href="javascript:history.back()" class="back-button">Regresar</a>
+        </div>
+    </div>
+
+    <script>
+        // Función para obtener la imagen según el número de visitas
+        function getImageForVisit(visits) {
+            const imageNumber = ((visits - 1) % 7) + 2; // Cicla entre 2 y 8
+            return `./img/Cono${imageNumber}.png`;
+        }
+
+        // Contador de visitas
+        function updateVisitCounter() {
+            let visits = parseInt(localStorage.getItem('errorPageVisits') || '0');
+            visits++;
+            localStorage.setItem('errorPageVisits', visits.toString());
+
+            const coneImage = document.getElementById('cone-image');
+            const imageSrc = getImageForVisit(visits);
+            coneImage.src = imageSrc;
+            
+            coneImage.onerror = function() {
+                console.log(`No se pudo cargar la imagen: ${imageSrc}`);
+            };
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            updateVisitCounter();
+        });
+    </script>
+</body>
+</html>

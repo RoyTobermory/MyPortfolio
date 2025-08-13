@@ -1,11 +1,15 @@
 // FUNCIÓN PARA CREAR EL MENÚ NUEVO
 function createNavbar() {
+    // Determinar qué logo usar basado en la página actual
+    const currentPage = getCurrentPage();
+    const logoSrc = currentPage === 'todos-mis-proyectos' ? 'img/LogoRMondragon 2.png' : 'img/LogoRMondragon 1.png';
+    
     return `
         <nav class="navbar">
             <div class="nav-container">
                 <!-- LOGO COMO BOTÓN -->
                 <a href="index.html" class="logo-button">
-                    <img src="img/Logo.png" alt="Logo" class="logo-image">
+                    <img src="${logoSrc}" alt="Logo" class="logo-image">
                 </a>
                 
                 <!-- NOMBRE -->
@@ -18,7 +22,7 @@ function createNavbar() {
                 <ul class="nav-menu">
                     <li><a href="3d.html" class="nav-link" data-page="3d">3D</a></li>
                     <li><a href="concept-art.html" class="nav-link" data-page="concept-art">ConceptArt</a></li>
-                    <li><a href="ilustracion.html" class="nav-link" data-page="ilustracion">Ilustración</a></li>
+                    <li><a href="bg-design.html" class="nav-link" data-page="ilustracion">Bg Design</a></li>
                     <li><a href="sobre-mi.html" class="nav-link" data-page="sobre-mi">Sobre Mí</a></li>
                 </ul>
                 

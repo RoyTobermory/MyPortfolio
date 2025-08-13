@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos mis proyectos - Rodrigo Mondragón</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <style>
+        /* Estilos específicos para página de todos los proyectos */
+        body {
+            background: #1a1a1a;
+        }
+
+        /* Hacer el navbar más alto */
+        .navbar {
+            height: 90px !important; /* 20px más alto que los 70px normales */
+        }
+
+        /* Ocultar elementos del menú en esta página */
+        .nav-menu,
+        .name-section,
+        .hamburger {
+            display: none !important;
+        }
+
+        /* Centrar y agrandar el logo */
+        .nav-container {
+            justify-content: center !important;
+            height: 100%;
+        }
+
+        .logo-image {
+            height: 85px !important; /* 5px más grande (era 80px) */
+        }
+
+        /* Línea gruesa degradada debajo del menú */
+        .navbar::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #de3b27 0%, #ff6b35 50%, #ff8c69 100%);
+        }
+
+        .gallery-container {
+            padding: 140px 20px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #2a2a2a;
+            min-height: 100vh;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .project-card {
+            position: relative;
+            aspect-ratio: 4/3;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(123, 175, 189, 0.15);
+        }
+
+        .project-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 15px 35px rgba(123, 175, 189, 0.25);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover .project-image {
+            filter: brightness(0.8);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #de3b27;
+            text-align: center;
+            padding: 20px;
+            text-shadow: none;
+            font-family: 'Courier New', monospace;
+        }
+
+        .projects-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .projects-intro h2 {
+            font-size: 2.5rem;
+            color: #7bafbd;
+            margin-bottom: 15px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .projects-intro p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                height: 80px !important; /* También más alto en móvil */
+            }
+
+            .gallery-container {
+                padding: 120px 20px 40px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .project-title {
+                font-size: 1.2rem;
+            }
+
+            .logo-image {
+                height: 65px !important; /* También 5px más en móvil */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- El menú se inserta automáticamente aquí -->
+
+    <!-- GALERÍA DE PROYECTOS -->
+    <section class="gallery-container">
+        <div class="projects-grid">
+            <div class="project-card" onclick="window.location.href='sagrado-micelio.html'">
+                <img src="img/sagrado-micelio.jpg" alt="Sagrado Micelio" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">Sagrado Micelio</h3>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.location.href='hematofago.html'">
+                <img src="img/hematofago.jpg" alt="Hematófago" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">Hematófago</h3>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.location.href='cardumen.html'">
+                <img src="img/cardumen.jpg" alt="Cardumen" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">Cardumen</h3>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.location.href='Nubes.html'">
+                <img src="img/nubes-con-forma-de-nube.png" alt="Nubes" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">Nubes con forma de Nube</h3>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.location.href='a-stupid-luv-story.html'">
+                <img src="img/a-stupid-luv-story.jpg" alt="A stupid luv story" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">A stupid luv story</h3>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.location.href='die-kackwurst.html'">
+                <img src="img/die-kackwurst.jpg" alt="Die Kackwurst" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">Die Kackwurst</h3>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.location.href='florilegio.html'">
+                <img src="img/florilegio.jpg" alt="Florilegio" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">Florilegio</h3>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.location.href='eleanor-rigby.html'">
+                <img src="img/eleanor-rigby.jpg" alt="Eleanor Rigby" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">Eleanor Rigby</h3>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.location.href='persefon-e.html'">
+                <img src="img/persefon-e.jpg" alt="PERSEFON-E" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">PERSEFON-E</h3>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.location.href='ratan.html'">
+                <img src="img/ratan.jpg" alt="Ratán" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">Ratán</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- El footer se inserta automáticamente aquí -->
+    
+    <script src="js/menu.js"></script>
+</body>
+
+</html>
