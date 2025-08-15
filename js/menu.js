@@ -37,12 +37,27 @@ function createNavbar() {
     `;
 }
 
+
 // FUNCIÓN PARA CREAR EL FOOTER
 function createFooter() {
     return `
         <footer class="footer">
             <div class="container">
-                <p>&copy; 2025 Rodrigo Mondragón. Todos los derechos reservados.</p>
+                <div class="footer-content">
+                    <p>&copy; 2025 Rodrigo Mondragón. Todos los derechos reservados.</p>
+                    <div class="footer-right">
+                        <span class="email">roy.mondragon@hotmail.com</span>
+                        <a href="https://www.instagram.com/roy.tobermory/?igshid=YmMyMTA2M2Y%3D" target="_blank">
+                            <img src="img/InstagramIcon.png" alt="Instagram" class="social-icon">
+                        </a>
+                        <a href="https://www.artstation.com/roy_tobermory" target="_blank">
+                            <img src="img/ArtStationIcon.png" alt="ArtStation" class="social-icon">
+                        </a>
+                        <a href="https://medium.com/@roy.mondragon" target="_blank">
+                            <img src="img/MediumIcon.png" alt="Medium" class="social-icon">
+                        </a>
+                    </div>
+                </div>
             </div>
         </footer>
     `;

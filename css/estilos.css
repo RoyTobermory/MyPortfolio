@@ -430,3 +430,39 @@ h1, h2, h3, h4, h5, h6,
         padding: 0.8rem 1.5rem;
     }
 }
+
+/* Agregar al final de estilos.css *//* CSS para el footer - agregar a estilos.css *//* CSS para el footer - agregar a estilos.css */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.email {
+    color: white;
+    margin-right: 10px;
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+    transition: opacity 0.3s ease;
+}
+
+.social-icon:hover {
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
