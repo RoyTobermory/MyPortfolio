@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todos mis proyectos - Rodrigo Mondragón</title>
+    <title>Todos mis proyectos - Rodrigo Mondragon</title>
     <link rel="stylesheet" href="css/estilos.css">
     <style>
-        /* Estilos específicos para página de todos los proyectos */
+        /* Estilos especÃ­ficos para pÃ¡gina de todos los proyectos */
         body {
             background: #1a1a1a;
         }
 
-        /* Hacer el navbar más alto */
+        /* Hacer el navbar mÃ¡s alto */
         .navbar {
-            height: 90px !important; /* 20px más alto que los 70px normales */
+            height: 90px !important; /* 20px mÃ¡s alto que los 70px normales */
         }
 
-        /* Ocultar elementos del menú en esta página */
+        /* Ocultar elementos del menÃº en esta pÃ¡gina */
         .nav-menu,
         .name-section,
         .hamburger {
@@ -30,10 +30,10 @@
         }
 
         .logo-image {
-            height: 85px !important; /* 5px más grande (era 80px) */
+            height: 85px !important; /* 5px mÃ¡s grande (era 80px) */
         }
 
-        /* Línea gruesa degradada debajo del menú */
+        /* LÃ­nea gruesa degradada debajo del menÃº */
         .navbar::after {
             content: '';
             position: absolute;
@@ -55,7 +55,7 @@
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 20px; /* Reducido de 30px a 20px para menos espacio */
             padding: 20px 0;
         }
 
@@ -104,6 +104,26 @@
             opacity: 1;
         }
 
+        /* Filmina semitransparente para proyectos en mantenimiento */
+        .maintenance-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* Filmina oscura semitransparente */
+            z-index: 5;
+        }
+
+        /* Overlay especial para proyectos en mantenimiento */
+        .project-overlay.maintenance {
+            background: rgba(255, 165, 0, 0.9); /* Fondo naranja */
+        }
+
+        .project-card:hover .project-overlay.maintenance {
+            background: rgba(255, 140, 0, 0.95); /* Naranja más intenso en hover */
+        }
+
         .project-title {
             font-size: 1.5rem;
             font-weight: bold;
@@ -112,6 +132,20 @@
             padding: 20px;
             text-shadow: none;
             font-family: 'Courier New', monospace;
+        }
+
+        .project-title.maintenance {
+            color: white; /* Letras blancas para proyectos en mantenimiento */
+        }
+
+        .maintenance-cone {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            z-index: 10;
         }
 
         .projects-intro {
@@ -138,7 +172,7 @@
 
         @media (max-width: 768px) {
             .navbar {
-                height: 80px !important; /* También más alto en móvil */
+                height: 80px !important; /* TambiÃ©n mÃ¡s alto en mÃ³vil */
             }
 
             .gallery-container {
@@ -147,7 +181,7 @@
             
             .projects-grid {
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 20px;
+                gap: 15px; /* También reducido en móvil */
             }
             
             .project-title {
@@ -155,38 +189,23 @@
             }
 
             .logo-image {
-                height: 65px !important; /* También 5px más en móvil */
+                height: 65px !important; /* TambiÃ©n 5px mÃ¡s en mÃ³vil */
+            }
+
+            .maintenance-cone {
+                width: 50px;
+                height: 50px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- El menú se inserta automáticamente aquí -->
+    <!-- El menÃº se inserta automÃ¡ticamente aquÃ­ -->
 
-    <!-- GALERÍA DE PROYECTOS -->
+    <!-- GALERÃA DE PROYECTOS -->
     <section class="gallery-container">
         <div class="projects-grid">
-            <div class="project-card" onclick="window.location.href='sagrado-micelio.html'">
-                <img src="img/sagrado-micelio.jpg" alt="Sagrado Micelio" class="project-image">
-                <div class="project-overlay">
-                    <h3 class="project-title">Sagrado Micelio</h3>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="window.location.href='hematofago.html'">
-                <img src="img/hematofago.jpg" alt="Hematófago" class="project-image">
-                <div class="project-overlay">
-                    <h3 class="project-title">Hematófago</h3>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="window.location.href='cardumen.html'">
-                <img src="img/cardumen.jpg" alt="Cardumen" class="project-image">
-                <div class="project-overlay">
-                    <h3 class="project-title">Cardumen</h3>
-                </div>
-            </div>
-
+            <!-- 1. Nubes -->
             <div class="project-card" onclick="window.location.href='Nubes.html'">
                 <img src="img/nubes-con-forma-de-nube.png" alt="Nubes" class="project-image">
                 <div class="project-overlay">
@@ -194,51 +213,91 @@
                 </div>
             </div>
 
-            <div class="project-card" onclick="window.location.href='a-stupid-luv-story.html'">
-                <img src="img/a-stupid-luv-story.jpg" alt="A stupid luv story" class="project-image">
-                <div class="project-overlay">
-                    <h3 class="project-title">A stupid luv story</h3>
+            <!-- 2. Hematofago - EN MANTENIMIENTO -->
+            <div class="project-card" onclick="return false;" style="cursor: not-allowed;">
+                <img src="img/Hematofago/26.jpg" alt="Hematofago" class="project-image">
+                <div class="maintenance-overlay"></div>
+                <img src="img/Cono2.png" alt="En mantenimiento" class="maintenance-cone">
+                <div class="project-overlay maintenance">
+                    <h3 class="project-title maintenance">Hematofago</h3>
                 </div>
             </div>
 
-            <div class="project-card" onclick="window.location.href='die-kackwurst.html'">
-                <img src="img/die-kackwurst.jpg" alt="Die Kackwurst" class="project-image">
-                <div class="project-overlay">
-                    <h3 class="project-title">Die Kackwurst</h3>
+            <!-- 3. Die Kack - EN MANTENIMIENTO -->
+            <div class="project-card" onclick="return false;" style="cursor: not-allowed;">
+                <img src="img/DieKackwurst/16.jpg" alt="Die Kackwurst" class="project-image">
+                <div class="maintenance-overlay"></div>
+                <img src="img/Cono3.png" alt="En mantenimiento" class="maintenance-cone">
+                <div class="project-overlay maintenance">
+                    <h3 class="project-title maintenance">Die Kackwurst</h3>
                 </div>
             </div>
 
-            <div class="project-card" onclick="window.location.href='florilegio.html'">
-                <img src="img/florilegio.jpg" alt="Florilegio" class="project-image">
+            <!-- 4. Cardumen -->
+            <div class="project-card" onclick="window.location.href='cardumen.html'">
+                <img src="img/Cardumen.jpg" alt="Cardumen" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">Cardumen</h3>
+                </div>
+            </div>
+
+            <!-- 5. A stupid luv - EN MANTENIMIENTO -->
+            <div class="project-card" onclick="return false;" style="cursor: not-allowed;">
+                <img src="img/AStupidLuvSeries.jpg" alt="A stupid luv story" class="project-image">
+                <div class="maintenance-overlay"></div>
+                <img src="img/Cono4.png" alt="En mantenimiento" class="maintenance-cone">
+                <div class="project-overlay maintenance">
+                    <h3 class="project-title maintenance">A stupid luv story</h3>
+                </div>
+            </div>
+
+            <!-- 6. Florilegio -->
+            <div class="project-card" onclick="window.open('https://heyzine.com/flip-book/52b9428d33.html', '_blank')">
+                <img src="img/Anna7.png" alt="Florilegio" class="project-image">
                 <div class="project-overlay">
                     <h3 class="project-title">Florilegio</h3>
                 </div>
             </div>
 
-            <div class="project-card" onclick="window.location.href='eleanor-rigby.html'">
+            <!-- 7. Ratan -->
+            <div class="project-card" onclick="window.open('https://www.youtube.com/watch?v=sJ2SYzYAWzs', '_blank')">
+                <img src="img/BgDesign/Ratan1_001.jpg" alt="Ratan" class="project-image">
+                <div class="project-overlay">
+                    <h3 class="project-title">Ratan</h3>
+                </div>
+            </div>
+
+            <!-- 8. Persefone - EN MANTENIMIENTO -->
+            <div class="project-card" onclick="return false;" style="cursor: not-allowed;">
+                <img src="img/PERSEFONE/14.jpg" alt="PERSEFON-E" class="project-image">
+                <div class="maintenance-overlay"></div>
+                <img src="img/Cono5.png" alt="En mantenimiento" class="maintenance-cone">
+                <div class="project-overlay maintenance">
+                    <h3 class="project-title maintenance">PERSEFON-E</h3>
+                </div>
+            </div>
+
+            <!-- 9. Sagrado Micelio - EN MANTENIMIENTO -->
+            <div class="project-card" onclick="return false;" style="cursor: not-allowed;">
+                <img src="img/sagrado-micelio.jpg" alt="Sagrado Micelio" class="project-image">
+                <img src="img/Cono6.png" alt="En mantenimiento" class="maintenance-cone">
+                <div class="project-overlay maintenance">
+                    <h3 class="project-title maintenance">Sagrado Micelio</h3>
+                </div>
+            </div>
+
+            <!-- 10. Eleanor - EN MANTENIMIENTO -->
+            <div class="project-card" onclick="return false;" style="cursor: not-allowed;">
                 <img src="img/eleanor-rigby.jpg" alt="Eleanor Rigby" class="project-image">
-                <div class="project-overlay">
-                    <h3 class="project-title">Eleanor Rigby</h3>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="window.location.href='persefon-e.html'">
-                <img src="img/persefon-e.jpg" alt="PERSEFON-E" class="project-image">
-                <div class="project-overlay">
-                    <h3 class="project-title">PERSEFON-E</h3>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="window.location.href='ratan.html'">
-                <img src="img/ratan.jpg" alt="Ratán" class="project-image">
-                <div class="project-overlay">
-                    <h3 class="project-title">Ratán</h3>
+                <img src="img/Cono7.png" alt="En mantenimiento" class="maintenance-cone">
+                <div class="project-overlay maintenance">
+                    <h3 class="project-title maintenance">Eleanor Rigby</h3>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- El footer se inserta automáticamente aquí -->
+    <!-- El footer se inserta automÃ¡ticamente aquÃ­ -->
     
     <script src="js/menu.js"></script>
 </body>
