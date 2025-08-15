@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LadJitsu - Fuego, Agua, Hielo</title>
+    <link rel="stylesheet" href="css/estilos.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -12,6 +13,11 @@
             background: linear-gradient(135deg, #4d310c 0%, #5b3a23 25%, #472e1e 50%, #421f02 100%);
             min-height: 100vh;
             color: white;
+        }
+
+        /* Ajuste para el menú */
+        .main-content {
+            margin-top: 60px;
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 10px; }
@@ -259,75 +265,122 @@
 
         .hidden { display: none; }
 
+        /* NUEVOS ESTILOS PARA LA PANTALLA DE CARGA */
+        .loading-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .loading-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(139, 69, 19, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .loading-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #d4851f, #ffd700);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-top: 4px solid #ffd700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @media (max-width: 768px) {
             .hands { grid-template-columns: 1fr; }
             .cards { grid-template-columns: repeat(3, 1fr); }
             .stats { grid-template-columns: 1fr; }
+            .main-content { margin-top: 50px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1 class="title">🔥 LadJitsu ❄️</h1>
-            <p class="subtitle">Fuego derrite Hielo • Hielo congela Agua • Agua apaga Fuego</p>
-        </header>
+    <!-- El menú se inserta automáticamente aquí -->
 
-        <div class="stats">
-            <div class="player-stats">
-                <h3>Tus Victorias</h3>
-                <div class="counters">
-                    <div class="counter fuego" id="pFuegoIcons"></div>
-                    <div class="counter agua" id="pAguaIcons"></div>
-                    <div class="counter hielo" id="pHieloIcons"></div>
+    <main class="main-content">
+        <div class="container">
+            <header class="header">
+                <h1 class="title">🔥 LadJitsu ❄️</h1>
+                <p class="subtitle">Fuego derrite Hielo • Hielo congela Agua • Agua apaga Fuego</p>
+            </header>
+
+            <div class="stats">
+                <div class="player-stats">
+                    <h3>Tus Victorias</h3>
+                    <div class="counters">
+                        <div class="counter fuego" id="pFuegoIcons"></div>
+                        <div class="counter agua" id="pAguaIcons"></div>
+                        <div class="counter hielo" id="pHieloIcons"></div>
+                    </div>
+                </div>
+
+                <div class="arena">
+                    <div id="gameStatus">Esperando que Sensei Sandía juegue...</div>
+                    <div id="roundResult"></div>
+                </div>
+
+                <div class="enemy-stats">
+                    <h3>Victorias Sensei Sandía</h3>
+                    <div class="counters">
+                        <div class="counter fuego" id="eFuegoIcons"></div>
+                        <div class="counter agua" id="eAguaIcons"></div>
+                        <div class="counter hielo" id="eHieloIcons"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="arena">
-                <div id="gameStatus">Esperando que Sensei Sandía juegue...</div>
-                <div id="roundResult"></div>
+            <div class="battle">
+                <h3>Arena de Batalla</h3>
+                <div class="battle-cards">
+                    <div class="slot" id="playerSlot">Tu carta</div>
+                    <div class="vs">VS</div>
+                    <div class="slot" id="enemySlot">Carta Sensei</div>
+                </div>
+                <div class="result" id="battleResult"></div>
             </div>
 
-            <div class="enemy-stats">
-                <h3>Victorias Sensei Sandía</h3>
-                <div class="counters">
-                    <div class="counter fuego" id="eFuegoIcons"></div>
-                    <div class="counter agua" id="eAguaIcons"></div>
-                    <div class="counter hielo" id="eHieloIcons"></div>
+            <div class="hands">
+                <div class="hand">
+                    <h3 class="hand-title">Tu Mano</h3>
+                    <div class="cards" id="playerCards"></div>
+                </div>
+
+                <div class="hand">
+                    <h3 class="hand-title">Mano Sensei Sandía</h3>
+                    <div class="cards" id="enemyCards"></div>
                 </div>
             </div>
         </div>
+    </main>
 
-        <div class="battle">
-            <h3>Arena de Batalla</h3>
-            <div class="battle-cards">
-                <div class="slot" id="playerSlot">Tu carta</div>
-                <div class="vs">VS</div>
-                <div class="slot" id="enemySlot">Carta Sensei</div>
-            </div>
-            <div class="result" id="battleResult"></div>
-        </div>
+    <!-- El footer se inserta automáticamente aquí -->
 
-        <div class="hands">
-            <div class="hand">
-                <h3 class="hand-title">Tu Mano</h3>
-                <div class="cards" id="playerCards"></div>
-            </div>
-
-            <div class="hand">
-                <h3 class="hand-title">Mano Sensei Sandía</h3>
-                <div class="cards" id="enemyCards"></div>
-            </div>
-        </div>
-    </div>
-
+    <!-- MODAL DE REGLAS (SIN CAMBIOS) -->
     <div class="modal" id="rulesModal">
         <div class="modal-content">
             <h2>🔥 Bienvenido a LadJitsu ❄️</h2>
             <div class="rules">
                 <h3>📋 Reglas del Juego:</h3>
                 <ul>
-                    <li><strong>Objetivo:</strong> Consigue 3 victorias del mismo elemento O 1 victoria de cada elemento</li>
+                    <li><strong>Objetivo:</strong> Consigue 3 victorias del mismo elemento ó 1 victoria de cada elemento</li>
                     <li><strong>Turnos:</strong> Sensei Sandía juega primero, después tú eliges tu carta</li>
                     <li><strong>Combate:</strong> Las cartas se revelan y se determina el ganador</li>
                 </ul>
@@ -353,6 +406,20 @@
         </div>
     </div>
 
+    <!-- NUEVA PANTALLA DE CARGA -->
+    <div class="modal hidden" id="loadingScreen">
+        <div class="modal-content">
+            <h2>🎴 Preparando LadJitsu</h2>
+            <div class="loading-container">
+                <div class="loading-bar">
+                    <div class="loading-fill" id="loadingBar"></div>
+                </div>
+                <p id="loadingProgress">Cargando cartas... 0%</p>
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal hidden" id="gameModal">
         <div class="modal-content">
             <h2 id="gameTitle">¡Juego Terminado!</h2>
@@ -361,7 +428,74 @@
         </div>
     </div>
 
+    <script src="js/menu.js"></script>
     <script>
+        // AQUÍ VA TODO EL CÓDIGO DE PRECARGA - ANTES DE LA CONFIGURACIÓN DEL JUEGO
+        
+        // ===== FUNCIÓN DE PRECARGA DE IMÁGENES =====
+        const preloadImages = () => {
+            return new Promise((resolve) => {
+                const imageCache = [];
+                const totalImages = [];
+                
+                // Generar lista de todas las imágenes necesarias
+                const cards = createCards(); // Esta función ya existe más abajo
+                cards.forEach(card => {
+                    totalImages.push(`img/LadJitsu/${card.name}.png`);
+                });
+                
+                // Agregar imagen del reverso
+                totalImages.push('img/LadJitsu/reverso.png');
+                
+                let loadedCount = 0;
+                
+                // Mostrar progreso de carga
+                const updateProgress = () => {
+                    const progress = Math.round((loadedCount / totalImages.length) * 100);
+                    const progressBar = document.getElementById('loadingBar');
+                    const progressText = document.getElementById('loadingProgress');
+                    
+                    if (progressBar) progressBar.style.width = `${progress}%`;
+                    if (progressText) progressText.textContent = 
+                        `Cargando cartas... ${progress}% (${loadedCount}/${totalImages.length})`;
+                };
+                
+                totalImages.forEach((src, index) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        loadedCount++;
+                        updateProgress();
+                        
+                        // Todas las imágenes cargadas
+                        if (loadedCount === totalImages.length) {
+                            setTimeout(() => {
+                                document.getElementById('loadingScreen').classList.add('hidden');
+                                resolve(imageCache);
+                            }, 500);
+                        }
+                    };
+                    
+                    img.onerror = () => {
+                        console.warn(`Error cargando imagen: ${src}`);
+                        loadedCount++;
+                        updateProgress();
+                        
+                        if (loadedCount === totalImages.length) {
+                            setTimeout(() => {
+                                document.getElementById('loadingScreen').classList.add('hidden');
+                                resolve(imageCache);
+                            }, 500);
+                        }
+                    };
+                    
+                    img.src = src;
+                    imageCache[src] = img;
+                });
+            });
+        };
+
+        // ===== AQUÍ EMPIEZA TU CÓDIGO ORIGINAL =====
+        
         // Configuración del juego
         const ELEMENTS = ['fuego', 'agua', 'hielo'];
         const ICONS = {fuego: '🔥', agua: '💧', hielo: '❄️'};
@@ -491,9 +625,18 @@
             return animated;
         };
 
-        // Lógica del juego
-        const startGame = () => {
+        // ===== FUNCIÓN STARTGAME MODIFICADA CON PRECARGA =====
+        const startGame = async () => {
+            // Ocultar modal de reglas
             document.getElementById('rulesModal').classList.add('hidden');
+            
+            // Mostrar pantalla de carga
+            document.getElementById('loadingScreen').classList.remove('hidden');
+            
+            // Precargar todas las imágenes
+            await preloadImages();
+            
+            // Iniciar el juego normalmente
             game.phase = 'enemyTurn';
             document.getElementById('gameStatus').textContent = 'Sensei Sandía está eligiendo su carta...';
             
@@ -508,6 +651,8 @@
             // Sensei Sandía elige después de un momento
             setTimeout(enemyTurn, 2000);
         };
+
+        // ===== RESTO DE TU CÓDIGO SIN CAMBIOS =====
 
         const enemyTurn = () => {
             // Sensei Sandía elige una carta
@@ -694,8 +839,9 @@
             setTimeout(enemyTurn, 2000);
         };
 
-        // Inicializar
-        // El juego empieza con el modal de reglas
+        // Inicializar - El juego empieza con el modal de reglas
     </script>
+
+
 </body>
 </html>
