@@ -24,7 +24,7 @@
             aspect-ratio: 3846 / 1080;
             width: 100%;
             position: relative;
-            margin-top: 60px; /* Espacio para el menú fijo */
+            margin-top: 60px;
             display: flex;
             align-items: flex-end;
             justify-content: center;
@@ -70,68 +70,193 @@
             margin-right: auto;
         }
 
-        /* Grid System */
-        .grid {
-            display: grid;
-            gap: 2rem;
-            margin-top: 2rem;
+        /* Description Section */
+        .description-section {
+            background: var(--bg-light);
+            text-align: center;
         }
 
-        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-
-        /* Cards */
-        .card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
+        .tagline {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
+            font-weight: 300;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
+        .description-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
         }
 
-        .card-image {
+        /* Gallery Section with Split Layout */
+        .split-gallery-section {
+            padding: 4rem 0;
+        }
+
+        .split-gallery-container {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .gallery-left {
+            flex: 1;
+        }
+
+        .vertical-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .gallery-image {
             width: 100%;
-            height: 200px;
+            height: 250px;
             background: #ddd;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-light);
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .card-description {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        /* Visual Cards */
-        .visual-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
+            font-size: 1.1rem;
             box-shadow: var(--shadow);
-            text-align: center;
-            border-left: 4px solid var(--primary-color);
+            transition: transform 0.3s ease;
         }
 
-        .visual-icon {
-            font-size: 2.5rem;
+        .gallery-image:hover {
+            transform: scale(1.02);
+        }
+
+        .story-text {
+            flex: 1;
+            padding-left: 2rem;
+        }
+
+        .story-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        /* Gallery Section - Based on BG Design */
+        .bg-gallery-section {
+            background: var(--bg-light);
+        }
+
+        /* Grid Layouts */
+        .gallery-grid {
+            display: grid;
+            gap: 0;
+            margin-bottom: 2rem;
+        }
+
+        .grid-1 { grid-template-columns: 1fr; }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        .grid-8 { grid-template-columns: repeat(8, 1fr); }
+
+        /* Image Containers */
+        .gallery-item {
+            background: var(--glass-bg, rgba(255,255,255,0.1));
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border, rgba(255,255,255,0.2));
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        /* Size Variants */
+        .size-large {
+            height: 500px;
+            border-radius: 16px;
+        }
+
+        .size-medium {
+            height: 250px;
+        }
+
+        .size-small {
+            height: 100px;
+        }
+
+        /* Hover Effects */
+        .gallery-item:hover {
+            z-index: 10;
+        }
+
+        .size-large:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .size-medium:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .size-small:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .size-small:hover img {
+            transform: scale(1.15);
+        }
+
+        .size-medium:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Director's Note */
+        .directors-note {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            font-style: italic;
+            text-align: justify;
+        }
+
+        /* Concept Art Gallery */
+        .concept-gallery {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 1rem;
             margin-bottom: 1rem;
+        }
+
+        .concept-image {
+            width: 100%;
+            height: 120px;
+            background: #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .concept-image:hover {
+            transform: scale(1.05);
         }
 
         /* Watch Section */
@@ -176,8 +301,8 @@
         /* Responsive */
         @media (max-width: 768px) {
             .hero-nubes {
-                margin-top: 50px; /* Menú más pequeño en móvil */
-                aspect-ratio: 16 / 9; /* Proporción más adecuada para móvil */
+                margin-top: 50px;
+                aspect-ratio: 16 / 9;
             }
             
             .hero-subtitle {
@@ -187,9 +312,37 @@
             .section-title {
                 font-size: 2rem;
             }
-            
-            .grid-2, .grid-4 {
-                grid-template-columns: 1fr;
+
+            .tagline {
+                font-size: 1.4rem;
+            }
+
+            .split-gallery-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .story-text {
+                padding-left: 0;
+            }
+
+            .concept-gallery {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .concept-image {
+                height: 100px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .concept-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bg-gallery {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -204,101 +357,128 @@
         </section>
 
         <!-- Description -->
-        <section class="section">
+        <section class="section description-section">
             <div class="container">
-                <h2 class="section-title">Descripción del Corto</h2>
-                <p class="section-subtitle">Lo que significó para mí este proyecto y cómo lo creamos</p>
-                <div style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8; color: #555;">
-                    <p>[Aquí puedes escribir sobre lo que significó para ti el corto y cómo lo hicieron...]</p>
-                    <br>
-                    <p>[Puedes expandir sobre las motivaciones, inspiraciones, y el mensaje que querías transmitir...]</p>
-                </div>
+                <p class="tagline"><em>Donde el cielo se convierte en océano y las nubes guardan lo que hemos perdido.</em></p>
+                <p class="description-text">
+                    En un puerto junto al mar, un niño se embarca para pescar nubes en un océano de fantasía, convencido de que así podrá traer de vuelta a su padre. Una aventura visual sobre el duelo, la esperanza y el fin de la inocencia.
+                </p>
             </div>
         </section>
 
-        <!-- Storytelling -->
-        <section class="section">
+        <!-- Split Gallery with Story -->
+        <section class="section split-gallery-section">
             <div class="container">
-                <h2 class="section-title">Storytelling</h2>
-                <p class="section-subtitle">Animatic y colorboards del desarrollo narrativo</p>
-                <div class="grid grid-2">
-                    <div class="card">
-                        <div class="card-image">[Animatic Preview]</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Animatic</h3>
-                            <p class="card-description">El animatic inicial que estableció el ritmo y la estructura narrativa del cortometraje.</p>
+                <div class="split-gallery-container">
+                    <div class="gallery-left">
+                        <div class="vertical-gallery">
+                            <div class="gallery-image">[Imagen 1]</div>
+                            <div class="gallery-image">[Imagen 2]</div>
+                            <div class="gallery-image">[Imagen 3]</div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-image">[Colorboard 1]</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Colorboards - Secuencia 1</h3>
-                            <p class="card-description">Exploración cromática y atmosférica para las primeras secuencias del corto.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">[Colorboard 2]</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Colorboards - Secuencia 2</h3>
-                            <p class="card-description">Desarrollo visual y paleta de colores para los momentos clave de la narrativa.</p>
+                    <div class="story-text">
+                        <div class="story-content">
+                            <p>En un rincón tranquilo de la costa, un niño vive marcado por la ausencia de su padre. Un día, decide zarpar en un barco improvisado hacia un océano donde el cielo y el mar se funden, y las nubes toman la forma de peces, ballenas y criaturas majestuosas. Su misión: pescar del cielo, entre las nubes, a su papá.</p>
+                            <br>
+                            <p>Enfrentará tormentas, fauna celeste y momentos de calma que parecen prometer milagros, sólo para descubrir que el viaje es, en realidad, un rito de aceptación. <em>Nubes con forma de nube</em> es una fábula visual que mezcla lo surreal con lo íntimo, explorando cómo la imaginación y el dolor se entrelazan para marcar el final de la infancia.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Backgrounds -->
-        <section class="section">
+        <!-- Background Gallery -->
+        <section class="section bg-gallery-section">
             <div class="container">
-                <h2 class="section-title">Fondos</h2>
+                <h2 class="section-title">Galería de Fondos</h2>
                 <p class="section-subtitle">Diseño y creación de ambientes para el cortometraje</p>
-                <div class="grid grid-4">
-                    <div class="card">
-                        <div class="card-image">[Fondo 1]</div>
-                        <div class="card-title" style="padding: 1rem; text-align: center;">Ambiente Principal</div>
+                
+                <div class="gallery-grid grid-1">
+                    <div class="gallery-item size-large">
+                        <img src="img/BgDesign/Bg1_001.jpg" alt="Background Design 1">
                     </div>
-                    <div class="card">
-                        <div class="card-image">[Fondo 2]</div>
-                        <div class="card-title" style="padding: 1rem; text-align: center;">Cielo y Nubes</div>
+                </div>
+                
+                <div class="gallery-grid grid-4">
+                    <div class="gallery-item size-medium">
+                        <img src="img/BgDesign/Bg2_001.jpg" alt="Background Design 2-1">
                     </div>
-                    <div class="card">
-                        <div class="card-image">[Fondo 3]</div>
-                        <div class="card-title" style="padding: 1rem; text-align: center;">Paisaje Secundario</div>
+                    <div class="gallery-item size-medium">
+                        <img src="img/BgDesign/Bg2_002.jpg" alt="Background Design 2-2">
                     </div>
-                    <div class="card">
-                        <div class="card-image">[Fondo 4]</div>
-                        <div class="card-title" style="padding: 1rem; text-align: center;">Ambientación Final</div>
+                    <div class="gallery-item size-medium">
+                        <img src="img/BgDesign/Bg2_003.jpg" alt="Background Design 2-3">
+                    </div>
+                    <div class="gallery-item size-medium">
+                        <img src="img/BgDesign/Bg2_004.jpg" alt="Background Design 2-4">
+                    </div>
+                </div>
+                
+                <div class="gallery-grid grid-8">
+                    <div class="gallery-item size-small">
+                        <img src="img/BgDesign/Bg3_001.jpg" alt="Background Design 3-1">
+                    </div>
+                    <div class="gallery-item size-small">
+                        <img src="img/BgDesign/Bg3_002.jpg" alt="Background Design 3-2">
+                    </div>
+                    <div class="gallery-item size-small">
+                        <img src="img/BgDesign/Bg3_003.jpg" alt="Background Design 3-3">
+                    </div>
+                    <div class="gallery-item size-small">
+                        <img src="img/BgDesign/Bg3_004.jpg" alt="Background Design 3-4">
+                    </div>
+                    <div class="gallery-item size-small">
+                        <img src="img/BgDesign/Bg3_005.jpg" alt="Background Design 3-5">
+                    </div>
+                    <div class="gallery-item size-small">
+                        <img src="img/BgDesign/Bg3_006.jpg" alt="Background Design 3-6">
+                    </div>
+                    <div class="gallery-item size-small">
+                        <img src="img/BgDesign/Bg3_007.jpg" alt="Background Design 3-7">
+                    </div>
+                    <div class="gallery-item size-small">
+                        <img src="img/BgDesign/Bg3_008.jpg" alt="Background Design 3-8">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Visual Exploration -->
+        <!-- Director's Note -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title">Exploración Visual</h2>
-                <p class="section-subtitle">Proceso creativo y desarrollo técnico del proyecto</p>
-                <div class="grid grid-2">
-                    <div class="visual-card">
-                        <div class="visual-icon">🎨</div>
-                        <h3 class="card-title">Diseño de Personajes</h3>
-                        <p class="card-description">Desarrollo y refinamiento de los personajes principales, explorando diferentes estilos y aproximaciones visuales.</p>
-                    </div>
-                    <div class="visual-card">
-                        <div class="visual-icon">🌈</div>
-                        <h3 class="card-title">Paleta Cromática</h3>
-                        <p class="card-description">Investigación de colores y atmósferas que mejor transmitieran la esencia poética del proyecto.</p>
-                    </div>
-                    <div class="visual-card">
-                        <div class="visual-icon">💡</div>
-                        <h3 class="card-title">Iluminación</h3>
-                        <p class="card-description">Experimentación con diferentes esquemas de iluminación para crear el mood apropiado para cada escena.</p>
-                    </div>
-                    <div class="visual-card">
-                        <div class="visual-icon">🎭</div>
-                        <h3 class="card-title">Expresión Visual</h3>
-                        <p class="card-description">Búsqueda del lenguaje visual que mejor comunicara las emociones y conceptos centrales de la historia.</p>
-                    </div>
+                <div class="directors-note">
+                    <p><em>Este corto nació de la idea de que la imaginación es un refugio, pero también un espejo. Cuando éramos niños, podíamos pasar horas viendo el cielo e inventando criaturas. Con el tiempo perdemos mucho esa emoción. Quise contar la historia de un niño que se aferra a la fantasía para no enfrentar la pérdida, pero cuyo viaje lo obliga a aceptar que no todo puede volver. Para mí, esta historia es una carta sobre el duelo, envuelta en imágenes que me hubiera gustado ver de niño: un mar de nubes, peces gigantes, ballenas que caen del cielo. Es, sobre todo, un recordatorio de que mirar hacia arriba, incluso en los días más oscuros, puede ser el primer paso para seguir adelante.</em></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept Art -->
+        <section class="section bg-gallery-section">
+            <div class="container">
+                <h2 class="section-title">Concept Art</h2>
+                <p class="section-subtitle">Exploración visual y desarrollo creativo del proyecto</p>
+                
+                <div class="concept-gallery">
+                    <div class="concept-image">[Concept 1]</div>
+                    <div class="concept-image">[Concept 2]</div>
+                    <div class="concept-image">[Concept 3]</div>
+                    <div class="concept-image">[Concept 4]</div>
+                    <div class="concept-image">[Concept 5]</div>
+                    <div class="concept-image">[Concept 6]</div>
+                    <div class="concept-image">[Concept 7]</div>
+                    <div class="concept-image">[Concept 8]</div>
+                </div>
+
+                <div class="concept-gallery">
+                    <div class="concept-image">[Concept 9]</div>
+                    <div class="concept-image">[Concept 10]</div>
+                    <div class="concept-image">[Concept 11]</div>
+                    <div class="concept-image">[Concept 12]</div>
+                    <div class="concept-image">[Concept 13]</div>
+                    <div class="concept-image">[Concept 14]</div>
+                    <div class="concept-image">[Concept 15]</div>
+                    <div class="concept-image">[Concept 16]</div>
                 </div>
             </div>
         </section>
@@ -339,11 +519,11 @@
         }, { threshold: 0.1 });
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.card, .visual-card').forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(card);
+            document.querySelectorAll('.gallery-image, .gallery-item, .concept-image').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(element);
             });
         });
     </script>
