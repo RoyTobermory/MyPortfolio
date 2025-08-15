@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LadJitsu - Fuego, Agua, Hielo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4d310c 0%, #5b3a23 25%, #472e1e 50%, #421f02 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 10px; }
+        
+        .header { text-align: center; margin-bottom: 15px; }
+        .title { font-size: 2.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-bottom: 5px; }
+        .subtitle { font-size: 1rem; opacity: 0.8; }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .player-stats, .enemy-stats {
+            background: rgba(139, 69, 19, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .arena {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.2), rgba(160, 82, 45, 0.3));
+            padding: 15px;
+            border-radius: 15px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 2px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .counters {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+            min-height: 30px;
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 1.2rem;
+        }
+
+        .fuego { color: #ff6b6b; }
+        .agua { color: #4ecdc4; }
+        .hielo { color: #a8e6cf; }
+
+        .hands {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .hand {
+            background: rgba(139, 69, 19, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .hand-title { text-align: center; margin-bottom: 15px; font-size: 1.1rem; font-weight: bold; }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .card {
+            aspect-ratio: 2/3;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .card.selected { border-color: #ffd700; transform: translateY(-8px); box-shadow: 0 12px 30px rgba(255, 215, 0, 0.4); }
+        .card.face-down { background-image: url('img/LadJitsu/reverso.png') !important; }
+        .card.empty-slot { border: 2px dashed rgba(255,215,0,0.4); background: rgba(218, 165, 32, 0.2); }
+        .card.enemy { cursor: default; }
+        .card.animating { position: fixed; z-index: 100; pointer-events: none; transform: scale(1.2); }
+        .card.winner { animation: glow 1s ease-in-out; box-shadow: 0 0 30px #ffd700; }
+        .card.loser { filter: brightness(0.3); }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 30px #ffd700; }
+            50% { box-shadow: 0 0 50px #ffd700, 0 0 70px #ffd700; }
+        }
+
+        .battle {
+            background: rgba(139, 69, 19, 0.4);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .battle-cards {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            align-items: center;
+            margin: 15px 0;
+            min-height: 140px;
+        }
+
+        .slot {
+            width: 100px;
+            height: 150px;
+            border: 2px dashed rgba(255, 215, 0, 0.4);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(160, 82, 45, 0.2);
+        }
+
+        .slot.occupied {
+            border: 2px solid #ffd700;
+            background-color: rgba(139, 69, 19, 0.3);
+        }
+
+        .slot .card-info {
+            position: absolute;
+            bottom: 6px;
+            left: 6px;
+            right: 6px;
+            background: linear-gradient(to top, rgba(139, 69, 19, 0.9), transparent);
+            color: white;
+            text-align: center;
+            border-radius: 3px;
+            padding: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .vs { font-size: 1.5rem; font-weight: bold; color: #ffd700; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .result { font-size: 1.2rem; font-weight: bold; margin-top: 15px; min-height: 30px; }
+
+        .btn {
+            background: linear-gradient(45deg, #d4851f, #8b4513, #cd853f);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.4);
+            background: linear-gradient(45deg, #f4a261, #a0522d, #daa520);
+        }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #d4851f, #8b4513, #cd853f);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            max-width: 500px;
+            border: 3px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .rules {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .rules h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .rules ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .rules li {
+            margin: 5px 0;
+        }
+
+        .rule-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+            font-size: 1.2rem;
+        }
+
+        .waiting-message {
+            font-size: 1.2rem;
+            color: #ffd700;
+            text-align: center;
+            padding: 20px;
+            background: rgba(139, 69, 19, 0.4);
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .hidden { display: none; }
+
+        @media (max-width: 768px) {
+            .hands { grid-template-columns: 1fr; }
+            .cards { grid-template-columns: repeat(3, 1fr); }
+            .stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🔥 LadJitsu ❄️</h1>
+            <p class="subtitle">Fuego derrite Hielo • Hielo congela Agua • Agua apaga Fuego</p>
+        </header>
+
+        <div class="stats">
+            <div class="player-stats">
+                <h3>Tus Victorias</h3>
+                <div class="counters">
+                    <div class="counter fuego" id="pFuegoIcons"></div>
+                    <div class="counter agua" id="pAguaIcons"></div>
+                    <div class="counter hielo" id="pHieloIcons"></div>
+                </div>
+            </div>
+
+            <div class="arena">
+                <div id="gameStatus">Esperando que Sensei Sandía juegue...</div>
+                <div id="roundResult"></div>
+            </div>
+
+            <div class="enemy-stats">
+                <h3>Victorias Sensei Sandía</h3>
+                <div class="counters">
+                    <div class="counter fuego" id="eFuegoIcons"></div>
+                    <div class="counter agua" id="eAguaIcons"></div>
+                    <div class="counter hielo" id="eHieloIcons"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="battle">
+            <h3>Arena de Batalla</h3>
+            <div class="battle-cards">
+                <div class="slot" id="playerSlot">Tu carta</div>
+                <div class="vs">VS</div>
+                <div class="slot" id="enemySlot">Carta Sensei</div>
+            </div>
+            <div class="result" id="battleResult"></div>
+        </div>
+
+        <div class="hands">
+            <div class="hand">
+                <h3 class="hand-title">Tu Mano</h3>
+                <div class="cards" id="playerCards"></div>
+            </div>
+
+            <div class="hand">
+                <h3 class="hand-title">Mano Sensei Sandía</h3>
+                <div class="cards" id="enemyCards"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="rulesModal">
+        <div class="modal-content">
+            <h2>🔥 Bienvenido a LadJitsu ❄️</h2>
+            <div class="rules">
+                <h3>📋 Reglas del Juego:</h3>
+                <ul>
+                    <li><strong>Objetivo:</strong> Consigue 3 victorias del mismo elemento O 1 victoria de cada elemento</li>
+                    <li><strong>Turnos:</strong> Sensei Sandía juega primero, después tú eliges tu carta</li>
+                    <li><strong>Combate:</strong> Las cartas se revelan y se determina el ganador</li>
+                </ul>
+                
+                <h3>⚔️ Elementos:</h3>
+                <div class="rule-icons">
+                    <div>🔥 Fuego derrite ❄️ Hielo</div>
+                </div>
+                <div class="rule-icons">
+                    <div>❄️ Hielo congela 💧 Agua</div>
+                </div>
+                <div class="rule-icons">
+                    <div>💧 Agua apaga 🔥 Fuego</div>
+                </div>
+                
+                <h3>🎯 Victorias:</h3>
+                <ul>
+                    <li>Si tienes el mismo elemento: gana el de mayor valor</li>
+                    <li>Si hay diferentes elementos: gana según las reglas arriba</li>
+                </ul>
+            </div>
+            <button class="btn" onclick="startGame()">¡Empezar Juego!</button>
+        </div>
+    </div>
+
+    <div class="modal hidden" id="gameModal">
+        <div class="modal-content">
+            <h2 id="gameTitle">¡Juego Terminado!</h2>
+            <p id="gameMessage"></p>
+            <button class="btn" onclick="restart()">Jugar de Nuevo</button>
+        </div>
+    </div>
+
+    <script>
+        // Configuración del juego
+        const ELEMENTS = ['fuego', 'agua', 'hielo'];
+        const ICONS = {fuego: '🔥', agua: '💧', hielo: '❄️'};
+        const WIN_CONDITIONS = {fuego: 'hielo', hielo: 'agua', agua: 'fuego'};
+        
+        // Generar cartas
+        const createCards = () => {
+            const cards = [];
+            ELEMENTS.forEach(element => {
+                const letter = element[0].toUpperCase();
+                [2,2,3,3,4,5,5,6,6,7,7,8,11,12].forEach((value, i) => {
+                    const suffix = [2,3,5,6,7].includes(value) && i % 2 === 1 ? '.2' : '';
+                    cards.push({name: `${letter}_${value}${suffix}`, element, value});
+                });
+            });
+            return cards;
+        };
+
+        // Estado del juego
+        let game = {
+            deck: [],
+            playerHand: [],
+            enemyHand: [],
+            playerWins: {fuego: 0, agua: 0, hielo: 0},
+            enemyWins: {fuego: 0, agua: 0, hielo: 0},
+            selected: null,
+            enemySelected: null,
+            phase: 'rules' // 'rules', 'enemyTurn', 'playerTurn', 'revealing', 'battle', 'gameOver'
+        };
+
+        // Utilidades
+        const shuffle = arr => {
+            const shuffled = [...arr];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        };
+
+        const drawCard = () => {
+            if (game.deck.length === 0) game.deck = shuffle(createCards());
+            return game.deck.pop();
+        };
+
+        const determineWinner = (p, e) => {
+            if (p.element === e.element) return p.value === e.value ? 'tie' : (p.value > e.value ? 'player' : 'enemy');
+            return WIN_CONDITIONS[p.element] === e.element ? 'player' : 'enemy';
+        };
+
+        const checkGameEnd = () => {
+            for (let element of ELEMENTS) {
+                if (game.playerWins[element] >= 3) return {winner: 'player', reason: `3 victorias con ${element}`};
+                if (game.enemyWins[element] >= 3) return {winner: 'enemy', reason: `3 victorias con ${element}`};
+            }
+            if (ELEMENTS.every(e => game.playerWins[e] >= 1)) return {winner: 'player', reason: '1 victoria con cada elemento'};
+            if (ELEMENTS.every(e => game.enemyWins[e] >= 1)) return {winner: 'enemy', reason: '1 victoria con cada elemento'};
+            return null;
+        };
+
+        // Renderizado
+        const createCardElement = (card, isEnemy = false, isSelected = false) => {
+            const el = document.createElement('div');
+            el.className = `card ${card.element} ${isSelected ? 'selected' : ''} ${isEnemy ? 'enemy face-down' : ''}`;
+            el.dataset.name = card.name;
+            
+            if (!isEnemy) {
+                el.style.backgroundImage = `url('img/LadJitsu/${card.name}.png')`;
+                el.onclick = () => selectCard(card, el);
+            }
+            return el;
+        };
+
+        const updateDisplay = () => {
+            // Actualizar contadores con íconos
+            ELEMENTS.forEach(e => {
+                const playerContainer = document.getElementById(`p${e.charAt(0).toUpperCase() + e.slice(1)}Icons`);
+                const enemyContainer = document.getElementById(`e${e.charAt(0).toUpperCase() + e.slice(1)}Icons`);
+                
+                playerContainer.innerHTML = ICONS[e].repeat(game.playerWins[e]);
+                enemyContainer.innerHTML = ICONS[e].repeat(game.enemyWins[e]);
+            });
+
+            // Renderizar manos
+            const render = (hand, container, isEnemy) => {
+                container.innerHTML = '';
+                hand.forEach((card, index) => {
+                    if (card === null) {
+                        // Espacio vacío para carta jugada
+                        const emptySlot = document.createElement('div');
+                        emptySlot.className = 'card empty-slot';
+                        container.appendChild(emptySlot);
+                    } else {
+                        const isSelected = game.selected && game.selected.name === card.name;
+                        container.appendChild(createCardElement(card, isEnemy, isSelected));
+                    }
+                });
+            };
+
+            render(game.playerHand, document.getElementById('playerCards'), false);
+            render(game.enemyHand, document.getElementById('enemyCards'), true);
+        };
+
+        const animateToCenter = (cardEl, targetSlot, isEnemy = false) => {
+            const rect = cardEl.getBoundingClientRect();
+            const targetRect = targetSlot.getBoundingClientRect();
+            
+            const animated = cardEl.cloneNode(true);
+            animated.classList.add('animating');
+            if (!isEnemy) animated.classList.add('face-down');
+            
+            Object.assign(animated.style, {
+                left: rect.left + 'px',
+                top: rect.top + 'px',
+                width: rect.width + 'px',
+                height: rect.height + 'px'
+            });
+            
+            document.body.appendChild(animated);
+            cardEl.classList.add('empty-slot');
+            
+            setTimeout(() => {
+                animated.style.left = targetRect.left + (targetRect.width - rect.width) / 2 + 'px';
+                animated.style.top = targetRect.top + (targetRect.height - rect.height) / 2 + 'px';
+            }, 50);
+            
+            return animated;
+        };
+
+        // Lógica del juego
+        const startGame = () => {
+            document.getElementById('rulesModal').classList.add('hidden');
+            game.phase = 'enemyTurn';
+            document.getElementById('gameStatus').textContent = 'Sensei Sandía está eligiendo su carta...';
+            
+            // Inicializar juego
+            game.deck = shuffle(createCards());
+            for (let i = 0; i < 5; i++) {
+                game.playerHand.push(drawCard());
+                game.enemyHand.push(drawCard());
+            }
+            updateDisplay();
+            
+            // Sensei Sandía elige después de un momento
+            setTimeout(enemyTurn, 2000);
+        };
+
+        const enemyTurn = () => {
+            // Sensei Sandía elige una carta
+            const enemyIndex = Math.floor(Math.random() * game.enemyHand.length);
+            game.enemySelected = game.enemyHand[enemyIndex];
+            
+            // Mostrar que ya eligió (carta volteada)
+            const enemySlot = document.getElementById('enemySlot');
+            enemySlot.style.backgroundImage = `url('img/LadJitsu/reverso.png')`;
+            enemySlot.classList.add('occupied');
+            enemySlot.innerHTML = '<div class="card-info">Carta elegida</div>';
+            
+            // Marcar espacio vacío en la mano enemiga
+            game.enemyHand[enemyIndex] = null;
+            updateDisplay();
+            
+            // Ahora es turno del jugador
+            game.phase = 'playerTurn';
+            document.getElementById('gameStatus').textContent = '¡Elige tu carta!';
+        };
+
+        const selectCard = (card, cardEl) => {
+            if (game.phase !== 'playerTurn') return;
+            
+            game.selected = card;
+            game.phase = 'revealing';
+            
+            // Mostrar carta del jugador en la arena
+            const playerSlot = document.getElementById('playerSlot');
+            playerSlot.style.backgroundImage = `url('img/LadJitsu/${card.name}.png')`;
+            playerSlot.classList.add('occupied', card.element);
+            playerSlot.innerHTML = `<div class="card-info">${ICONS[card.element]} ${card.value}</div>`;
+            
+            // Marcar espacio vacío en la mano del jugador
+            const playerIndex = game.playerHand.findIndex(c => c && c.name === card.name);
+            if (playerIndex !== -1) {
+                game.playerHand[playerIndex] = null;
+            }
+            
+            updateDisplay();
+            document.getElementById('gameStatus').textContent = 'Revelando cartas...';
+            
+            // Revelar carta del enemigo
+            setTimeout(() => {
+                const enemySlot = document.getElementById('enemySlot');
+                enemySlot.style.backgroundImage = `url('img/LadJitsu/${game.enemySelected.name}.png')`;
+                enemySlot.classList.add(game.enemySelected.element);
+                enemySlot.innerHTML = `<div class="card-info">${ICONS[game.enemySelected.element]} ${game.enemySelected.value}</div>`;
+                
+                setTimeout(() => battle(), 1500);
+            }, 1000);
+        };
+
+        const battle = () => {
+            game.phase = 'battle';
+            
+            const result = determineWinner(game.selected, game.enemySelected);
+            let text = '';
+            
+            const playerSlot = document.getElementById('playerSlot');
+            const enemySlot = document.getElementById('enemySlot');
+            
+            switch(result) {
+                case 'player':
+                    playerSlot.classList.add('winner');
+                    enemySlot.classList.add('loser');
+                    game.playerWins[game.selected.element]++;
+                    text = `¡Ganaste! ${ICONS[game.selected.element]} ${game.selected.element} vence a ${ICONS[game.enemySelected.element]} ${game.enemySelected.element}`;
+                    break;
+                case 'enemy':
+                    enemySlot.classList.add('winner');
+                    playerSlot.classList.add('loser');
+                    game.enemyWins[game.enemySelected.element]++;
+                    text = `Perdiste. ${ICONS[game.enemySelected.element]} ${game.enemySelected.element} vence a ${ICONS[game.selected.element]} ${game.selected.element}`;
+                    break;
+                case 'tie':
+                    text = '¡Empate! Misma carta';
+                    break;
+            }
+            
+            document.getElementById('battleResult').textContent = text;
+            document.getElementById('gameStatus').textContent = '';
+            
+            setTimeout(() => {
+                updateDisplay();
+                const gameEnd = checkGameEnd();
+                if (gameEnd) return setTimeout(() => endGame(gameEnd), 1000);
+                setTimeout(nextRound, 2000);
+            }, 1500);
+        };
+
+        const nextRound = () => {
+            if (!game.selected || !game.enemySelected) return;
+            
+            // Reemplazar espacios vacíos con nuevas cartas
+            for (let i = 0; i < game.playerHand.length; i++) {
+                if (game.playerHand[i] === null) {
+                    game.playerHand[i] = drawCard();
+                }
+            }
+            for (let i = 0; i < game.enemyHand.length; i++) {
+                if (game.enemyHand[i] === null) {
+                    game.enemyHand[i] = drawCard();
+                }
+            }
+            
+            game.selected = null;
+            game.enemySelected = null;
+            game.phase = 'enemyTurn';
+            
+            // Limpiar arena de batalla
+            const playerSlot = document.getElementById('playerSlot');
+            const enemySlot = document.getElementById('enemySlot');
+            
+            [playerSlot, enemySlot].forEach(slot => {
+                slot.style.backgroundImage = '';
+                slot.classList.remove('occupied', 'winner', 'loser', 'fuego', 'agua', 'hielo');
+            });
+            
+            playerSlot.innerHTML = 'Tu carta';
+            enemySlot.innerHTML = 'Carta Sensei';
+            
+            document.getElementById('battleResult').textContent = '';
+            updateDisplay();
+            
+            // Sensei Sandía elige su próxima carta
+            document.getElementById('gameStatus').textContent = 'Sensei Sandía está eligiendo su carta...';
+            setTimeout(enemyTurn, 1500);
+        };
+
+        const endGame = gameEnd => {
+            game.phase = 'gameOver';
+            const modal = document.getElementById('gameModal');
+            const title = document.getElementById('gameTitle');
+            const message = document.getElementById('gameMessage');
+            
+            if (gameEnd.winner === 'player') {
+                title.textContent = '🎉 ¡Victoria!';
+                message.textContent = `¡Ganaste por ${gameEnd.reason}!`;
+            } else {
+                title.textContent = '💀 Derrota';
+                message.textContent = `El enemigo ganó por ${gameEnd.reason}`;
+            }
+            
+            modal.classList.remove('hidden');
+        };
+
+        const restart = () => {
+            game = {
+                deck: shuffle(createCards()),
+                playerHand: [],
+                enemyHand: [],
+                playerWins: {fuego: 0, agua: 0, hielo: 0},
+                enemyWins: {fuego: 0, agua: 0, hielo: 0},
+                selected: null,
+                enemySelected: null,
+                phase: 'enemyTurn'
+            };
+            
+            // Repartir cartas iniciales
+            for (let i = 0; i < 5; i++) {
+                game.playerHand.push(drawCard());
+                game.enemyHand.push(drawCard());
+            }
+            
+            // Limpiar arena de batalla
+            const playerSlot = document.getElementById('playerSlot');
+            const enemySlot = document.getElementById('enemySlot');
+            
+            [playerSlot, enemySlot].forEach(slot => {
+                slot.style.backgroundImage = '';
+                slot.classList.remove('occupied', 'winner', 'loser', 'fuego', 'agua', 'hielo');
+            });
+            
+            playerSlot.innerHTML = 'Tu carta';
+            enemySlot.innerHTML = 'Carta Sensei';
+            
+            document.getElementById('battleResult').textContent = '';
+            document.getElementById('gameModal').classList.add('hidden');
+            document.getElementById('gameStatus').textContent = 'Sensei Sandía está eligiendo su carta...';
+            updateDisplay();
+            
+            // Iniciar nueva ronda
+            setTimeout(enemyTurn, 2000);
+        };
+
+        // Inicializar
+        // El juego empieza con el modal de reglas
+    </script>
+</body>
+</html>
