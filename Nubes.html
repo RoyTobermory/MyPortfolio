@@ -6,9 +6,8 @@
     <title>Nubes con forma de nube - Rodrigo Mondragón</title>
     <link rel="stylesheet" href="css/estilos.css">
     <style>
-        /* Variables CSS */
         :root {
-            --primary-color: #7bafbd;
+            --primary: #7bafbd;
             --primary-dark: #6496a6;
             --text-dark: #2c3e50;
             --text-light: #666;
@@ -16,256 +15,192 @@
             --shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        /* Hero Section */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section { padding: 4rem 0; }
+        .section:nth-child(even) { background: var(--bg-light); }
+
+        .section-title { 
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            text-align: center; 
+            margin-bottom: 1rem; 
+            color: var(--text-dark); 
+            font-weight: 300; 
+        }
+        .section-subtitle { 
+            text-align: center; 
+            color: var(--text-light); 
+            font-size: 1.1rem; 
+            margin-bottom: 3rem; 
+            max-width: 600px; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+
+        /* Hero */
         .hero-nubes {
-            background: url('img/BgDesign/Bg4_001.jpg');
-            background-size: cover;
-            background-position: center;
-            aspect-ratio: 3846 / 1080;
-            width: 100%;
-            position: relative;
+            background: url('img/BgDesign/Bg4_001.jpg') center/cover;
+            aspect-ratio: 3846/1080;
             margin-top: 60px;
             display: flex;
             align-items: flex-end;
             justify-content: center;
             padding-bottom: 2rem;
         }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
-            color: white;
+        .hero-subtitle { 
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-weight: 300; 
+            color: white; 
         }
 
-        /* Layout Base */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        /* Description */
+        .description-section { background: var(--bg-light); text-align: center; }
+        .tagline { 
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            font-style: italic; 
+            color: var(--primary-dark); 
+            margin-bottom: 2rem; 
+            font-weight: 300; 
+        }
+        .description-text { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            font-size: 1.1rem; 
+            line-height: 1.8; 
+            color: var(--text-light); 
         }
 
-        .section {
-            padding: 4rem 0;
+        /* Split Gallery */
+        .split-gallery-container { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 3rem; 
+            align-items: start; 
         }
-
-        .section:nth-child(even) {
-            background: var(--bg-light);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-            font-weight: 300;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-light);
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Description Section */
-        .description-section {
-            background: var(--bg-light);
-            text-align: center;
-        }
-
-        .tagline {
-            font-size: 1.8rem;
-            font-style: italic;
-            color: var(--primary-dark);
+        .horizontal-gallery { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1rem; 
             margin-bottom: 2rem;
-            font-weight: 300;
         }
-
-        .description-text {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-light);
-        }
-
-        /* Gallery Section with Split Layout */
-        .split-gallery-section {
-            padding: 4rem 0;
-        }
-
-        .split-gallery-container {
-            display: flex;
-            gap: 3rem;
-            align-items: flex-start;
-        }
-
-        .gallery-left {
-            flex: 1;
-        }
-
-        .vertical-gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .gallery-image {
-            width: 100%;
-            height: 250px;
-            background: #ddd;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
-            font-size: 1.1rem;
+        .story-item {
+            aspect-ratio: 1.29 / 1;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             box-shadow: var(--shadow);
+        }
+        .story-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        .story-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             transition: transform 0.3s ease;
         }
-
-        .gallery-image:hover {
-            transform: scale(1.02);
+        .story-item:hover img {
+            transform: scale(1.05);
         }
+        .story-content { font-size: 1.1rem; line-height: 1.8; color: var(--text-light); }
 
-        .story-text {
-            flex: 1;
-            padding-left: 2rem;
-        }
-
-        .story-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-light);
-        }
-
-        /* Gallery Section - Based on BG Design */
-        .bg-gallery-section {
-            background: var(--bg-light);
-        }
-
-        /* Grid Layouts */
-        .gallery-grid {
-            display: grid;
-            gap: 0;
-            margin-bottom: 2rem;
-        }
-
+        /* Gallery */
+        .gallery-grid { display: grid; gap: 1rem; margin-bottom: 2rem; }
         .grid-1 { grid-template-columns: 1fr; }
         .grid-4 { grid-template-columns: repeat(4, 1fr); }
         .grid-8 { grid-template-columns: repeat(8, 1fr); }
 
-        /* Image Containers */
-        .gallery-item {
-            background: var(--glass-bg, rgba(255,255,255,0.1));
+        .gallery-item, .concept-image {
+            background: #ddd;
             overflow: hidden;
             position: relative;
             cursor: pointer;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border, rgba(255,255,255,0.2));
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.3s ease;
-        }
-
-        /* Size Variants */
-        .size-large {
-            height: 500px;
-            border-radius: 16px;
-        }
-
-        .size-medium {
-            height: 250px;
-        }
-
-        .size-small {
-            height: 100px;
-        }
-
-        /* Hover Effects */
-        .gallery-item:hover {
-            z-index: 10;
-        }
-
-        .size-large:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .size-medium:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
-
-        .size-small:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .size-small:hover img {
-            transform: scale(1.15);
-        }
-
-        .size-medium:hover img {
-            transform: scale(1.1);
-        }
-
-        /* Director's Note */
-        .directors-note {
-            max-width: 900px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-light);
-            font-style: italic;
-            text-align: justify;
-        }
-
-        /* Concept Art Gallery */
-        .concept-gallery {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .concept-image {
-            width: 100%;
-            height: 120px;
-            background: #ddd;
             border-radius: 8px;
+            box-shadow: var(--shadow);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-light);
-            font-size: 0.9rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
         }
 
+        .gallery-item img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.3s ease; 
+        }
+
+        .size-large { height: 500px; border-radius: 16px; }
+        .size-medium { height: 250px; }
+        .size-small { height: 100px; border-radius: 4px; }
+
+        .gallery-item:hover, .concept-image:hover { 
+            transform: scale(1.02); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3); 
+        }
+        .gallery-item:hover img { transform: scale(1.05); }
+
+        /* Director's Note */
+        .directors-note { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            font-size: 1.1rem; 
+            line-height: 1.8; 
+            color: var(--text-light); 
+            font-style: italic; 
+            text-align: justify; 
+        }
+
+        /* Concept Art */
+        .concept-gallery { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1.5rem; 
+            margin-bottom: 2rem; 
+        }
+        .concept-image {
+            aspect-ratio: 1 / 1;
+            background: #ddd;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        .concept-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
         .concept-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        .concept-image:hover img {
             transform: scale(1.05);
+        }
+        .concept-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            height: 100%;
         }
 
         /* Watch Section */
         .watch-section {
-            background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
             color: white;
             text-align: center;
         }
-
         .watch-thumbnail {
             max-width: 400px;
             width: 100%;
@@ -275,11 +210,7 @@
             cursor: pointer;
             transition: transform 0.3s ease;
         }
-
-        .watch-thumbnail:hover {
-            transform: scale(1.05);
-        }
-
+        .watch-thumbnail:hover { transform: scale(1.05); }
         .watch-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -291,63 +222,146 @@
             transition: all 0.3s ease;
             border: 2px solid rgba(255,255,255,0.3);
         }
-
         .watch-button:hover {
             background: white;
             color: var(--primary-dark);
             text-decoration: none;
         }
 
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        /* Responsive lightbox */
+        @media (min-width: 1200px) {
+            .lightbox {
+                padding: 80px;
+            }
+            .lightbox img {
+                max-height: 80vh;
+                max-width: 80vw;
+            }
+        }
+        .lightbox-btn {
+            position: fixed;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+        }
+        .close-lightbox {
+            top: 30px;
+            right: 30px;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .carousel-btn {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+        }
+        .carousel-btn.prev { left: 30px; }
+        .carousel-btn.next { right: 30px; }
+        .lightbox-btn:hover { 
+            background: rgba(255,255,255,0.2); 
+            transform: scale(1.1); 
+        }
+        .carousel-btn:hover { transform: translateY(-50%) scale(1.1); }
+        .image-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .gallery-subtitle {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .hero-nubes {
-                margin-top: 50px;
-                aspect-ratio: 16 / 9;
-            }
-            
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .tagline {
-                font-size: 1.4rem;
-            }
-
-            .split-gallery-container {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .story-text {
-                padding-left: 0;
-            }
-
-            .concept-gallery {
-                grid-template-columns: repeat(4, 1fr);
-            }
-
-            .concept-image {
-                height: 100px;
-                font-size: 0.8rem;
-            }
+            .hero-nubes { margin-top: 50px; aspect-ratio: 16/9; }
+            .split-gallery-container { gap: 2rem; }
+            .horizontal-gallery { grid-template-columns: 1fr; gap: 1rem; }
+            .concept-gallery { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .grid-8 { grid-template-columns: repeat(4, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 480px) {
-            .concept-gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .concept-gallery { grid-template-columns: 1fr; }
+            .grid-8 { grid-template-columns: repeat(2, 1fr); }
+        }
 
-            .bg-gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
+    <!-- El menú se inserta automáticamente aquí -->
+
     <main class="main-content">
         <!-- Hero Section -->
         <section class="hero-nubes">
@@ -371,10 +385,16 @@
             <div class="container">
                 <div class="split-gallery-container">
                     <div class="gallery-left">
-                        <div class="vertical-gallery">
-                            <div class="gallery-image">[Imagen 1]</div>
-                            <div class="gallery-image">[Imagen 2]</div>
-                            <div class="gallery-image">[Imagen 3]</div>
+                        <div class="horizontal-gallery" data-gallery="unified">
+                            <div class="story-item fade-in" data-index="0">
+                                <img src="img/Nubes/1.jpg" alt="Historia 1">
+                            </div>
+                            <div class="story-item fade-in" data-index="1">
+                                <img src="img/Nubes/2.jpg" alt="Historia 2">
+                            </div>
+                            <div class="story-item fade-in" data-index="2">
+                                <img src="img/Nubes/3.jpg" alt="Historia 3">
+                            </div>
                         </div>
                     </div>
                     <div class="story-text">
@@ -394,50 +414,50 @@
                 <h2 class="section-title">Galería de Fondos</h2>
                 <p class="section-subtitle">Diseño y creación de ambientes para el cortometraje</p>
                 
-                <div class="gallery-grid grid-1">
-                    <div class="gallery-item size-large">
+                <div class="gallery-grid grid-1" data-gallery="unified">
+                    <div class="gallery-item size-large fade-in" data-index="3">
                         <img src="img/BgDesign/Bg1_001.jpg" alt="Background Design 1">
                     </div>
                 </div>
                 
-                <div class="gallery-grid grid-4">
-                    <div class="gallery-item size-medium">
+                <div class="gallery-grid grid-4" data-gallery="unified">
+                    <div class="gallery-item size-medium fade-in" data-index="4">
                         <img src="img/BgDesign/Bg2_001.jpg" alt="Background Design 2-1">
                     </div>
-                    <div class="gallery-item size-medium">
+                    <div class="gallery-item size-medium fade-in" data-index="5">
                         <img src="img/BgDesign/Bg2_002.jpg" alt="Background Design 2-2">
                     </div>
-                    <div class="gallery-item size-medium">
+                    <div class="gallery-item size-medium fade-in" data-index="6">
                         <img src="img/BgDesign/Bg2_003.jpg" alt="Background Design 2-3">
                     </div>
-                    <div class="gallery-item size-medium">
+                    <div class="gallery-item size-medium fade-in" data-index="7">
                         <img src="img/BgDesign/Bg2_004.jpg" alt="Background Design 2-4">
                     </div>
                 </div>
                 
-                <div class="gallery-grid grid-8">
-                    <div class="gallery-item size-small">
+                <div class="gallery-grid grid-8" data-gallery="unified">
+                    <div class="gallery-item size-small fade-in" data-index="8">
                         <img src="img/BgDesign/Bg3_001.jpg" alt="Background Design 3-1">
                     </div>
-                    <div class="gallery-item size-small">
+                    <div class="gallery-item size-small fade-in" data-index="9">
                         <img src="img/BgDesign/Bg3_002.jpg" alt="Background Design 3-2">
                     </div>
-                    <div class="gallery-item size-small">
+                    <div class="gallery-item size-small fade-in" data-index="10">
                         <img src="img/BgDesign/Bg3_003.jpg" alt="Background Design 3-3">
                     </div>
-                    <div class="gallery-item size-small">
+                    <div class="gallery-item size-small fade-in" data-index="11">
                         <img src="img/BgDesign/Bg3_004.jpg" alt="Background Design 3-4">
                     </div>
-                    <div class="gallery-item size-small">
+                    <div class="gallery-item size-small fade-in" data-index="12">
                         <img src="img/BgDesign/Bg3_005.jpg" alt="Background Design 3-5">
                     </div>
-                    <div class="gallery-item size-small">
+                    <div class="gallery-item size-small fade-in" data-index="13">
                         <img src="img/BgDesign/Bg3_006.jpg" alt="Background Design 3-6">
                     </div>
-                    <div class="gallery-item size-small">
+                    <div class="gallery-item size-small fade-in" data-index="14">
                         <img src="img/BgDesign/Bg3_007.jpg" alt="Background Design 3-7">
                     </div>
-                    <div class="gallery-item size-small">
+                    <div class="gallery-item size-small fade-in" data-index="15">
                         <img src="img/BgDesign/Bg3_008.jpg" alt="Background Design 3-8">
                     </div>
                 </div>
@@ -459,26 +479,58 @@
                 <h2 class="section-title">Concept Art</h2>
                 <p class="section-subtitle">Exploración visual y desarrollo creativo del proyecto</p>
                 
-                <div class="concept-gallery">
-                    <div class="concept-image">[Concept 1]</div>
-                    <div class="concept-image">[Concept 2]</div>
-                    <div class="concept-image">[Concept 3]</div>
-                    <div class="concept-image">[Concept 4]</div>
-                    <div class="concept-image">[Concept 5]</div>
-                    <div class="concept-image">[Concept 6]</div>
-                    <div class="concept-image">[Concept 7]</div>
-                    <div class="concept-image">[Concept 8]</div>
+                <div class="concept-gallery" data-gallery="unified" data-start="14">
+                    <div class="concept-image fade-in" data-index="14">
+                        <img src="img/Nubes/4.jpg" alt="Concept Art 4">
+                    </div>
+                    <div class="concept-image fade-in" data-index="15">
+                        <img src="img/Nubes/5.jpg" alt="Concept Art 5">
+                    </div>
+                    <div class="concept-image fade-in" data-index="16">
+                        <img src="img/Nubes/6.jpg" alt="Concept Art 6">
+                    </div>
+                    <div class="concept-image fade-in" data-index="17">
+                        <img src="img/Nubes/7.jpg" alt="Concept Art 7">
+                    </div>
+                    <div class="concept-image fade-in" data-index="18">
+                        <img src="img/Nubes/8.jpg" alt="Concept Art 8">
+                    </div>
+                    <div class="concept-image fade-in" data-index="19">
+                        <img src="img/Nubes/9.jpg" alt="Concept Art 9">
+                    </div>
                 </div>
 
-                <div class="concept-gallery">
-                    <div class="concept-image">[Concept 9]</div>
-                    <div class="concept-image">[Concept 10]</div>
-                    <div class="concept-image">[Concept 11]</div>
-                    <div class="concept-image">[Concept 12]</div>
-                    <div class="concept-image">[Concept 13]</div>
-                    <div class="concept-image">[Concept 14]</div>
-                    <div class="concept-image">[Concept 15]</div>
-                    <div class="concept-image">[Concept 16]</div>
+                <div class="concept-gallery" data-gallery="unified" data-start="20">
+                    <div class="concept-image fade-in" data-index="20">
+                        <img src="img/Nubes/10.jpg" alt="Concept Art 10">
+                    </div>
+                    <div class="concept-image fade-in" data-index="21">
+                        <img src="img/Nubes/11.jpg" alt="Concept Art 11">
+                    </div>
+                    <div class="concept-image fade-in" data-index="22">
+                        <img src="img/Nubes/12.jpg" alt="Concept Art 12">
+                    </div>
+                    <div class="concept-image fade-in" data-index="23">
+                        <img src="img/Nubes/13.jpg" alt="Concept Art 13">
+                    </div>
+                    <div class="concept-image fade-in" data-index="24">
+                        <img src="img/Nubes/14.jpg" alt="Concept Art 14">
+                    </div>
+                    <div class="concept-image fade-in" data-index="25">
+                        <img src="img/Nubes/15.jpg" alt="Concept Art 15">
+                    </div>
+                </div>
+
+                <div class="concept-gallery" data-gallery="unified" data-start="26">
+                    <div class="concept-image fade-in" data-index="26">
+                        <img src="img/Nubes/16.jpg" alt="Concept Art 16">
+                    </div>
+                    <div class="concept-image fade-in" data-index="27">
+                        <img src="img/Nubes/17.jpg" alt="Concept Art 17">
+                    </div>
+                    <div class="concept-image fade-in" data-index="28">
+                        <div class="concept-placeholder">[+]</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -497,34 +549,169 @@
                 </a>
             </div>
         </section>
+
+ <!-- Personal Reflection -->
+        <section class="section">
+            <div class="container">
+                <div class="directors-note">
+                    <p>El camino de dieciocho semanas que llevó a <em>Nubes con forma de nube</em> desde una idea hasta la pantalla se dice fácil, pero se camina pesado. Fue un trayecto con subidas y bajadas, días que se sentían eternos y noches que parecían durar minutos. Hubo momentos de frustración, de cansancio, de querer detenernos… y momentos que nos recordaban por qué estábamos haciendo esto.</p>
+                    
+                    <p>Este proyecto existe gracias a las personas que caminaron ese trayecto conmigo. Los que construyeron este cortometraje desde sus cimientos, los que creyeron en él desde el principio, los que hoy están aquí —aunque algunos, inevitablemente, ya no puedan estar.</p>
+                    
+                    <p>Quiero compartirles un pedazo de lo que vivimos detrás de las escenas. Hace unas semanas, ya muy avanzados en producción, estaba en el centro de medios con Damián, Sam y Melón, peleándonos con las computadoras para que nos dejaran terminar los renders 3D. Era como un partido de fútbol contra un rival invencible: la infame computadora número 16 nos llevaba 3-0. Pensé más de una vez en poner un marcador en la pared: "Computadora 3, Damián 0".</p>
+                    
+                    <p>En medio del cansancio acumulado, llegó el sonido que cualquier animador reconoce: el crasheo universal de Maya. Suena como alguien murmurando "nonononono" frente a la pantalla. Esa vez fue Melón. Y aunque no lo crean, sí, a veces hasta a él le crashea Maya. Nos reímos mucho en ese momento, tanto nosotros como la gente que estaba trabajando en otros proyectos a nuestro alrededor. El cansancio tiene eso: cuando la deuda de sueño es grande, la risa se vuelve más fácil.</p>
+                    
+                    <p>Pero en medio de esa risa, sonó mi teléfono. Era mi mamá. Respondí ahí mismo, todavía con una sonrisa, pero en cuestión de segundos el mundo real se coló entre nosotros. Me contó que la mamá de un amigo muy cercano, alguien que conocía desde la primaria, había fallecido. Y entonces todo lo que me rodeaba se apagó: el render, las correcciones, la música, las risas. Todo desapareció como si se hubiera ido trescientos pasos hacia atrás.</p>
+                    
+                    <p>Salí del centro de medios y me quedé un momento afuera, tratando de procesar lo que sentía. No era la primera vez que recibía una llamada así. En noviembre de 2020, mi mamá me llamó para decirme que la mamá de mi mejor amiga había fallecido. Y recuerdo que mientras ella me hablaba de trámites y papeleo, yo sólo podía pensar en lo cruel que es la burocracia en esos momentos… y en lo cruel que es la vida, porque no nos deja olvidar que un día todo se acaba.</p>
+                    
+                    <p>En esas llamadas siempre hay un silencio incómodo. El tipo de silencio en el que uno quiere decir algo, pero no sabe cómo. Y lo único que yo quería decirle a mi mamá era: "nunca me hagas esto, por favor".</p>
+                    
+                    <p>De ahí nació una pregunta que me acompaña desde entonces, y que atraviesa este cortometraje: <strong>¿En qué momento uno se da cuenta que los papás no son para siempre?</strong></p>
+                    
+                    <p>Claro que todos lo sabemos. Es obvio. Pero una cosa es entenderlo en la cabeza y otra sentirlo en el estómago. Cuando hago esta pregunta, muchas veces la respuesta es un silencio. Un silencio que, para mí, se llama miedo.</p>
+                    
+                    <p>Y quiero ponerle un nombre aún más grande: no sólo los papás no son para siempre, sino que cuando tomamos nuestro propio camino, cuando nos mudamos de ciudad, de estado o de país… un día va a llegar una llamada. Y ese día quizá estemos lejos. Muy lejos. Y tal vez no podamos regresar.</p>
+                    
+                    <p>Ese miedo vive conmigo. Y vive en <em>Nubes con forma de nube</em>. Si tienes a tus papás cerca, disfrútalos. Si no están hoy contigo, mándales un mensaje. Úsalo de pretexto: cuéntales algo que te pasó, algo que te gustó o que te molestó. No esperes a que la llamada sea sólo para dar malas noticias.</p>
+                    
+                    <p>Mis papás no pudieron estar conmigo el día del estreno, pero les aseguro que esa noche los llamé. Y me gusta pensar que, en nuestro próximo viaje juntos, volveremos a jugar a encontrar figuras en las nubes. Ojalá podamos hacerlo todos. Porque no sabemos cuándo va a llegar el día en que, al mirar al cielo, sólo veamos nubes con forma de nube.</p>
+
+			<p>-R.</p>
+                </div>
+            </div>
+        </section>
+
     </main>
+
+    <!-- El footer se inserta automáticamente aquí -->
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-btn close-lightbox">&times;</div>
+        <button class="lightbox-btn carousel-btn prev">&#8249;</button>
+        <div class="gallery-subtitle" id="gallery-subtitle">COLOR BOARD</div>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+        <button class="lightbox-btn carousel-btn next">&#8250;</button>
+        <div class="image-counter">
+            <span id="current-image">1</span> / <span id="total-images">1</span>
+        </div>
+    </div>
 
     <script src="js/menu.js"></script>
     <script>
-        // Parallax effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero-nubes');
-            if (hero) hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        const unifiedGallery = [
+            // Color Board (0-2)
+            'img/Nubes/1.jpg', 'img/Nubes/2.jpg', 'img/Nubes/3.jpg',
+            // Fondos (3-15)
+            'img/BgDesign/Bg1_001.jpg', 'img/BgDesign/Bg2_001.jpg', 'img/BgDesign/Bg2_002.jpg',
+            'img/BgDesign/Bg2_003.jpg', 'img/BgDesign/Bg2_004.jpg', 'img/BgDesign/Bg3_001.jpg',
+            'img/BgDesign/Bg3_002.jpg', 'img/BgDesign/Bg3_003.jpg', 'img/BgDesign/Bg3_004.jpg',
+            'img/BgDesign/Bg3_005.jpg', 'img/BgDesign/Bg3_006.jpg', 'img/BgDesign/Bg3_007.jpg',
+            'img/BgDesign/Bg3_008.jpg',
+            // Concept (16-27)
+            'img/Nubes/4.jpg', 'img/Nubes/5.jpg', 'img/Nubes/6.jpg', 'img/Nubes/7.jpg',
+            'img/Nubes/8.jpg', 'img/Nubes/9.jpg', 'img/Nubes/10.jpg', 'img/Nubes/11.jpg',
+            'img/Nubes/12.jpg', 'img/Nubes/13.jpg', 'img/Nubes/14.jpg', 'img/Nubes/15.jpg',
+            'img/Nubes/16.jpg', 'img/Nubes/17.jpg'
+        ];
+
+        const galleryTitles = {
+            0: "COLOR BOARD", 1: "COLOR BOARD", 2: "COLOR BOARD",
+            3: "FONDOS", 4: "FONDOS", 5: "FONDOS", 6: "FONDOS", 7: "FONDOS", 8: "FONDOS", 
+            9: "FONDOS", 10: "FONDOS", 11: "FONDOS", 12: "FONDOS", 13: "FONDOS", 14: "FONDOS", 15: "FONDOS",
+            16: "CONCEPT", 17: "CONCEPT", 18: "CONCEPT", 19: "CONCEPT", 20: "CONCEPT", 21: "CONCEPT",
+            22: "CONCEPT", 23: "CONCEPT", 24: "CONCEPT", 25: "CONCEPT", 26: "CONCEPT", 27: "CONCEPT"
+        };
+
+        let currentIndex = 0;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const currentCounter = document.getElementById('current-image');
+        const totalCounter = document.getElementById('total-images');
+        const gallerySubtitle = document.getElementById('gallery-subtitle');
+
+        // Initialize unified gallery clicks
+        document.querySelectorAll('[data-gallery="unified"] [data-index]').forEach(item => {
+            item.addEventListener('click', () => {
+                openLightbox(parseInt(item.dataset.index));
+            });
+        });
+
+        function openLightbox(index) {
+            currentIndex = index;
+            lightboxImg.src = unifiedGallery[index];
+            updateCounter();
+            updateGallerySubtitle();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function navigateImage(direction) {
+            currentIndex = (currentIndex + direction + unifiedGallery.length) % unifiedGallery.length;
+            lightboxImg.src = unifiedGallery[currentIndex];
+            updateCounter();
+            updateGallerySubtitle();
+        }
+
+        function updateCounter() {
+            currentCounter.textContent = currentIndex + 1;
+            totalCounter.textContent = unifiedGallery.length;
+        }
+
+        function updateGallerySubtitle() {
+            gallerySubtitle.textContent = galleryTitles[currentIndex] || "GALERÍA";
+        }
+
+        // Lightbox controls
+        document.querySelector('.close-lightbox').addEventListener('click', closeLightbox);
+        document.querySelector('.carousel-btn.prev').addEventListener('click', e => {
+            e.stopPropagation();
+            navigateImage(-1);
+        });
+        document.querySelector('.carousel-btn.next').addEventListener('click', e => {
+            e.stopPropagation();
+            navigateImage(1);
+        });
+
+        lightbox.addEventListener('click', e => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') navigateImage(1);
+            if (e.key === 'ArrowLeft') navigateImage(-1);
         });
 
         // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
                 }
             });
         }, { threshold: 0.1 });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.gallery-image, .gallery-item, .concept-image').forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(30px)';
-                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(element);
-            });
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Simple parallax for hero
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero-nubes');
+            if (hero) {
+                hero.style.transform = `translateY(${window.pageYOffset * 0.5}px)`;
+            }
         });
     </script>
 </body>
