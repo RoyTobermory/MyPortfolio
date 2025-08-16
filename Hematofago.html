@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hematófago - Escultura Digital</title>
+    <link rel="icon" type="image/png" href="img/Icon.png">
+    <link rel="stylesheet" href="css/estilos.css">
+    <style>
+        :root {
+            --primary: #8B0000;
+            --primary-dark: #660000;
+            --accent: #CC6666;
+            --text-dark: #2c3e50;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-dark: #1a1a1a;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --shadow-heavy: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; background: #fafafa; }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-top: 80px;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section { padding: 4rem 0; }
+        .section:nth-child(even) { background: var(--bg-light); }
+
+        .section-title { 
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            text-align: center; 
+            margin-bottom: 1rem; 
+            color: var(--text-dark); 
+            font-weight: 300; 
+        }
+        .section-subtitle { 
+            text-align: center; 
+            color: var(--text-light); 
+            font-size: 1.1rem; 
+            margin-bottom: 3rem; 
+            max-width: 600px; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+
+        /* Header */
+        .header-section {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #2d2d2d 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 0 4rem;
+        }
+        .main-title {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 100;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Video Section */
+        .video-section { 
+            background: var(--bg-dark); 
+            padding: 5rem 0; 
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Description */
+        .description-section { 
+            background: white; 
+            text-align: left; 
+        }
+        .description-text { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            font-size: 1.1rem; 
+            line-height: 1.8; 
+            color: var(--text-light); 
+            text-align: justify;
+        }
+
+        /* Story Section */
+        .story-section {
+            background: linear-gradient(45deg, var(--bg-dark), #2d1a1a);
+            color: white;
+            padding: 5rem 0;
+        }
+        .story-title {
+            color: var(--primary);
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .story-location {
+            text-align: center;
+            font-style: italic;
+            color: #ccc;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        .story-text {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ddd;
+            text-align: justify;
+        }
+
+        /* Gallery */
+        .gallery-section { 
+            background: var(--bg-light); 
+        }
+        .render-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin-bottom: 3rem;
+        }
+        .main-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+        .gallery-item {
+            aspect-ratio: 1;
+            background: #ddd;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            box-shadow: var(--shadow);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Award Section */
+        .award-section {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+        .award-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        .award-text {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        .award-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+            margin-top: 1rem;
+        }
+        .award-link:hover {
+            background: white;
+            color: var(--primary-dark);
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .lightbox-btn {
+            position: fixed;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+        }
+        .close-lightbox {
+            top: 30px;
+            right: 30px;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .carousel-btn {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+        }
+        .carousel-btn.prev { left: 30px; }
+        .carousel-btn.next { right: 30px; }
+        .lightbox-btn:hover { 
+            background: rgba(255,255,255,0.2); 
+            transform: scale(1.1); 
+        }
+        .carousel-btn:hover { transform: translateY(-50%) scale(1.1); }
+        
+        .image-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .gallery-subtitle {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(139,0,0,0.9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .render-gallery { 
+                grid-template-columns: 1fr; 
+                gap: 0; 
+            }
+            .main-gallery { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 0; 
+            }
+            .video-container {
+                margin: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-gallery { 
+                grid-template-columns: 1fr; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="main-content">
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="container">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/4fH7DFHXkFE" 
+                        title="Hematófago - Escultura Digital" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Description -->
+    <section class="section description-section">
+        <div class="container">
+            <div class="description-text">
+                <p>Hematófago es un proyecto en el que trabajé de manera individual, integrando diferentes herramientas de producción 3D. Desde la fase de conceptualización, me enfoqué en la creación de criaturas, desarrollando una narrativa fantástica que guió el diseño del personaje.</p>
+                <br>
+                <p>Para la escultura de las formas orgánicas utilicé ZBrush, asegurando un modelado detallado y expresivo. Posteriormente, realicé la retopología en Maya, optimizando la geometría para su uso en tiempo real. La corona del personaje, al tratarse de un elemento rígido, fue modelada directamente en Maya, aprovechando sus herramientas de modelado poligonal.</p>
+                <br>
+                <p>En el proceso de texturizado, utilicé Substance Painter, donde apliqué materiales y detalles que reforzaron la estética del personaje. Finalmente, el renderizado y la presentación del proyecto se realizaron en Unreal Engine, destacando el acabado visual en un entorno en tiempo real.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Render Gallery -->
+    <section class="section gallery-section">
+        <div class="container">
+            <h2 class="section-title">Renders Finales</h2>
+            <p class="section-subtitle">Presentación del personaje en Unreal Engine</p>
+            
+            <div class="render-gallery" data-gallery="unified">
+                <div class="gallery-item fade-in" data-index="0">
+                    <img src="img/Hematofago/24.jpg" alt="Render Final 1">
+                </div>
+                <div class="gallery-item fade-in" data-index="1">
+                    <img src="img/Hematofago/25.jpg" alt="Render Final 2">
+                </div>
+                <div class="gallery-item fade-in" data-index="2">
+                    <img src="img/Hematofago/26.jpg" alt="Render Final 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="container">
+            <h2 class="story-title">El Haemoryx</h2>
+            <p class="story-location">Protektorat Böhmen und Mähren – 1941<br>
+            Protectorado de Bohemia y Moravia (actual República Checa)</p>
+            
+            <div class="story-text">
+                <p>Entre riscos y brumas eternas, el monasterio de Kaerghul, una reliquia gótica de épocas olvidadas, se convirtió en el escenario de una incursión siniestra. Soldados de la Alemania nazi irrumpieron en su santuario, atraídos por la promesa de una leyenda: un poder ancestral que, de dominarlo, les garantizaría la victoria definitiva. Las historias hablaban de una criatura primigenia, un depredador nacido del hambre y la furia, sin fronteras ni restricciones. Los textos prohibidos del monasterio, custodiados por un culto que lo veneraba, lo describían como un nexo entre lo terrenal y lo divino, un ser que desafiaba toda comprensión humana.</p>
+                <br>
+                <p>Los invasores devastaron los bosques, seguros de que podrían doblegar a la bestia y convertirla en un arma. Pero pronto entenderían una verdad ineludible: aquello que es venerado, aquello que ha sido mantenido en las sombras durante siglos, no se somete. La leyenda no reconoce amos. En los registros arcanos, la criatura era conocida como el Haemoryx, "El Guardián de la Sangre". Los soldados alemanes, aterrorizados por lo que enfrentaban, lo bautizaron con un nombre más simple: Das Blutsauger. El hematófago.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Gallery -->
+    <section class="section gallery-section">
+        <div class="container">
+            <h2 class="section-title">Proceso Creativo</h2>
+            <p class="section-subtitle">Desarrollo completo del personaje: desde concepto hasta render final</p>
+            
+            <div class="main-gallery" data-gallery="unified">
+                <div class="gallery-item fade-in" data-index="3">
+                    <img src="img/Hematofago/7.jpg" alt="Proceso 1">
+                </div>
+                <div class="gallery-item fade-in" data-index="4">
+                    <img src="img/Hematofago/8.jpg" alt="Proceso 2">
+                </div>
+                <div class="gallery-item fade-in" data-index="5">
+                    <img src="img/Hematofago/9.jpg" alt="Proceso 3">
+                </div>
+                <div class="gallery-item fade-in" data-index="6">
+                    <img src="img/Hematofago/10.jpg" alt="Proceso 4">
+                </div>
+                <div class="gallery-item fade-in" data-index="7">
+                    <img src="img/Hematofago/11.jpg" alt="Proceso 5">
+                </div>
+                <div class="gallery-item fade-in" data-index="8">
+                    <img src="img/Hematofago/12.jpg" alt="Proceso 6">
+                </div>
+                <div class="gallery-item fade-in" data-index="9">
+                    <img src="img/Hematofago/13.jpg" alt="Proceso 7">
+                </div>
+                <div class="gallery-item fade-in" data-index="10">
+                    <img src="img/Hematofago/14.jpg" alt="Proceso 8">
+                </div>
+                <div class="gallery-item fade-in" data-index="11">
+                    <img src="img/Hematofago/15.jpg" alt="Proceso 9">
+                </div>
+                <div class="gallery-item fade-in" data-index="12">
+                    <img src="img/Hematofago/16.jpg" alt="Proceso 10">
+                </div>
+                <div class="gallery-item fade-in" data-index="13">
+                    <img src="img/Hematofago/17.jpg" alt="Proceso 11">
+                </div>
+                <div class="gallery-item fade-in" data-index="14">
+                    <img src="img/Hematofago/18.jpg" alt="Proceso 12">
+                </div>
+                <div class="gallery-item fade-in" data-index="15">
+                    <img src="img/Hematofago/19.jpg" alt="Proceso 13">
+                </div>
+                <div class="gallery-item fade-in" data-index="16">
+                    <img src="img/Hematofago/20.jpg" alt="Proceso 14">
+                </div>
+                <div class="gallery-item fade-in" data-index="17">
+                    <img src="img/Hematofago/21.jpg" alt="Proceso 15">
+                </div>
+                <div class="gallery-item fade-in" data-index="18">
+                    <img src="img/Hematofago/22.jpg" alt="Proceso 16">
+                </div>
+                <div class="gallery-item fade-in" data-index="19">
+                    <img src="img/Hematofago/23.jpg" alt="Proceso 17">
+                </div>
+                <div class="gallery-item fade-in" data-index="20">
+                    <img src="img/Hematofago/24.jpg" alt="Proceso 18">
+                </div>
+                <div class="gallery-item fade-in" data-index="21">
+                    <img src="img/Hematofago/25.jpg" alt="Proceso 19">
+                </div>
+                <div class="gallery-item fade-in" data-index="22">
+                    <img src="img/Hematofago/26.jpg" alt="Proceso 20">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Award Section -->
+    <section class="award-section">
+        <div class="container">
+            <h2 class="award-title">Reconocimiento</h2>
+            <p class="award-text">
+                Este proyecto participó en el Festival de Arte Nacional Vibrart y obtuvo el primer lugar en Artes Visuales de nivel profesional en el Tecnológico de Monterrey, reconociendo la excelencia técnica y creatividad en el desarrollo de esta escultura digital.
+            </p>
+            <a href="https://www.instagram.com/vibrartfestival?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+               target="_blank" 
+               class="award-link">
+                📸 Ver Festival Vibrart
+            </a>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-btn close-lightbox">&times;</div>
+        <button class="lightbox-btn carousel-btn prev">&#8249;</button>
+        <div class="gallery-subtitle" id="gallery-subtitle">RENDER</div>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+        <button class="lightbox-btn carousel-btn next">&#8250;</button>
+        <div class="image-counter">
+            <span id="current-image">1</span> / <span id="total-images">1</span>
+        </div>
+    </div>
+
+    <script>
+        const unifiedGallery = [
+            // Renders (0-2)
+            'img/Hematofago/24.jpg', 'img/Hematofago/25.jpg', 'img/Hematofago/26.jpg',
+            // Proceso (3-22)
+            'img/Hematofago/7.jpg', 'img/Hematofago/8.jpg', 'img/Hematofago/9.jpg',
+            'img/Hematofago/10.jpg', 'img/Hematofago/11.jpg', 'img/Hematofago/12.jpg',
+            'img/Hematofago/13.jpg', 'img/Hematofago/14.jpg', 'img/Hematofago/15.jpg',
+            'img/Hematofago/16.jpg', 'img/Hematofago/17.jpg', 'img/Hematofago/18.jpg',
+            'img/Hematofago/19.jpg', 'img/Hematofago/20.jpg', 'img/Hematofago/21.jpg',
+            'img/Hematofago/22.jpg', 'img/Hematofago/23.jpg', 'img/Hematofago/24.jpg',
+            'img/Hematofago/25.jpg', 'img/Hematofago/26.jpg'
+        ];
+
+        const galleryTitles = {
+            0: "RENDER", 1: "RENDER", 2: "RENDER",
+            3: "PROCESO", 4: "PROCESO", 5: "PROCESO", 6: "PROCESO", 7: "PROCESO", 8: "PROCESO",
+            9: "PROCESO", 10: "PROCESO", 11: "PROCESO", 12: "PROCESO", 13: "PROCESO", 14: "PROCESO",
+            15: "PROCESO", 16: "PROCESO", 17: "PROCESO", 18: "PROCESO", 19: "PROCESO", 20: "PROCESO",
+            21: "PROCESO", 22: "PROCESO"
+        };
+
+        let currentIndex = 0;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const currentCounter = document.getElementById('current-image');
+        const totalCounter = document.getElementById('total-images');
+        const gallerySubtitle = document.getElementById('gallery-subtitle');
+
+        // Initialize unified gallery clicks
+        document.querySelectorAll('[data-gallery="unified"] [data-index]').forEach(item => {
+            item.addEventListener('click', () => {
+                openLightbox(parseInt(item.dataset.index));
+            });
+        });
+
+        function openLightbox(index) {
+            currentIndex = index;
+            lightboxImg.src = unifiedGallery[index];
+            updateCounter();
+            updateGallerySubtitle();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function navigateImage(direction) {
+            currentIndex = (currentIndex + direction + unifiedGallery.length) % unifiedGallery.length;
+            lightboxImg.src = unifiedGallery[currentIndex];
+            updateCounter();
+            updateGallerySubtitle();
+        }
+
+        function updateCounter() {
+            currentCounter.textContent = currentIndex + 1;
+            totalCounter.textContent = unifiedGallery.length;
+        }
+
+        function updateGallerySubtitle() {
+            gallerySubtitle.textContent = galleryTitles[currentIndex] || "GALERÍA";
+        }
+
+        // Lightbox controls
+        document.querySelector('.close-lightbox').addEventListener('click', closeLightbox);
+        document.querySelector('.carousel-btn.prev').addEventListener('click', e => {
+            e.stopPropagation();
+            navigateImage(-1);
+        });
+        document.querySelector('.carousel-btn.next').addEventListener('click', e => {
+            e.stopPropagation();
+            navigateImage(1);
+        });
+
+        lightbox.addEventListener('click', e => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') navigateImage(1);
+            if (e.key === 'ArrowLeft') navigateImage(-1);
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+    </script>
+    
+    <script src="js/menu.js"></script>
+</body>
+</html>
