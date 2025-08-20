@@ -20,7 +20,7 @@ function createNavbar() {
                 
                 <!-- BOTONES DEL MENÚ -->
                 <ul class="nav-menu">
-                    <li><a href="3dd.html" class="nav-link" data-page="3d">3D</a></li>
+                    <li><a href="3d.html" class="nav-link" data-page="3d">3D</a></li>
                     <li><a href="concept-artt.html" class="nav-link" data-page="concept-art">ConceptArt</a></li>
                     <li><a href="bg-design.html" class="nav-link" data-page="ilustracion">Bg Design</a></li>
                     <li><a href="sobre-mi.html" class="nav-link" data-page="sobre-mi">Sobre Mí</a></li>
@@ -124,3 +124,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeMenu();
 
 });
+
