@@ -3,70 +3,632 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modelado 3D - Mi Portfolio</title>
+    <title>3D - R.Mondragon</title>
+    <link rel="icon" type="image/png" href="img/Icon.png">
     <link rel="stylesheet" href="css/estilos.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(45deg, #7bafbd 0%, #6496a6 100%);
+            --glass-bg: rgba(255,255,255,0.1);
+            --glass-border: rgba(255,255,255,0.2);
+            --text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            --hover-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 20px 60px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 60px;
+            text-shadow: var(--text-shadow);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            margin-bottom: 60px;
+        }
+
+        .gallery-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .project-icon {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            flex-shrink: 0;
+        }
+
+        .project-icon:hover {
+            transform: scale(1.1);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .project-icon.no-hover {
+            cursor: default;
+        }
+
+        .project-icon.no-hover:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .project-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-titles {
+            flex: 1;
+        }
+
+        .project-subtitle {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            text-shadow: var(--text-shadow);
+        }
+
+        .project-description {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin: 0;
+            font-style: italic;
+        }
+
+        /* Grid Layouts */
+        .gallery-grid {
+            display: grid;
+            gap: 0;
+            margin-bottom: 0;
+        }
+
+        .grid-1 { grid-template-columns: 1fr; }
+        .grid-8 { grid-template-columns: repeat(8, 1fr); }
+        .grid-7 { grid-template-columns: repeat(7, 1fr); }
+        .grid-6 { grid-template-columns: repeat(6, 1fr); }
+        .grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+        /* Image Containers */
+        .gallery-item {
+            background: var(--glass-bg);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        /* Size Variants */
+        .size-large {
+            height: 500px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+        }
+
+        .size-small {
+            height: 100px;
+        }
+
+        /* Hover Effects */
+        .gallery-item:hover {
+            z-index: 10;
+        }
+
+        .size-large:hover {
+            transform: scale(1.02);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .size-small:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .size-small:hover img {
+            transform: scale(1.15);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-btn {
+            position: absolute;
+            background: var(--glass-bg);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .close-lightbox {
+            top: 30px;
+            right: 30px;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .carousel-btn {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+        }
+
+        .carousel-btn.prev { left: 30px; }
+        .carousel-btn.next { right: 30px; }
+
+        .lightbox-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+        .carousel-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .image-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .grid-8 { grid-template-columns: repeat(5, 1fr); }
+            .grid-7 { grid-template-columns: repeat(5, 1fr); }
+            .grid-6 { grid-template-columns: repeat(4, 1fr); }
+            .grid-5 { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container { padding: 100px 15px 40px; }
+            .page-title { font-size: 2.2rem; margin-bottom: 40px; }
+            .gallery-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .project-icon { width: 60px; height: 60px; }
+            .project-subtitle { font-size: 1.4rem; }
+            .project-description { font-size: 0.9rem; }
+            .size-large { height: 300px; }
+            .grid-8 { grid-template-columns: repeat(3, 1fr); }
+            .grid-7 { grid-template-columns: repeat(3, 1fr); }
+            .grid-6 { grid-template-columns: repeat(3, 1fr); }
+            .grid-5 { grid-template-columns: repeat(3, 1fr); }
+            .size-small { height: 80px; }
+            .carousel-btn { width: 50px; height: 50px; font-size: 1.2rem; }
+            .carousel-btn.prev { left: 15px; }
+            .carousel-btn.next { right: 15px; }
+        }
+
+        @media (max-width: 480px) {
+            .page-title { font-size: 1.8rem; }
+            .project-icon { width: 50px; height: 50px; }
+            .project-subtitle { font-size: 1.2rem; }
+            .project-description { font-size: 0.8rem; }
+            .size-large { height: 250px; }
+            .grid-8, .grid-7, .grid-6, .grid-5 { grid-template-columns: repeat(2, 1fr); }
+            .size-small { height: 70px; }
+            .carousel-btn { width: 40px; height: 40px; font-size: 1rem; }
+            .close-lightbox { width: 40px; height: 40px; font-size: 1.5rem; top: 20px; right: 20px; }
+        }
+    </style>
 </head>
 <body>
-    <!-- El menú se inserta automáticamente aquí -->
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="main-content">
-        <div class="container">
-            <h1 class="page-title">Modelado 3D</h1>
-            
-            <div class="content-section">
-                <h2>Mi Trabajo en 3D</h2>
-                <p>Me especializo en la creación de modelos 3D para diversas aplicaciones, desde videojuegos hasta visualizaciones arquitectónicas. Utilizo herramientas como Blender, Maya y 3ds Max para dar vida a conceptos e ideas.</p>
-                
-                <h3>Técnicas que domino:</h3>
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-icon">🏗️</div>
-                        <h4>Modelado Hard Surface</h4>
-                        <p>Creación de objetos mecánicos, vehículos y arquitectura con formas geométricas precisas.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">👤</div>
-                        <h4>Modelado Orgánico</h4>
-                        <p>Personajes, criaturas y formas naturales con topología optimizada para animación.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">🎨</div>
-                        <h4>Texturizado y Materiales</h4>
-                        <p>Creación de materiales realistas y estilizados usando Substance Painter y Blender.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">💡</div>
-                        <h4>Iluminación y Render</h4>
-                        <p>Setup de iluminación profesional y renders de alta calidad para presentación.</p>
-                    </div>
+    <main class="gallery-container">
+        <h1 class="page-title">3D</h1>
+        
+        <!-- Gallery Section: Hematófago -->
+        <div class="gallery-section">
+            <div class="gallery-header">
+                <div class="project-icon" onclick="window.location.href='hematofago.html'">
+                    <img src="img/HematofagoIcon.png" alt="Hematófago Icono" onerror="this.style.display='none'">
+                </div>
+                <div class="project-titles">
+                    <h2 class="project-subtitle">Hematófago</h2>
+                    <p class="project-description">Escultura digital</p>
                 </div>
             </div>
+            
+            <div class="gallery-grid grid-1">
+                <div class="gallery-item size-large" data-image="0">
+                    <img src="img/3d/1.jpg" alt="Hematófago 1">
+                </div>
+            </div>
+            
+            <div class="gallery-grid grid-7">
+                <div class="gallery-item size-small" data-image="1">
+                    <img src="img/3d/2.jpg" alt="Hematófago 2">
+                </div>
+                <div class="gallery-item size-small" data-image="2">
+                    <img src="img/3d/3.jpg" alt="Hematófago 3">
+                </div>
+                <div class="gallery-item size-small" data-image="3">
+                    <img src="img/3d/4.jpg" alt="Hematófago 4">
+                </div>
+                <div class="gallery-item size-small" data-image="4">
+                    <img src="img/3d/5.jpg" alt="Hematófago 5">
+                </div>
+                <div class="gallery-item size-small" data-image="5">
+                    <img src="img/3d/6.jpg" alt="Hematófago 6">
+                </div>
+                <div class="gallery-item size-small" data-image="6">
+                    <img src="img/3d/7.jpg" alt="Hematófago 7">
+                </div>
+                <div class="gallery-item size-small" data-image="7">
+                    <img src="img/3d/8.jpg" alt="Hematófago 8">
+                </div>
+            </div>
+        </div>
 
-            <div class="content-section">
-                <h2>Proyectos Destacados</h2>
-                <p>Aquí algunos de mis trabajos más recientes en modelado 3D. Cada proyecto representa un desafío único y una oportunidad de crecimiento creativo.</p>
-                
-                <div class="grid">
-                    <div class="card">
-                        <h4>Proyecto 1</h4>
-                        <p>Descripción del primer proyecto de modelado 3D. Aquí irían las imágenes y detalles del trabajo realizado.</p>
-                    </div>
-                    <div class="card">
-                        <h4>Proyecto 2</h4>
-                        <p>Descripción del segundo proyecto. Técnicas utilizadas, software empleado y resultado final.</p>
-                    </div>
-                    <div class="card">
-                        <h4>Proyecto 3</h4>
-                        <p>Descripción del tercer proyecto. Desafíos enfrentados y soluciones creativas implementadas.</p>
-                    </div>
+        <!-- Gallery Section: Die Kackwurst Fabrik -->
+        <div class="gallery-section">
+            <div class="gallery-header">
+                <div class="project-icon" onclick="window.location.href='DieKackwurst.html'">
+                    <img src="img/DieKackwurst/13.jpg" alt="Kackwurst Icono" onerror="this.style.display='none'">
+                </div>
+                <div class="project-titles">
+                    <h2 class="project-subtitle">Die Kackwurst Fabrik</h2>
+                    <p class="project-description">Concept, texturizado y Animación</p>
+                </div>
+            </div>
+            
+            <div class="gallery-grid grid-1">
+                <div class="gallery-item size-large" data-image="8">
+                    <img src="img/3d/9.jpg" alt="Die Kackwurst Fabrik 1">
+                </div>
+            </div>
+            
+            <div class="gallery-grid grid-6">
+                <div class="gallery-item size-small" data-image="9">
+                    <img src="img/3d/10.jpg" alt="Die Kackwurst Fabrik 2">
+                </div>
+                <div class="gallery-item size-small" data-image="10">
+                    <img src="img/3d/11.jpg" alt="Die Kackwurst Fabrik 3">
+                </div>
+                <div class="gallery-item size-small" data-image="11">
+                    <img src="img/3d/12.jpg" alt="Die Kackwurst Fabrik 4">
+                </div>
+                <div class="gallery-item size-small" data-image="12">
+                    <img src="img/3d/13.jpg" alt="Die Kackwurst Fabrik 5">
+                </div>
+                <div class="gallery-item size-small" data-image="13">
+                    <img src="img/3d/14.jpg" alt="Die Kackwurst Fabrik 6">
+                </div>
+                <div class="gallery-item size-small" data-image="14">
+                    <img src="img/3d/15.jpg" alt="Die Kackwurst Fabrik 7">
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Section: PERSEFON-E -->
+        <div class="gallery-section">
+            <div class="gallery-header">
+                <div class="project-icon" onclick="window.open('https://www.artstation.com/artwork/BkkKPr', '_blank')">
+                    <img src="img/PersefoneIcon.png" alt="Persefone Icono" onerror="this.style.display='none'">
+                </div>
+                <div class="project-titles">
+                    <h2 class="project-subtitle">PERSEFON-E</h2>
+                    <p class="project-description">Modelado, Rig y Animación</p>
+                </div>
+            </div>
+            
+            <div class="gallery-grid grid-1">
+                <div class="gallery-item size-large" data-image="15">
+                    <img src="img/3d/17.jpg" alt="PERSEFON-E 1">
+                </div>
+            </div>
+            
+            <div class="gallery-grid grid-6">
+                <div class="gallery-item size-small" data-image="16">
+                    <img src="img/3d/18.jpg" alt="PERSEFON-E 2">
+                </div>
+                <div class="gallery-item size-small" data-image="17">
+                    <img src="img/3d/19.jpg" alt="PERSEFON-E 3">
+                </div>
+                <div class="gallery-item size-small" data-image="18">
+                    <img src="img/3d/20.jpg" alt="PERSEFON-E 4">
+                </div>
+                <div class="gallery-item size-small" data-image="19">
+                    <img src="img/3d/21.jpg" alt="PERSEFON-E 5">
+                </div>
+                <div class="gallery-item size-small" data-image="20">
+                    <img src="img/3d/22.jpg" alt="PERSEFON-E 6">
+                </div>
+                <div class="gallery-item size-small" data-image="21">
+                    <img src="img/3d/23.jpg" alt="PERSEFON-E 7">
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Section: Armadura -->
+        <div class="gallery-section">
+            <div class="gallery-header">
+                <div class="project-icon no-hover">
+                    <img src="img/3d/26.jpg" alt="Armadura Icono" onerror="this.style.display='none'">
+                </div>
+                <div class="project-titles">
+                    <h2 class="project-subtitle">Armadura</h2>
+                    <p class="project-description">Escultura digital</p>
+                </div>
+            </div>
+            
+            <div class="gallery-grid grid-1">
+                <div class="gallery-item size-large" data-image="21">
+                    <img src="img/3d/23.jpg" alt="Armadura 1">
+                </div>
+            </div>
+            
+            <div class="gallery-grid grid-6">
+                <div class="gallery-item size-small" data-image="22">
+                    <img src="img/3d/24.jpg" alt="Armadura 2">
+                </div>
+                <div class="gallery-item size-small" data-image="23">
+                    <img src="img/3d/25.jpg" alt="Armadura 3">
+                </div>
+                <div class="gallery-item size-small" data-image="24">
+                    <img src="img/3d/26.jpg" alt="Armadura 4">
+                </div>
+                <div class="gallery-item size-small" data-image="25">
+                    <img src="img/3d/27.jpg" alt="Armadura 5">
+                </div>
+                <div class="gallery-item size-small" data-image="26">
+                    <img src="img/3d/28.jpg" alt="Armadura 6">
+                </div>
+                <div class="gallery-item size-small" data-image="27">
+                    <img src="img/3d/29.jpg" alt="Armadura 7">
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Section: Eleanor Rigby -->
+        <div class="gallery-section">
+            <div class="gallery-header">
+                <div class="project-icon" onclick="window.open('https://www.artstation.com/artwork/oJJWQ4', '_blank')">
+                    <img src="img/3d/30.jpg" alt="Eleanor Icono" onerror="this.style.display='none'">
+                </div>
+                <div class="project-titles">
+                    <h2 class="project-subtitle">Eleanor Rigby</h2>
+                    <p class="project-description">Escultura digital</p>
+                </div>
+            </div>
+            
+            <div class="gallery-grid grid-8">
+                <div class="gallery-item size-small" data-image="28">
+                    <img src="img/3d/30.jpg" alt="Eleanor Rigby 1">
+                </div>
+                <div class="gallery-item size-small" data-image="29">
+                    <img src="img/3d/31.jpg" alt="Eleanor Rigby 2">
+                </div>
+                <div class="gallery-item size-small" data-image="30">
+                    <img src="img/3d/32.jpg" alt="Eleanor Rigby 3">
+                </div>
+                <div class="gallery-item size-small" data-image="31">
+                    <img src="img/3d/33.jpg" alt="Eleanor Rigby 4">
+                </div>
+                <div class="gallery-item size-small" data-image="32">
+                    <img src="img/3d/34.jpg" alt="Eleanor Rigby 5">
+                </div>
+                <div class="gallery-item size-small" data-image="33">
+                    <img src="img/3d/35.jpg" alt="Eleanor Rigby 6">
+                </div>
+                <div class="gallery-item size-small" data-image="34">
+                    <img src="img/3d/36.jpg" alt="Eleanor Rigby 7">
+                </div>
+                <div class="gallery-item size-small" data-image="35">
+                    <img src="img/3d/37.jpg" alt="Eleanor Rigby 8">
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- El footer se inserta automáticamente aquí -->
-    
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-btn close-lightbox">&times;</div>
+        <button class="lightbox-btn carousel-btn prev">&#8249;</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+        <button class="lightbox-btn carousel-btn next">&#8250;</button>
+        <div class="image-counter">
+            <span id="current-image">1</span> / <span id="total-images">36</span>
+        </div>
+    </div>
+
     <script src="js/menu.js"></script>
+    <script>
+        // Configuration - Array with all images in order
+        const images = [
+            // Hematófago (1-8)
+            'img/3d/1.jpg', 'img/3d/2.jpg', 'img/3d/3.jpg', 'img/3d/4.jpg', 
+            'img/3d/5.jpg', 'img/3d/6.jpg', 'img/3d/7.jpg', 'img/3d/8.jpg',
+            // Die Kackwurst Fabrik (9-15)
+            'img/3d/9.jpg', 'img/3d/10.jpg', 'img/3d/11.jpg', 'img/3d/12.jpg', 
+            'img/3d/13.jpg', 'img/3d/14.jpg', 'img/3d/15.jpg',
+            // PERSEFON-E (17-23)
+            'img/3d/17.jpg', 'img/3d/18.jpg', 'img/3d/19.jpg', 'img/3d/20.jpg', 
+            'img/3d/21.jpg', 'img/3d/22.jpg', 'img/3d/23.jpg',
+            // Armadura (24-29) - CORRIGIENDO INDICES
+            'img/3d/24.jpg', 'img/3d/25.jpg', 'img/3d/26.jpg', 'img/3d/27.jpg', 
+            'img/3d/28.jpg', 'img/3d/29.jpg',
+            // Eleanor Rigby (30-37)
+            'img/3d/30.jpg', 'img/3d/31.jpg', 'img/3d/32.jpg', 'img/3d/33.jpg', 
+            'img/3d/34.jpg', 'img/3d/35.jpg', 'img/3d/36.jpg', 'img/3d/37.jpg'
+        ];
+
+        let currentImageIndex = 0;
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            lightboxImg.src = images[currentImageIndex];
+            updateCounter();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function navigateImage(direction) {
+            currentImageIndex = (currentImageIndex + direction + images.length) % images.length;
+            lightboxImg.src = images[currentImageIndex];
+            updateCounter();
+        }
+
+        function updateCounter() {
+            document.getElementById('current-image').textContent = currentImageIndex + 1;
+            document.getElementById('total-images').textContent = images.length;
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gallery item clicks
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const imageIndex = parseInt(item.dataset.image);
+                    openLightbox(imageIndex);
+                });
+            });
+
+            // Lightbox controls
+            document.querySelector('.close-lightbox').addEventListener('click', closeLightbox);
+            document.querySelector('.carousel-btn.prev').addEventListener('click', (e) => {
+                e.stopPropagation();
+                navigateImage(-1);
+            });
+            document.querySelector('.carousel-btn.next').addEventListener('click', (e) => {
+                e.stopPropagation();
+                navigateImage(1);
+            });
+
+            // Close on background click
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                
+                switch(e.key) {
+                    case 'Escape': closeLightbox(); break;
+                    case 'ArrowRight': navigateImage(1); break;
+                    case 'ArrowLeft': navigateImage(-1); break;
+                }
+            });
+
+            // Entrance animations
+            const sections = document.querySelectorAll('.gallery-section');
+            sections.forEach((section, index) => {
+                const header = section.querySelector('.gallery-header');
+                const items = section.querySelectorAll('.gallery-item');
+                
+                header.style.cssText = 'opacity: 0; transform: translateY(30px);';
+                
+                setTimeout(() => {
+                    header.style.cssText += 'transition: all 0.6s ease; opacity: 1; transform: translateY(0);';
+                }, index * 800 + 200);
+                
+                items.forEach((item, i) => {
+                    item.style.cssText = 'opacity: 0; transform: translateY(30px);';
+                    setTimeout(() => {
+                        item.style.cssText += 'transition: all 0.6s ease; opacity: 1; transform: translateY(0);';
+                    }, index * 800 + i * 100 + 400);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
