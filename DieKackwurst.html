@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hematófago - Escultura Digital</title>
+    <title>Die Kackwurstfabrik - Realidad Aumentada</title>
     <link rel="icon" type="image/png" href="img/Icon.png">
     <link rel="stylesheet" href="css/estilos.css">
     <style>
@@ -28,13 +28,13 @@
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .section { padding: 4rem 0; }
+        .section { padding: 2.5rem 0; }
         .section:nth-child(even) { background: var(--bg-light); }
 
         .section-title { 
             font-size: clamp(2rem, 4vw, 2.5rem);
             text-align: center; 
-            margin-bottom: 1rem; 
+            margin-bottom: 0.8rem; 
             color: var(--text-dark); 
             font-weight: 300; 
         }
@@ -42,7 +42,7 @@
             text-align: center; 
             color: var(--text-light); 
             font-size: 1.1rem; 
-            margin-bottom: 3rem; 
+            margin-bottom: 2rem; 
             max-width: 600px; 
             margin-left: auto; 
             margin-right: auto; 
@@ -67,7 +67,7 @@
         /* Video Section */
         .video-section { 
             background: var(--bg-dark); 
-            padding: 5rem 0; 
+            padding: 3rem 0; 
         }
         .video-container {
             position: relative;
@@ -92,6 +92,7 @@
         .description-section { 
             background: white; 
             text-align: left; 
+            padding: 3rem 0;
         }
         .description-text { 
             max-width: 900px; 
@@ -133,18 +134,32 @@
 
         /* Gallery */
         .gallery-section { 
-            background: var(--bg-light); 
+            background: var(--bg-light);
+            padding: 2rem 0 !important;
         }
-        .render-gallery {
+        .concept-gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-            margin-bottom: 3rem;
+            gap: 15px;
+            margin-bottom: 2rem;
         }
-        .main-gallery {
+        .model-gallery {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+        .texture-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+        .assets-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 2rem;
         }
         .gallery-item {
             aspect-ratio: 1;
@@ -153,7 +168,7 @@
             position: relative;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-radius: 0;
+            border-radius: 8px;
             box-shadow: var(--shadow);
         }
         .gallery-item img {
@@ -170,12 +185,21 @@
             transform: scale(1.05);
         }
 
+        /* Credit text */
+        .credit-text {
+            text-align: center;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
         /* Award Section */
         .award-section {
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(45deg, #7bafbd 0%, #6496a6 100%);
             color: white;
             text-align: center;
-            padding: 5rem 0;
+            padding: 3rem 0;
         }
         .award-title {
             font-size: clamp(2rem, 4vw, 2.8rem);
@@ -189,24 +213,6 @@
             margin-left: auto;
             margin-right: auto;
             line-height: 1.7;
-        }
-        .award-link {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255,255,255,0.3);
-            margin-top: 1rem;
-        }
-        .award-link:hover {
-            background: white;
-            color: var(--primary-dark);
-            text-decoration: none;
-            transform: translateY(-2px);
         }
 
         /* Lightbox */
@@ -317,21 +323,31 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .render-gallery { 
+            .concept-gallery { 
                 grid-template-columns: 1fr; 
-                gap: 0; 
+                gap: 10px; 
             }
-            .main-gallery { 
+            .model-gallery, .assets-gallery { 
+                grid-template-columns: 1fr; 
+                gap: 10px; 
+            }
+            .texture-gallery { 
                 grid-template-columns: repeat(2, 1fr); 
-                gap: 0; 
+                gap: 10px; 
             }
             .video-container {
                 margin: 0 1rem;
             }
+            .section { 
+                padding: 1.5rem 0; 
+            }
+            .gallery-section { 
+                padding: 1.5rem 0 !important; 
+            }
         }
 
         @media (max-width: 480px) {
-            .main-gallery { 
+            .texture-gallery { 
                 grid-template-columns: 1fr; 
             }
         }
@@ -344,8 +360,8 @@
     <section class="video-section">
         <div class="container">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/4fH7DFHXkFE" 
-                        title="Hematófago - Escultura Digital" 
+                <iframe src="https://www.youtube.com/embed/hniFjXrooWY" 
+                        title="Die Kackwurstfabrik - Realidad Aumentada" 
                         allowfullscreen>
                 </iframe>
             </div>
@@ -356,133 +372,134 @@
     <section class="section description-section">
         <div class="container">
             <div class="description-text">
-                <p>Hematófago es un proyecto en el que trabajé de manera individual, integrando diferentes herramientas de producción 3D. Desde la fase de conceptualización, me enfoqué en la creación de criaturas, desarrollando una narrativa fantástica que guió el diseño del personaje.</p>
+                <p><strong>Die Kackwurstfabrik</strong> es un libro <strong>escrito por Marja Baseler y Annemarie van den Brink</strong>, <strong>ilustrado por Tjarko van der Pol</strong>, todos de <strong>nacionalidad neerlandesa</strong>. La obra, con un estilo fresco y lúdico, explica de manera clara y humorística el proceso de la digestión, acompañada de ilustraciones vibrantes que despiertan la curiosidad de los más pequeños.</p>
                 <br>
-                <p>Para la escultura de las formas orgánicas utilicé ZBrush, asegurando un modelado detallado y expresivo. Posteriormente, realicé la retopología en Maya, optimizando la geometría para su uso en tiempo real. La corona del personaje, al tratarse de un elemento rígido, fue modelada directamente en Maya, aprovechando sus herramientas de modelado poligonal.</p>
+                <p>Como parte de un proyecto académico coordinado por la maestra <strong>Ma. Elena Melón Jareda</strong>, en colaboración con la <strong>Biblioteca Juvenil Internacional de Múnich</strong> (<em>Internationale Jugendbibliothek</em> en alemán), desarrollamos una serie de experiencias de realidad aumentada (AR) para una exposición que tendrá lugar en octubre de este año.</p>
                 <br>
-                <p>En el proceso de texturizado, utilicé Substance Painter, donde apliqué materiales y detalles que reforzaron la estética del personaje. Finalmente, el renderizado y la presentación del proyecto se realizaron en Unreal Engine, destacando el acabado visual en un entorno en tiempo real.</p>
+                <p>Nuestro trabajo se centró en crear puentes entre la literatura infantil y las nuevas tecnologías. Concretamente, tomamos como base el libro <strong>Die Kackwurstfabrik</strong> y lo llevamos al terreno del 3D, diseñando una experiencia inmersiva que permite al espectador interactuar con los personajes y escenarios del relato. El objetivo fue transformar la lectura en una vivencia interactiva, en la que los niños y jóvenes no solo lean o vean, sino que también <strong>exploren, jueguen y aprendan</strong>.</p>
+                <br>
+                <p>Este proyecto forma parte de un esfuerzo mayor por demostrar cómo la realidad aumentada puede convertirse en una herramienta educativa y cultural. Más allá de la innovación tecnológica, buscamos reforzar el papel de la literatura como un medio que evoluciona y se adapta a las nuevas generaciones, sin perder su esencia narrativa.</p>
+                <br>
+                <p>La exposición en Múnich será una oportunidad para mostrar cómo, a través de la colaboración internacional entre instituciones educativas, bibliotecas y artistas digitales, se pueden abrir nuevas formas de acercar los libros a los lectores, fomentando tanto la lectura como la creatividad.</p>
             </div>
         </div>
     </section>
 
-    <!-- Render Gallery -->
+    <!-- Concept Art Gallery -->
     <section class="section gallery-section">
         <div class="container">
-            <h2 class="section-title">Renders Finales</h2>
-            <p class="section-subtitle">Presentación del personaje en Unreal Engine</p>
+            <h2 class="section-title">Concept Art</h2>
+            <p class="section-subtitle">Desarrollo conceptual inicial del proyecto</p>
             
-            <div class="render-gallery" data-gallery="unified">
+            <div class="concept-gallery" data-gallery="unified">
                 <div class="gallery-item fade-in" data-index="0">
-                    <img src="img/Hematofago/24.jpg" alt="Render Final 1">
+                    <img src="img/DieKackwurst/1.jpg" alt="Concept Art 1">
                 </div>
                 <div class="gallery-item fade-in" data-index="1">
-                    <img src="img/Hematofago/25.jpg" alt="Render Final 2">
+                    <img src="img/DieKackwurst/2.jpg" alt="Concept Art 2">
                 </div>
                 <div class="gallery-item fade-in" data-index="2">
-                    <img src="img/Hematofago/26.jpg" alt="Render Final 3">
+                    <img src="img/DieKackwurst/3.jpg" alt="Concept Art 3">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Story Section -->
-    <section class="story-section">
-        <div class="container">
-            <h2 class="story-title">El Haemoryx</h2>
-            <p class="story-location">Protektorat Böhmen und Mähren – 1941<br>
-            Protectorado de Bohemia y Moravia (actual República Checa)</p>
-            
-            <div class="story-text">
-                <p>Entre riscos y brumas eternas, el monasterio de Kaerghul, una reliquia gótica de épocas olvidadas, se convirtió en el escenario de una incursión siniestra. Soldados de la Alemania nazi irrumpieron en su santuario, atraídos por la promesa de una leyenda: un poder ancestral que, de dominarlo, les garantizaría la victoria definitiva. Las historias hablaban de una criatura primigenia, un depredador nacido del hambre y la furia, sin fronteras ni restricciones. Los textos prohibidos del monasterio, custodiados por un culto que lo veneraba, lo describían como un nexo entre lo terrenal y lo divino, un ser que desafiaba toda comprensión humana.</p>
-                <br>
-                <p>Los invasores devastaron los bosques, seguros de que podrían doblegar a la bestia y convertirla en un arma. Pero pronto entenderían una verdad ineludible: aquello que es venerado, aquello que ha sido mantenido en las sombras durante siglos, no se somete. La leyenda no reconoce amos. En los registros arcanos, la criatura era conocida como el Haemoryx, "El Guardián de la Sangre". Los soldados alemanes, aterrorizados por lo que enfrentaban, lo bautizaron con un nombre más simple: Das Blutsauger. El hematófago.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Gallery -->
+    <!-- 3D Model Gallery -->
     <section class="section gallery-section">
         <div class="container">
-            <h2 class="section-title">Proceso Creativo</h2>
-            <p class="section-subtitle">Desarrollo completo del personaje: desde concepto hasta render final</p>
+            <h2 class="section-title">Modelo 3D</h2>
+            <div class="credit-text">Modelo por Ma. Elena Melón Jareda</div>
             
-            <div class="main-gallery" data-gallery="unified">
+            <div class="model-gallery" data-gallery="unified">
                 <div class="gallery-item fade-in" data-index="3">
-                    <img src="img/Hematofago/7.jpg" alt="Proceso 1">
+                    <img src="img/DieKackwurst/18.jpg" alt="Modelo 3D 1">
                 </div>
                 <div class="gallery-item fade-in" data-index="4">
-                    <img src="img/Hematofago/8.jpg" alt="Proceso 2">
-                </div>
-                <div class="gallery-item fade-in" data-index="5">
-                    <img src="img/Hematofago/9.jpg" alt="Proceso 3">
-                </div>
-                <div class="gallery-item fade-in" data-index="6">
-                    <img src="img/Hematofago/10.jpg" alt="Proceso 4">
-                </div>
-                <div class="gallery-item fade-in" data-index="7">
-                    <img src="img/Hematofago/11.jpg" alt="Proceso 5">
-                </div>
-                <div class="gallery-item fade-in" data-index="8">
-                    <img src="img/Hematofago/12.jpg" alt="Proceso 6">
-                </div>
-                <div class="gallery-item fade-in" data-index="9">
-                    <img src="img/Hematofago/13.jpg" alt="Proceso 7">
-                </div>
-                <div class="gallery-item fade-in" data-index="10">
-                    <img src="img/Hematofago/14.jpg" alt="Proceso 8">
-                </div>
-                <div class="gallery-item fade-in" data-index="11">
-                    <img src="img/Hematofago/15.jpg" alt="Proceso 9">
-                </div>
-                <div class="gallery-item fade-in" data-index="12">
-                    <img src="img/Hematofago/16.jpg" alt="Proceso 10">
-                </div>
-                <div class="gallery-item fade-in" data-index="13">
-                    <img src="img/Hematofago/17.jpg" alt="Proceso 11">
-                </div>
-                <div class="gallery-item fade-in" data-index="14">
-                    <img src="img/Hematofago/18.jpg" alt="Proceso 12">
-                </div>
-                <div class="gallery-item fade-in" data-index="15">
-                    <img src="img/Hematofago/19.jpg" alt="Proceso 13">
-                </div>
-                <div class="gallery-item fade-in" data-index="16">
-                    <img src="img/Hematofago/20.jpg" alt="Proceso 14">
-                </div>
-                <div class="gallery-item fade-in" data-index="17">
-                    <img src="img/Hematofago/21.jpg" alt="Proceso 15">
-                </div>
-                <div class="gallery-item fade-in" data-index="18">
-                    <img src="img/Hematofago/22.jpg" alt="Proceso 16">
-                </div>
-                <div class="gallery-item fade-in" data-index="19">
-                    <img src="img/Hematofago/23.jpg" alt="Proceso 17">
-                </div>
-                <div class="gallery-item fade-in" data-index="20">
-                    <img src="img/Hematofago/24.jpg" alt="Proceso 18">
-                </div>
-                <div class="gallery-item fade-in" data-index="21">
-                    <img src="img/Hematofago/25.jpg" alt="Proceso 19">
-                </div>
-                <div class="gallery-item fade-in" data-index="22">
-                    <img src="img/Hematofago/26.jpg" alt="Proceso 20">
+                    <img src="img/DieKackwurst/17.jpg" alt="Modelo 3D 2">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Award Section -->
+    <!-- Pim Texture Gallery -->
+    <section class="section gallery-section">
+        <div class="container">
+            <h2 class="section-title">Pim - Texturizado</h2>
+            <div class="credit-text">Texturizado por mí</div>
+            
+            <div class="texture-gallery" data-gallery="unified">
+                <div class="gallery-item fade-in" data-index="5">
+                    <img src="img/DieKackwurst/5.jpg" alt="Pim Textura 1">
+                </div>
+                <div class="gallery-item fade-in" data-index="6">
+                    <img src="img/DieKackwurst/6.jpg" alt="Pim Textura 2">
+                </div>
+                <div class="gallery-item fade-in" data-index="7">
+                    <img src="img/DieKackwurst/7.jpg" alt="Pim Textura 3">
+                </div>
+                <div class="gallery-item fade-in" data-index="8">
+                    <img src="img/DieKackwurst/8.jpg" alt="Pim Textura 4">
+                </div>
+                <div class="gallery-item fade-in" data-index="9">
+                    <img src="img/DieKackwurst/9.jpg" alt="Pim Textura 5">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tin Texture Gallery -->
+    <section class="section gallery-section">
+        <div class="container">
+            <h2 class="section-title">Tin - Texturizado</h2>
+            <div class="credit-text">Texturizado por mí</div>
+            
+            <div class="texture-gallery" data-gallery="unified">
+                <div class="gallery-item fade-in" data-index="10">
+                    <img src="img/DieKackwurst/10.jpg" alt="Tin Textura 1">
+                </div>
+                <div class="gallery-item fade-in" data-index="11">
+                    <img src="img/DieKackwurst/11.jpg" alt="Tin Textura 2">
+                </div>
+                <div class="gallery-item fade-in" data-index="12">
+                    <img src="img/DieKackwurst/12.jpg" alt="Tin Textura 3">
+                </div>
+                <div class="gallery-item fade-in" data-index="13">
+                    <img src="img/DieKackwurst/13.jpg" alt="Tin Textura 4">
+                </div>
+                <div class="gallery-item fade-in" data-index="14">
+                    <img src="img/DieKackwurst/14.jpg" alt="Tin Textura 5">
+                </div>
+                <div class="gallery-item fade-in" data-index="15">
+                    <img src="img/DieKackwurst/15.jpg" alt="Tin Textura 6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assets Gallery -->
+    <section class="section gallery-section">
+        <div class="container">
+            <h2 class="section-title">Assets</h2>
+            <div class="credit-text">Modelo de la fábrica por Gerardo Sánchez</div>
+            
+            <div class="assets-gallery" data-gallery="unified">
+                <div class="gallery-item fade-in" data-index="16">
+                    <img src="img/DieKackwurst/4.jpg" alt="Assets 1">
+                </div>
+                <div class="gallery-item fade-in" data-index="17">
+                    <img src="img/DieKackwurst/16.jpg" alt="Assets 2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Participation Section -->
     <section class="award-section">
         <div class="container">
-            <h2 class="award-title">Reconocimiento</h2>
+            <h2 class="award-title">Mi Participación</h2>
             <p class="award-text">
-                Este proyecto participó en el Festival de Arte Nacional Vibrart y obtuvo el primer lugar en Artes Visuales de nivel profesional en el Tecnológico de Monterrey, reconociendo la excelencia técnica y creatividad en el desarrollo de esta escultura digital.
-            </p>
-            <a href="https://www.instagram.com/vibrartfestival?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-               target="_blank" 
-               class="award-link">
-                📸 Ver Festival Vibrart
-            </a>
+          Dentro de este proyecto mi participación se centró en la conceptualización y diseño de un personaje guía, pensado para acompañar a los visitantes a lo largo de toda la experiencia. Este personaje, al que llamamos "Pim y Tin", funciona como un hilo conductor que aparece en cada libro adaptado, facilitando la inmersión y generando una narrativa común entre las distintas propuestas de realidad aumentada. Además de su diseño visual, desarrollé la texturización de los modelos 3D, cuidando que las paletas de color y los acabados mantuvieran la esencia lúdica del material original, al mismo tiempo que se adaptaban a un entorno digital interactivo. Otro de mis aportes clave fue la animación del personaje y de los elementos del libro, sincronizándolos con los audios narrativos para crear una experiencia cohesiva. Esta integración entre sonido e imagen busca que los niños no solo observen, sino que también vivan la lectura como un proceso multisensorial, en el que la historia se despliega frente a ellos de manera dinámica. De esta forma, se refuerza el aprendizaje, la atención y la conexión emocional con la obra.  </p>
         </div>
     </section>
 
@@ -492,7 +509,7 @@
     <div class="lightbox" id="lightbox">
         <div class="lightbox-btn close-lightbox">&times;</div>
         <button class="lightbox-btn carousel-btn prev">&#8249;</button>
-        <div class="gallery-subtitle" id="gallery-subtitle">RENDER</div>
+        <div class="gallery-subtitle" id="gallery-subtitle">GALERÍA</div>
         <div class="lightbox-content">
             <img id="lightbox-img" src="" alt="">
         </div>
@@ -504,24 +521,26 @@
 
     <script>
         const unifiedGallery = [
-            // Renders (0-2)
-            'img/Hematofago/24.jpg', 'img/Hematofago/25.jpg', 'img/Hematofago/26.jpg',
-            // Proceso (3-22)
-            'img/Hematofago/7.jpg', 'img/Hematofago/8.jpg', 'img/Hematofago/9.jpg',
-            'img/Hematofago/10.jpg', 'img/Hematofago/11.jpg', 'img/Hematofago/12.jpg',
-            'img/Hematofago/13.jpg', 'img/Hematofago/14.jpg', 'img/Hematofago/15.jpg',
-            'img/Hematofago/16.jpg', 'img/Hematofago/17.jpg', 'img/Hematofago/18.jpg',
-            'img/Hematofago/19.jpg', 'img/Hematofago/20.jpg', 'img/Hematofago/21.jpg',
-            'img/Hematofago/22.jpg', 'img/Hematofago/23.jpg', 'img/Hematofago/24.jpg',
-            'img/Hematofago/25.jpg', 'img/Hematofago/26.jpg'
+            // Concept Art (0-2)
+            'img/DieKackwurst/1.jpg', 'img/DieKackwurst/2.jpg', 'img/DieKackwurst/3.jpg',
+            // 3D Model (3-4)
+            'img/DieKackwurst/18.jpg', 'img/DieKackwurst/17.jpg',
+            // Pim Texture (5-9)
+            'img/DieKackwurst/5.jpg', 'img/DieKackwurst/6.jpg', 'img/DieKackwurst/7.jpg',
+            'img/DieKackwurst/8.jpg', 'img/DieKackwurst/9.jpg',
+            // Tin Texture (10-15)
+            'img/DieKackwurst/10.jpg', 'img/DieKackwurst/11.jpg', 'img/DieKackwurst/12.jpg',
+            'img/DieKackwurst/13.jpg', 'img/DieKackwurst/14.jpg', 'img/DieKackwurst/15.jpg',
+            // Assets (16-17)
+            'img/DieKackwurst/4.jpg', 'img/DieKackwurst/16.jpg'
         ];
 
         const galleryTitles = {
-            0: "RENDER", 1: "RENDER", 2: "RENDER",
-            3: "PROCESO", 4: "PROCESO", 5: "PROCESO", 6: "PROCESO", 7: "PROCESO", 8: "PROCESO",
-            9: "PROCESO", 10: "PROCESO", 11: "PROCESO", 12: "PROCESO", 13: "PROCESO", 14: "PROCESO",
-            15: "PROCESO", 16: "PROCESO", 17: "PROCESO", 18: "PROCESO", 19: "PROCESO", 20: "PROCESO",
-            21: "PROCESO", 22: "PROCESO"
+            0: "CONCEPT ART", 1: "CONCEPT ART", 2: "CONCEPT ART",
+            3: "MODELO 3D", 4: "MODELO 3D",
+            5: "PIM TEXTURA", 6: "PIM TEXTURA", 7: "PIM TEXTURA", 8: "PIM TEXTURA", 9: "PIM TEXTURA",
+            10: "TIN TEXTURA", 11: "TIN TEXTURA", 12: "TIN TEXTURA", 13: "TIN TEXTURA", 14: "TIN TEXTURA", 15: "TIN TEXTURA",
+            16: "ASSETS", 17: "ASSETS"
         };
 
         let currentIndex = 0;
