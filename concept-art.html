@@ -455,22 +455,12 @@
             slides[currentSlide].classList.add('active');
         }
 
-        function changeSlide(direction) {
-            showSlide(currentSlide + direction);
-            resetInterval();
-        }
-
         function autoSlide() {
             showSlide(currentSlide + 1);
         }
 
         function startInterval() {
             slideInterval = setInterval(autoSlide, 4500);
-        }
-
-        function resetInterval() {
-            clearInterval(slideInterval);
-            startInterval();
         }
 
         // Funciones para lightbox
@@ -528,29 +518,11 @@
                         changeLightboxSlide(1);
                         break;
                 }
-            } else {
-                switch(e.key) {
-                    case 'ArrowLeft':
-                        changeSlide(-1);
-                        break;
-                    case 'ArrowRight':
-                        changeSlide(1);
-                        break;
-                }
             }
         });
 
         // Inicializar la galería principal
         startInterval();
-
-        // Pausar la galería cuando el usuario está navegando
-        document.querySelector('.main-gallery').addEventListener('mouseenter', () => {
-            clearInterval(slideInterval);
-        });
-
-        document.querySelector('.main-gallery').addEventListener('mouseleave', () => {
-            startInterval();
-        });
     </script>
 </body>
 </html>
