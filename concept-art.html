@@ -3,162 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva Página - R.Mondragon</title>
+    <title>Arte Conceptual - R.Mondragon</title>
     <link rel="icon" type="image/png" href="img/Icon.png">
     <link rel="stylesheet" href="css/estilos.css">
     <style>
         .gallery-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .gallery-title {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.5rem;
-            color: #333;
-            font-weight: 300;
-        }
-
-        .masonry-grid {
-            column-count: 4;
-            column-gap: 15px;
-            column-fill: balance;
-        }
-
-        .gallery-item {
-            display: inline-block;
             width: 100%;
-            margin-bottom: 15px;
-            break-inside: avoid;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .project-section {
+            width: 100%;
+            height: 80vh;
+            min-height: 600px;
             position: relative;
+            margin: 20px 0;
+            padding: 0;
             overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            background: #fff;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .gallery-item.featured {
-            column-span: 2;
-            width: calc(200% + 15px);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
-        .gallery-item:hover .image-overlay {
-            opacity: 1;
-        }
-
-        .image-title {
+        
+        .project-title {
+            position: absolute;
+            top: 30px;
+            left: 50px;
+            font-size: 2.5rem;
+            font-weight: bold;
             color: white;
-            font-size: 1.1rem;
-            font-weight: 500;
-            text-align: center;
-            padding: 0 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            z-index: 10;
+            font-family: Arial, sans-serif;
         }
-
-        /* Lightbox */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
+        
+        .image-container {
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            animation: fadeIn 0.3s ease;
+            position: relative;
+            background: #000;
         }
-
-        .lightbox-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 90%;
-            max-height: 90%;
-        }
-
-        .lightbox img {
+        
+        .background-image {
             width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .close {
+            height: 100%;
+            object-fit: cover;
             position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
+            top: 0;
+            left: 0;
+            filter: blur(20px) brightness(0.6);
+            transform: scale(1.1);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .background-image.active {
+            opacity: 1;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 5;
+        }
+        
+        .gallery-image.active {
+            opacity: 1;
+        }
+        
+        .nav-arrow {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 15%;
+            background: transparent;
+            border: none;
             cursor: pointer;
-            transition: color 0.3s ease;
+            font-size: 0;
+            z-index: 20;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        .close:hover {
-            color: #ccc;
+        
+        .nav-arrow:hover {
+            background: rgba(0,0,0,0.1);
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        
+        .nav-arrow::after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            transition: background 0.3s ease;
         }
-
-        /* Responsive design */
-        @media (max-width: 1200px) {
-            .masonry-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        
+        .nav-arrow.prev::after {
+            content: '‹';
         }
-
-        @media (max-width: 768px) {
-            .masonry-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .gallery-item.featured {
-                grid-column: span 1;
-            }
+        
+        .nav-arrow.next::after {
+            content: '›';
         }
-
-        @media (max-width: 480px) {
-            .masonry-grid {
-                grid-template-columns: 1fr;
-            }
-            .gallery-container {
-                padding: 10px;
-            }
+        
+        .nav-arrow:hover::after {
+            background: rgba(255,255,255,1);
+        }
+        
+        .nav-arrow.prev {
+            left: 0;
+        }
+        
+        .nav-arrow.next {
+            right: 0;
+        }
+        
+        .image-counter {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 10;
         }
     </style>
 </head>
@@ -167,289 +151,244 @@
 
     <main class="main-content">
         <div class="gallery-container">
-            <h1 class="gallery-title">Concept Art Gallery</h1>
-            
-            <div class="masonry-grid" id="gallery">
-                <!-- Todas las imágenes en tamaño normal -->
-                <div class="gallery-item" data-src="img/Concept/Coco_Cncpt_0010.jpg">
-                    <img src="img/Concept/Coco_Cncpt_0010.jpg" alt="Coco Concept Art">
-                    <div class="image-overlay">
-                        <div class="image-title">Animal Library</div>
-                    </div>
+            <!-- Sagrado Micelio -->
+            <div class="project-section" data-project="sagrado-micelio">
+                <h2 class="project-title">Sagrado Micelio</h2>
+                <div class="image-container">
+                    <!-- Imágenes de fondo borrosas -->
+                    <img src="img/Concept/SM_001.jpg" alt="Background" class="background-image active">
+                    <img src="img/Concept/SM_002.jpg" alt="Background" class="background-image">
+                    <img src="img/Concept/SM_003.jpg" alt="Background" class="background-image">
+                    <img src="img/Concept/SM_004.jpg" alt="Background" class="background-image">
+                    <img src="img/Concept/SM_005.jpg" alt="Background" class="background-image">
+                    <img src="img/Concept/SM_006.jpg" alt="Background" class="background-image">
+                    <img src="img/Concept/SM_007.jpg" alt="Background" class="background-image">
+                    <img src="img/Concept/SM_008.jpg" alt="Background" class="background-image">
+                    <img src="img/Concept/SM_009.jpg" alt="Background" class="background-image">
+                    <!-- Imágenes principales -->
+                    <img src="img/Concept/SM_001.jpg" alt="Sagrado Micelio 1" class="gallery-image active">
+                    <img src="img/Concept/SM_002.jpg" alt="Sagrado Micelio 2" class="gallery-image">
+                    <img src="img/Concept/SM_003.jpg" alt="Sagrado Micelio 3" class="gallery-image">
+                    <img src="img/Concept/SM_004.jpg" alt="Sagrado Micelio 4" class="gallery-image">
+                    <img src="img/Concept/SM_005.jpg" alt="Sagrado Micelio 5" class="gallery-image">
+                    <img src="img/Concept/SM_006.jpg" alt="Sagrado Micelio 6" class="gallery-image">
+                    <img src="img/Concept/SM_007.jpg" alt="Sagrado Micelio 7" class="gallery-image">
+                    <img src="img/Concept/SM_008.jpg" alt="Sagrado Micelio 8" class="gallery-image">
+                    <img src="img/Concept/SM_009.jpg" alt="Sagrado Micelio 9" class="gallery-image">
                 </div>
-
-               
-
-                <div class="gallery-item" data-src="img/Concept/Nbs_Cncpt_02.jpg">
-                    <img src="img/Concept/Nbs_Cncpt_02.jpg" alt="Character Concept">
-                    <div class="image-overlay">
-                        <div class="image-title">NubesConFormaDeNube</div>
-                    </div>
+                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
+                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
+                <div class="image-counter">
+                    <span class="current">1</span> / <span class="total">9</span>
                 </div>
+            </div>
 
-               
-
-                <!-- Resto de imágenes -->
-                <div class="gallery-item" data-src="img/Concept/Crdm_c_0010.jpg">
-                    <img src="img/Concept/Crdm_c_0010.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Cardumen</div>
-                    </div>
+            <!-- Stupid Luv Series -->
+            <div class="project-section" data-project="stupid-luv">
+                <h2 class="project-title">Stupid Luv Series</h2>
+                <div class="image-container">
+                    <img src="img/Concept/SLS_001.jpg" alt="Stupid Luv Series 1" class="gallery-image active">
+                    <img src="img/Concept/SLS_002.jpg" alt="Stupid Luv Series 2" class="gallery-image">
+                    <img src="img/Concept/SLS_003.jpg" alt="Stupid Luv Series 3" class="gallery-image">
+                    <img src="img/Concept/SLS_004.jpg" alt="Stupid Luv Series 4" class="gallery-image">
+                    <img src="img/Concept/SLS_005.jpg" alt="Stupid Luv Series 5" class="gallery-image">
+                    <img src="img/Concept/SLS_006.jpg" alt="Stupid Luv Series 6" class="gallery-image">
+                    <img src="img/Concept/SLS_007.jpg" alt="Stupid Luv Series 7" class="gallery-image">
+                    <img src="img/Concept/SLS_008.jpg" alt="Stupid Luv Series 8" class="gallery-image">
+                    <img src="img/Concept/SLS_009.jpg" alt="Stupid Luv Series 9" class="gallery-image">
+                    <img src="img/Concept/SLS_010.jpg" alt="Stupid Luv Series 10" class="gallery-image">
+                    <img src="img/Concept/SLS_011.jpg" alt="Stupid Luv Series 11" class="gallery-image">
+                    <img src="img/Concept/SLS_012.jpg" alt="Stupid Luv Series 12" class="gallery-image">
+                    <img src="img/Concept/SLS_013.jpg" alt="Stupid Luv Series 13" class="gallery-image">
                 </div>
-
-                <div class="gallery-item" data-src="img/Concept/Crdm_c_0020.jpg">
-                    <img src="img/Concept/Crdm_c_0020.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Cardumen</div>
-                    </div>
+                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
+                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
+                <div class="image-counter">
+                    <span class="current">1</span> / <span class="total">13</span>
                 </div>
+            </div>
 
-                <div class="gallery-item" data-src="img/Concept/Crdm_c_0030.jpg">
-                    <img src="img/Concept/Crdm_c_0030.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Cardumen</div>
-                    </div>
+            <!-- Hunt -->
+            <div class="project-section" data-project="hunt">
+                <h2 class="project-title">Hunt</h2>
+                <div class="image-container">
+                    <img src="img/Concept/Hunt_001.jpg" alt="Hunt 1" class="gallery-image active">
+                    <img src="img/Concept/Hunt_002.jpg" alt="Hunt 2" class="gallery-image">
                 </div>
-
-                <div class="gallery-item" data-src="img/Concept/Crdm_c_0040.jpg">
-                    <img src="img/Concept/Crdm_c_0040.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Cardumen</div>
-                    </div>
+                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
+                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
+                <div class="image-counter">
+                    <span class="current">1</span> / <span class="total">2</span>
                 </div>
+            </div>
 
- 		<div class="gallery-item" data-src="img/Concept/Dino_Concept_0002.jpg">
-                    <img src="img/Concept/Dino_Concept_0002.jpg" alt="Dinosaur Concept Art">
-                    <div class="image-overlay">
-                        <div class="image-title">Hunt Scene</div>
-                    </div>
+            <!-- Cardumen -->
+            <div class="project-section" data-project="cardumen">
+                <h2 class="project-title">Cardumen</h2>
+                <div class="image-container">
+                    <img src="img/Concept/Crd_001.jpg" alt="Cardumen 1" class="gallery-image active">
+                    <img src="img/Concept/Crd_002.jpg" alt="Cardumen 2" class="gallery-image">
+                    <img src="img/Concept/Crd_003.jpg" alt="Cardumen 3" class="gallery-image">
+                    <img src="img/Concept/Crd_004.jpg" alt="Cardumen 4" class="gallery-image">
                 </div>
-
-                <div class="gallery-item" data-src="img/Concept/Hunt_Cpt_0010.jpg">
-                    <img src="img/Concept/Hunt_Cpt_0010.jpg" alt="Hunt Concept">
-                    <div class="image-overlay">
-                        <div class="image-title">Hunt Scene</div>
-                    </div>
+                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
+                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
+                <div class="image-counter">
+                    <span class="current">1</span> / <span class="total">4</span>
                 </div>
+            </div>
 
-                <div class="gallery-item" data-src="img/Concept/Nbs_Cncpt_01.jpg">
-                    <img src="img/Concept/Nbs_Cncpt_01.jpg" alt="Character Concept">
-                    <div class="image-overlay">
-                        <div class="image-title">Character Art</div>
-                    </div>
+            <!-- Nubes -->
+            <div class="project-section" data-project="nubes">
+                <h2 class="project-title">Nubes</h2>
+                <div class="image-container">
+                    <img src="img/Nubes/4.jpg" alt="Nubes 4" class="gallery-image active">
+                    <img src="img/Nubes/5.jpg" alt="Nubes 5" class="gallery-image">
+                    <img src="img/Nubes/6.jpg" alt="Nubes 6" class="gallery-image">
+                    <img src="img/Nubes/7.jpg" alt="Nubes 7" class="gallery-image">
+                    <img src="img/Nubes/8.jpg" alt="Nubes 8" class="gallery-image">
+                    <img src="img/Nubes/9.jpg" alt="Nubes 9" class="gallery-image">
+                    <img src="img/Nubes/10.jpg" alt="Nubes 10" class="gallery-image">
+                    <img src="img/Nubes/11.jpg" alt="Nubes 11" class="gallery-image">
+                    <img src="img/Nubes/12.jpg" alt="Nubes 12" class="gallery-image">
+                    <img src="img/Nubes/13.jpg" alt="Nubes 13" class="gallery-image">
+                    <img src="img/Nubes/14.jpg" alt="Nubes 14" class="gallery-image">
+                    <img src="img/Nubes/15.jpg" alt="Nubes 15" class="gallery-image">
+                    <img src="img/Nubes/16.jpg" alt="Nubes 16" class="gallery-image">
+                    <img src="img/Nubes/17.jpg" alt="Nubes 17" class="gallery-image">
+                    <img src="img/BgDesign/Bg1_001.jpg" alt="BgDesign Bg1_001" class="gallery-image">
+                    <img src="img/BgDesign/Bg2_001.jpg" alt="BgDesign Bg2_001" class="gallery-image">
+                    <img src="img/BgDesign/Bg2_002.jpg" alt="BgDesign Bg2_002" class="gallery-image">
+                    <img src="img/BgDesign/Bg2_003.jpg" alt="BgDesign Bg2_003" class="gallery-image">
+                    <img src="img/BgDesign/Bg2_004.jpg" alt="BgDesign Bg2_004" class="gallery-image">
+                    <img src="img/BgDesign/Bg3_001.jpg" alt="BgDesign Bg3_001" class="gallery-image">
+                    <img src="img/BgDesign/Bg3_002.jpg" alt="BgDesign Bg3_002" class="gallery-image">
+                    <img src="img/BgDesign/Bg3_003.jpg" alt="BgDesign Bg3_003" class="gallery-image">
+                    <img src="img/BgDesign/Bg3_004.jpg" alt="BgDesign Bg3_004" class="gallery-image">
+                    <img src="img/BgDesign/Bg3_005.jpg" alt="BgDesign Bg3_005" class="gallery-image">
+                    <img src="img/BgDesign/Bg3_006.jpg" alt="BgDesign Bg3_006" class="gallery-image">
+                    <img src="img/BgDesign/Bg3_007.jpg" alt="BgDesign Bg3_007" class="gallery-image">
+                    <img src="img/BgDesign/Bg3_008.jpg" alt="BgDesign Bg3_008" class="gallery-image">
                 </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_0010.jpg">
-                    <img src="img/Concept/SLS_CAS_0010.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
+                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
+                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
+                <div class="image-counter">
+                    <span class="current">1</span> / <span class="total">27</span>
                 </div>
+            </div>
 
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_0020.jpg">
-                    <img src="img/Concept/SLS_CAS_0020.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
+            <!-- Animaux -->
+            <div class="project-section" data-project="animaux">
+                <h2 class="project-title">Animaux</h2>
+                <div class="image-container">
+                    <img src="img/Concept/Coco_001.jpg" alt="Animaux Coco_001" class="gallery-image active">
                 </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_0030.jpg">
-                    <img src="img/Concept/SLS_CAS_0030.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_0040.jpg">
-                    <img src="img/Concept/SLS_CAS_0040.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_0060.jpg">
-                    <img src="img/Concept/SLS_CAS_0060.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_0080.jpg">
-                    <img src="img/Concept/SLS_CAS_0080.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_0092.jpg">
-                    <img src="img/Concept/SLS_CAS_0092.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_0120.jpg">
-                    <img src="img/Concept/SLS_CAS_0120.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_1010.jpg">
-                    <img src="img/Concept/SLS_CAS_1010.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_1020.jpg">
-                    <img src="img/Concept/SLS_CAS_1020.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_1030.jpg">
-                    <img src="img/Concept/SLS_CAS_1030.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_1040.jpg">
-                    <img src="img/Concept/SLS_CAS_1040.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SLS_CAS_1050.jpg">
-                    <img src="img/Concept/SLS_CAS_1050.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Stupid Luv Series</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SM_c_0010.jpg">
-                    <img src="img/Concept/SM_c_0010.jpg" alt="Environment Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Sagrado Micelio</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SM_c_0020.jpg">
-                    <img src="img/Concept/SM_c_0020.jpg" alt="Storyboard">
-                    <div class="image-overlay">
-                        <div class="image-title">Sagrado Micelio</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SM_c_0030.jpg">
-                    <img src="img/Concept/SM_c_0030.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Sagrado Micelio</div>
-                    </div>
-                </div>
-
- 		<div class="gallery-item" data-src="img/Concept/SM_BgCncpt_0001.jpg">
-                    <img src="img/Concept/SM_BgCncpt_0001.jpg" alt="Background Concept">
-                    <div class="image-overlay">
-                        <div class="image-title">Sagrado Micelio</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SM_c_0040.jpg">
-                    <img src="img/Concept/SM_c_0040.jpg" alt="Dark Concept">
-                    <div class="image-overlay">
-                        <div class="image-title">Sagrado Micelio</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-src="img/Concept/SM_c_0050.jpg">
-                    <img src="img/Concept/SM_c_0050.jpg" alt="Character Design">
-                    <div class="image-overlay">
-                        <div class="image-title">Sagrado Micelio</div>
-                    </div>
+                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
+                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
+                <div class="image-counter">
+                    <span class="current">1</span> / <span class="total">1</span>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
-        <span class="close">&times;</span>
-        <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="">
-        </div>
-    </div>
-
     <!-- El footer se inserta automáticamente aquí -->
 
     <script src="js/menu.js"></script>
     <script>
-        // Lightbox functionality
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.querySelector('.close');
+        let autoSlideIntervals = new Map();
 
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const imgSrc = item.getAttribute('data-src');
-                const imgAlt = item.querySelector('img').getAttribute('alt');
-                lightboxImg.src = imgSrc;
-                lightboxImg.alt = imgAlt;
-                lightbox.style.display = 'block';
-                document.body.style.overflow = 'hidden';
+        function initializeGallery() {
+            const sections = document.querySelectorAll('.project-section');
+            
+            sections.forEach(section => {
+                const images = section.querySelectorAll('.gallery-image');
+                const total = section.querySelector('.total');
+                total.textContent = images.length;
+                
+                // Iniciar auto-slide para cada sección
+                startAutoSlide(section);
             });
-        });
-
-        closeBtn.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            }
-        });
-
-        function closeLightbox() {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = 'auto';
         }
 
-        // Lazy loading for performance
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.getAttribute('data-src') || img.src;
-                    img.classList.remove('lazy');
-                    observer.unobserve(img);
+        function startAutoSlide(section) {
+            const projectName = section.dataset.project;
+            
+            // Limpiar intervalo existente si hay uno
+            if (autoSlideIntervals.has(projectName)) {
+                clearInterval(autoSlideIntervals.get(projectName));
+            }
+            
+            // Crear nuevo intervalo
+            const interval = setInterval(() => {
+                changeImage(section.querySelector('.nav-arrow.next'), 1, false);
+            }, 3000);
+            
+            autoSlideIntervals.set(projectName, interval);
+        }
+
+        function changeImage(button, direction, resetTimer = true) {
+            const section = button.closest('.project-section');
+            const images = section.querySelectorAll('.gallery-image');
+            const backgroundImages = section.querySelectorAll('.background-image');
+            const current = section.querySelector('.current');
+            
+            let activeIndex = 0;
+            images.forEach((img, index) => {
+                if (img.classList.contains('active')) {
+                    activeIndex = index;
                 }
+            });
+
+            // Remover clase active de imagen actual
+            images[activeIndex].classList.remove('active');
+            
+            // Remover clase active de fondo solo si existen imágenes de fondo
+            if (backgroundImages.length > 0) {
+                backgroundImages[activeIndex].classList.remove('active');
+            }
+
+            // Calcular nueva imagen
+            let newIndex = activeIndex + direction;
+            if (newIndex >= images.length) {
+                newIndex = 0;
+            } else if (newIndex < 0) {
+                newIndex = images.length - 1;
+            }
+
+            // Agregar clase active a nueva imagen
+            images[newIndex].classList.add('active');
+            
+            // Agregar clase active a fondo solo si existen imágenes de fondo
+            if (backgroundImages.length > 0) {
+                backgroundImages[newIndex].classList.add('active');
+            }
+            
+            // Actualizar contador
+            current.textContent = newIndex + 1;
+
+            // Reiniciar timer si es necesario
+            if (resetTimer) {
+                startAutoSlide(section);
+            }
+        }
+
+        // Pausar auto-slide cuando el mouse está sobre una sección
+        document.querySelectorAll('.project-section').forEach(section => {
+            section.addEventListener('mouseenter', () => {
+                const projectName = section.dataset.project;
+                if (autoSlideIntervals.has(projectName)) {
+                    clearInterval(autoSlideIntervals.get(projectName));
+                }
+            });
+            
+            section.addEventListener('mouseleave', () => {
+                startAutoSlide(section);
             });
         });
 
-        // Optional: Add loading animation
-        window.addEventListener('load', () => {
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            galleryItems.forEach((item, index) => {
-                setTimeout(() => {
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateY(20px)';
-                    item.style.transition = 'all 0.6s ease';
-                    
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'translateY(0)';
-                    }, 50);
-                }, index * 100);
-            });
-        });
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', initializeGallery);
     </script>
 </body>
 </html>
