@@ -7,142 +7,265 @@
     <link rel="icon" type="image/png" href="img/Icon.png">
     <link rel="stylesheet" href="css/estilos.css">
     <style>
-        .gallery-container {
-            width: 100%;
+        /* Estilos para la galería principal */
+        .main-gallery {
+            position: relative;
+            width: 100vw;
+            height: 60vh;
             margin: 0;
             padding: 0;
-        }
-        
-        .project-section {
-            width: 100%;
-            height: 80vh;
-            min-height: 600px;
-            position: relative;
-            margin: 20px 0;
-            padding: 0;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .project-title {
-            position: absolute;
-            top: 30px;
-            left: 50px;
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            z-index: 10;
-            font-family: Arial, sans-serif;
-        }
-        
-        .image-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
             background: #000;
         }
-        
-        .background-image {
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gallery-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+        }
+
+        .gallery-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .gallery-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            z-index: 10;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8), 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Estilos para la galería de proyectos */
+        .projects-gallery {
+            width: 100vw;
+            margin: 0;
+            padding: 20px 0 0 0;
+            background: #f5f5f5;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            margin: 0;
+        }
+
+        .project-item {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-item::after {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            filter: blur(20px) brightness(0.6);
-            transform: scale(1.1);
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.2) 85%);
+            pointer-events: none;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-item:hover::after {
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
         }
-        
-        .background-image.active {
-            opacity: 1;
+
+        .project-item:hover img {
+            transform: scale(1.05);
         }
-        
-        .gallery-image {
+
+        .project-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            z-index: 2;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7), 0 6px 12px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Lightbox para proyectos */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 1000;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .lightbox-slide {
+            display: none;
+            width: 100%;
+            height: 80vh;
+        }
+
+        .lightbox-slide.active {
+            display: block;
+        }
+
+        .lightbox-slide img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            object-position: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            z-index: 5;
+            background: #000;
         }
-        
-        .gallery-image.active {
-            opacity: 1;
-        }
-        
-        .nav-arrow {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 15%;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 0;
-            z-index: 20;
-            transition: background 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .nav-arrow:hover {
-            background: rgba(0,0,0,0.1);
-        }
-        
-        .nav-arrow::after {
-            content: '';
-            width: 50px;
-            height: 50px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: bold;
-            transition: background 0.3s ease;
-        }
-        
-        .nav-arrow.prev::after {
-            content: '‹';
-        }
-        
-        .nav-arrow.next::after {
-            content: '›';
-        }
-        
-        .nav-arrow:hover::after {
-            background: rgba(255,255,255,1);
-        }
-        
-        .nav-arrow.prev {
-            left: 0;
-        }
-        
-        .nav-arrow.next {
-            right: 0;
-        }
-        
-        .image-counter {
-            position: absolute;
-            bottom: 30px;
-            right: 50px;
-            background: rgba(0,0,0,0.7);
+
+        .lightbox-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
             color: white;
+            border: none;
+            font-size: 2rem;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            z-index: 1010;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-nav.prev {
+            left: 50px;
+        }
+
+        .lightbox-nav.next {
+            right: 50px;
+        }
+
+        /* Hitbox grande invisible para las flechas */
+        .lightbox-nav::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            bottom: -50px;
+            left: -50px;
+            right: -50px;
+            background: transparent;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 2rem;
             padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            z-index: 10;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            z-index: 1010;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-title {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            z-index: 1010;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-gallery {
+                height: 40vh;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .project-item {
+                height: 250px;
+            }
+            
+            .gallery-nav {
+                width: 20%;
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -150,245 +273,284 @@
     <!-- El menú se inserta automáticamente aquí -->
 
     <main class="main-content">
-        <div class="gallery-container">
-            <!-- Sagrado Micelio -->
-            <div class="project-section" data-project="sagrado-micelio">
-                <h2 class="project-title">Sagrado Micelio</h2>
-                <div class="image-container">
-                    <!-- Imágenes de fondo borrosas -->
-                    <img src="img/Concept/SM_001.jpg" alt="Background" class="background-image active">
-                    <img src="img/Concept/SM_002.jpg" alt="Background" class="background-image">
-                    <img src="img/Concept/SM_003.jpg" alt="Background" class="background-image">
-                    <img src="img/Concept/SM_004.jpg" alt="Background" class="background-image">
-                    <img src="img/Concept/SM_005.jpg" alt="Background" class="background-image">
-                    <img src="img/Concept/SM_006.jpg" alt="Background" class="background-image">
-                    <img src="img/Concept/SM_007.jpg" alt="Background" class="background-image">
-                    <img src="img/Concept/SM_008.jpg" alt="Background" class="background-image">
-                    <img src="img/Concept/SM_009.jpg" alt="Background" class="background-image">
-                    <!-- Imágenes principales -->
-                    <img src="img/Concept/SM_001.jpg" alt="Sagrado Micelio 1" class="gallery-image active">
-                    <img src="img/Concept/SM_002.jpg" alt="Sagrado Micelio 2" class="gallery-image">
-                    <img src="img/Concept/SM_003.jpg" alt="Sagrado Micelio 3" class="gallery-image">
-                    <img src="img/Concept/SM_004.jpg" alt="Sagrado Micelio 4" class="gallery-image">
-                    <img src="img/Concept/SM_005.jpg" alt="Sagrado Micelio 5" class="gallery-image">
-                    <img src="img/Concept/SM_006.jpg" alt="Sagrado Micelio 6" class="gallery-image">
-                    <img src="img/Concept/SM_007.jpg" alt="Sagrado Micelio 7" class="gallery-image">
-                    <img src="img/Concept/SM_008.jpg" alt="Sagrado Micelio 8" class="gallery-image">
-                    <img src="img/Concept/SM_009.jpg" alt="Sagrado Micelio 9" class="gallery-image">
+        <!-- Galería Principal -->
+        <section class="main-gallery">
+            <div class="gallery-container">
+                <div class="gallery-slide active">
+                    <img src="img/Concept/Hunt_001.jpg" alt="Hunt">
+                    <div class="gallery-title">CONCEPT ART</div>
                 </div>
-                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
-                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
-                <div class="image-counter">
-                    <span class="current">1</span> / <span class="total">9</span>
+                <div class="gallery-slide">
+                    <img src="img/Concept/SM_002.jpg" alt="Sagrado Micelio">
+                    <div class="gallery-title">CONCEPT ART</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="img/Concept/Nbs_Cncpt_01.jpg" alt="Nubes">
+                    <div class="gallery-title">CONCEPT ART</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="img/BgDesign/Bg1_001.jpg" alt="Background Design">
+                    <div class="gallery-title">CONCEPT ART</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="img/Concept/SM_006.jpg" alt="Sagrado Micelio">
+                    <div class="gallery-title">CONCEPT ART</div>
                 </div>
             </div>
+            
+            <button class="gallery-nav prev" onclick="changeSlide(-1)" style="display: none;">‹</button>
+            <button class="gallery-nav next" onclick="changeSlide(1)" style="display: none;">›</button>
+        </section>
 
-            <!-- Stupid Luv Series -->
-            <div class="project-section" data-project="stupid-luv">
-                <h2 class="project-title">Stupid Luv Series</h2>
-                <div class="image-container">
-                    <img src="img/Concept/SLS_001.jpg" alt="Stupid Luv Series 1" class="gallery-image active">
-                    <img src="img/Concept/SLS_002.jpg" alt="Stupid Luv Series 2" class="gallery-image">
-                    <img src="img/Concept/SLS_003.jpg" alt="Stupid Luv Series 3" class="gallery-image">
-                    <img src="img/Concept/SLS_004.jpg" alt="Stupid Luv Series 4" class="gallery-image">
-                    <img src="img/Concept/SLS_005.jpg" alt="Stupid Luv Series 5" class="gallery-image">
-                    <img src="img/Concept/SLS_006.jpg" alt="Stupid Luv Series 6" class="gallery-image">
-                    <img src="img/Concept/SLS_007.jpg" alt="Stupid Luv Series 7" class="gallery-image">
-                    <img src="img/Concept/SLS_008.jpg" alt="Stupid Luv Series 8" class="gallery-image">
-                    <img src="img/Concept/SLS_009.jpg" alt="Stupid Luv Series 9" class="gallery-image">
-                    <img src="img/Concept/SLS_010.jpg" alt="Stupid Luv Series 10" class="gallery-image">
-                    <img src="img/Concept/SLS_011.jpg" alt="Stupid Luv Series 11" class="gallery-image">
-                    <img src="img/Concept/SLS_012.jpg" alt="Stupid Luv Series 12" class="gallery-image">
-                    <img src="img/Concept/SLS_013.jpg" alt="Stupid Luv Series 13" class="gallery-image">
+        <!-- Galería de Proyectos -->
+        <section class="projects-gallery">
+            <div class="projects-grid">
+                <div class="project-item" onclick="openLightbox('sagrado-micelio')">
+                    <img src="img/Concept/SM_001.jpg" alt="Sagrado Micelio">
+                    <div class="project-title">Sagrado Micelio</div>
                 </div>
-                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
-                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
-                <div class="image-counter">
-                    <span class="current">1</span> / <span class="total">13</span>
+                
+                <div class="project-item" onclick="openLightbox('nubes')">
+                    <img src="img/Nubes/4.jpg" alt="Nubes">
+                    <div class="project-title">Nubes</div>
                 </div>
-            </div>
-
-            <!-- Hunt -->
-            <div class="project-section" data-project="hunt">
-                <h2 class="project-title">Hunt</h2>
-                <div class="image-container">
-                    <img src="img/Concept/Hunt_001.jpg" alt="Hunt 1" class="gallery-image active">
-                    <img src="img/Concept/Hunt_002.jpg" alt="Hunt 2" class="gallery-image">
+                
+                <div class="project-item" onclick="openLightbox('stupid-luv')">
+                    <img src="img/Concept/SLS_001.jpg" alt="Stupid Luv Series">
+                    <div class="project-title">Stupid Luv Series</div>
                 </div>
-                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
-                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
-                <div class="image-counter">
-                    <span class="current">1</span> / <span class="total">2</span>
+                
+                <div class="project-item" onclick="openLightbox('ratan')">
+                    <img src="img/BgDesign/Ratan1_001.jpg" alt="Ratán">
+                    <div class="project-title">Ratán</div>
                 </div>
-            </div>
-
-            <!-- Cardumen -->
-            <div class="project-section" data-project="cardumen">
-                <h2 class="project-title">Cardumen</h2>
-                <div class="image-container">
-                    <img src="img/Concept/Crd_001.jpg" alt="Cardumen 1" class="gallery-image active">
-                    <img src="img/Concept/Crd_002.jpg" alt="Cardumen 2" class="gallery-image">
-                    <img src="img/Concept/Crd_003.jpg" alt="Cardumen 3" class="gallery-image">
-                    <img src="img/Concept/Crd_004.jpg" alt="Cardumen 4" class="gallery-image">
+                
+                <div class="project-item" onclick="openLightbox('robopez')">
+                    <img src="img/Concept/Robopez_001.png" alt="Robopez">
+                    <div class="project-title">Robopez</div>
                 </div>
-                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
-                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
-                <div class="image-counter">
-                    <span class="current">1</span> / <span class="total">4</span>
+                
+                <div class="project-item" onclick="openLightbox('hunt')">
+                    <img src="img/Concept/Hunt_001.jpg" alt="Hunt">
+                    <div class="project-title">Hunt</div>
+                </div>
+                
+                <div class="project-item" onclick="openLightbox('cardumen')">
+                    <img src="img/Concept/Crd_001.jpg" alt="Cardumen">
+                    <div class="project-title">Cardumen</div>
+                </div>
+                
+                <div class="project-item" onclick="openLightbox('animaux')">
+                    <img src="img/Concept/Coco_001.jpg" alt="Animaux">
+                    <div class="project-title">Animaux</div>
                 </div>
             </div>
-
-            <!-- Nubes -->
-            <div class="project-section" data-project="nubes">
-                <h2 class="project-title">Nubes</h2>
-                <div class="image-container">
-                    <img src="img/Nubes/4.jpg" alt="Nubes 4" class="gallery-image active">
-                    <img src="img/Nubes/5.jpg" alt="Nubes 5" class="gallery-image">
-                    <img src="img/Nubes/6.jpg" alt="Nubes 6" class="gallery-image">
-                    <img src="img/Nubes/7.jpg" alt="Nubes 7" class="gallery-image">
-                    <img src="img/Nubes/8.jpg" alt="Nubes 8" class="gallery-image">
-                    <img src="img/Nubes/9.jpg" alt="Nubes 9" class="gallery-image">
-                    <img src="img/Nubes/10.jpg" alt="Nubes 10" class="gallery-image">
-                    <img src="img/Nubes/11.jpg" alt="Nubes 11" class="gallery-image">
-                    <img src="img/Nubes/12.jpg" alt="Nubes 12" class="gallery-image">
-                    <img src="img/Nubes/13.jpg" alt="Nubes 13" class="gallery-image">
-                    <img src="img/Nubes/14.jpg" alt="Nubes 14" class="gallery-image">
-                    <img src="img/Nubes/15.jpg" alt="Nubes 15" class="gallery-image">
-                    <img src="img/Nubes/16.jpg" alt="Nubes 16" class="gallery-image">
-                    <img src="img/Nubes/17.jpg" alt="Nubes 17" class="gallery-image">
-                    <img src="img/BgDesign/Bg1_001.jpg" alt="BgDesign Bg1_001" class="gallery-image">
-                    <img src="img/BgDesign/Bg2_001.jpg" alt="BgDesign Bg2_001" class="gallery-image">
-                    <img src="img/BgDesign/Bg2_002.jpg" alt="BgDesign Bg2_002" class="gallery-image">
-                    <img src="img/BgDesign/Bg2_003.jpg" alt="BgDesign Bg2_003" class="gallery-image">
-                    <img src="img/BgDesign/Bg2_004.jpg" alt="BgDesign Bg2_004" class="gallery-image">
-                    <img src="img/BgDesign/Bg3_001.jpg" alt="BgDesign Bg3_001" class="gallery-image">
-                    <img src="img/BgDesign/Bg3_002.jpg" alt="BgDesign Bg3_002" class="gallery-image">
-                    <img src="img/BgDesign/Bg3_003.jpg" alt="BgDesign Bg3_003" class="gallery-image">
-                    <img src="img/BgDesign/Bg3_004.jpg" alt="BgDesign Bg3_004" class="gallery-image">
-                    <img src="img/BgDesign/Bg3_005.jpg" alt="BgDesign Bg3_005" class="gallery-image">
-                    <img src="img/BgDesign/Bg3_006.jpg" alt="BgDesign Bg3_006" class="gallery-image">
-                    <img src="img/BgDesign/Bg3_007.jpg" alt="BgDesign Bg3_007" class="gallery-image">
-                    <img src="img/BgDesign/Bg3_008.jpg" alt="BgDesign Bg3_008" class="gallery-image">
-                </div>
-                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
-                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
-                <div class="image-counter">
-                    <span class="current">1</span> / <span class="total">27</span>
-                </div>
-            </div>
-
-            <!-- Animaux -->
-            <div class="project-section" data-project="animaux">
-                <h2 class="project-title">Animaux</h2>
-                <div class="image-container">
-                    <img src="img/Concept/Coco_001.jpg" alt="Animaux Coco_001" class="gallery-image active">
-                </div>
-                <button class="nav-arrow prev" onclick="changeImage(this, -1)">‹</button>
-                <button class="nav-arrow next" onclick="changeImage(this, 1)">›</button>
-                <div class="image-counter">
-                    <span class="current">1</span> / <span class="total">1</span>
-                </div>
-            </div>
-        </div>
+        </section>
     </main>
+
+    <!-- Lightboxes para cada proyecto -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <button class="lightbox-nav prev" onclick="changeLightboxSlide(-1)">‹</button>
+            <button class="lightbox-nav next" onclick="changeLightboxSlide(1)">›</button>
+            <div id="lightbox-slides"></div>
+            <div class="lightbox-title" id="lightbox-title"></div>
+        </div>
+    </div>
 
     <!-- El footer se inserta automáticamente aquí -->
 
     <script src="js/menu.js"></script>
     <script>
-        let autoSlideIntervals = new Map();
+        // Variables globales para la galería principal
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.gallery-slide');
+        let slideInterval;
 
-        function initializeGallery() {
-            const sections = document.querySelectorAll('.project-section');
-            
-            sections.forEach(section => {
-                const images = section.querySelectorAll('.gallery-image');
-                const total = section.querySelector('.total');
-                total.textContent = images.length;
-                
-                // Iniciar auto-slide para cada sección
-                startAutoSlide(section);
-            });
+        // Variables globales para lightbox
+        let currentLightboxSlide = 0;
+        let currentProject = '';
+        let projectImages = {};
+
+        // Definir las imágenes de cada proyecto
+        const projects = {
+            'sagrado-micelio': {
+                title: 'Sagrado Micelio',
+                images: []
+            },
+            'nubes': {
+                title: 'Nubes',
+                images: []
+            },
+            'stupid-luv': {
+                title: 'Stupid Luv Series',
+                images: []
+            },
+            'ratan': {
+                title: 'Ratán',
+                images: []
+            },
+            'robopez': {
+                title: 'Robopez',
+                images: ['img/Concept/Robopez_001.png', 'img/Concept/Robopez_002.png', 'img/Concept/Robopez_003.png', 'img/Concept/Robopez_004.png', 'img/Concept/Robopez_005.png']
+            },
+            'hunt': {
+                title: 'Hunt',
+                images: ['img/Concept/Hunt_001.jpg', 'img/Concept/Hunt_002.jpg']
+            },
+            'cardumen': {
+                title: 'Cardumen',
+                images: []
+            },
+            'animaux': {
+                title: 'Animaux',
+                images: ['img/Concept/Coco_001.jpg']
+            }
+        };
+
+        // Generar arrays de imágenes
+        // Sagrado Micelio
+        for(let i = 1; i <= 9; i++) {
+            projects['sagrado-micelio'].images.push(`img/Concept/SM_${i.toString().padStart(3, '0')}.jpg`);
         }
 
-        function startAutoSlide(section) {
-            const projectName = section.dataset.project;
-            
-            // Limpiar intervalo existente si hay uno
-            if (autoSlideIntervals.has(projectName)) {
-                clearInterval(autoSlideIntervals.get(projectName));
-            }
-            
-            // Crear nuevo intervalo
-            const interval = setInterval(() => {
-                changeImage(section.querySelector('.nav-arrow.next'), 1, false);
-            }, 3000);
-            
-            autoSlideIntervals.set(projectName, interval);
+        // Nubes
+        for(let i = 4; i <= 17; i++) {
+            projects['nubes'].images.push(`img/Nubes/${i}.jpg`);
+        }
+        projects['nubes'].images.push('img/BgDesign/Bg1_001.jpg');
+        for(let i = 1; i <= 4; i++) {
+            projects['nubes'].images.push(`img/BgDesign/Bg2_${i.toString().padStart(3, '0')}.jpg`);
+        }
+        for(let i = 1; i <= 8; i++) {
+            projects['nubes'].images.push(`img/BgDesign/Bg3_${i.toString().padStart(3, '0')}.jpg`);
         }
 
-        function changeImage(button, direction, resetTimer = true) {
-            const section = button.closest('.project-section');
-            const images = section.querySelectorAll('.gallery-image');
-            const backgroundImages = section.querySelectorAll('.background-image');
-            const current = section.querySelector('.current');
-            
-            let activeIndex = 0;
-            images.forEach((img, index) => {
-                if (img.classList.contains('active')) {
-                    activeIndex = index;
-                }
-            });
-
-            // Remover clase active de imagen actual
-            images[activeIndex].classList.remove('active');
-            
-            // Remover clase active de fondo solo si existen imágenes de fondo
-            if (backgroundImages.length > 0) {
-                backgroundImages[activeIndex].classList.remove('active');
-            }
-
-            // Calcular nueva imagen
-            let newIndex = activeIndex + direction;
-            if (newIndex >= images.length) {
-                newIndex = 0;
-            } else if (newIndex < 0) {
-                newIndex = images.length - 1;
-            }
-
-            // Agregar clase active a nueva imagen
-            images[newIndex].classList.add('active');
-            
-            // Agregar clase active a fondo solo si existen imágenes de fondo
-            if (backgroundImages.length > 0) {
-                backgroundImages[newIndex].classList.add('active');
-            }
-            
-            // Actualizar contador
-            current.textContent = newIndex + 1;
-
-            // Reiniciar timer si es necesario
-            if (resetTimer) {
-                startAutoSlide(section);
-            }
+        // Stupid Luv Series
+        for(let i = 1; i <= 13; i++) {
+            projects['stupid-luv'].images.push(`img/Concept/SLS_${i.toString().padStart(3, '0')}.jpg`);
         }
 
-        // Pausar auto-slide cuando el mouse está sobre una sección
-        document.querySelectorAll('.project-section').forEach(section => {
-            section.addEventListener('mouseenter', () => {
-                const projectName = section.dataset.project;
-                if (autoSlideIntervals.has(projectName)) {
-                    clearInterval(autoSlideIntervals.get(projectName));
-                }
+        // Ratán
+        for(let i = 1; i <= 2; i++) {
+            projects['ratan'].images.push(`img/BgDesign/Ratan1_${i.toString().padStart(3, '0')}.jpg`);
+        }
+        for(let i = 1; i <= 5; i++) {
+            projects['ratan'].images.push(`img/BgDesign/Ratan2_${i.toString().padStart(3, '0')}.jpg`);
+        }
+        for(let i = 1; i <= 2; i++) {
+            projects['ratan'].images.push(`img/BgDesign/Ratan3_${i.toString().padStart(3, '0')}.jpg`);
+        }
+
+        // Cardumen
+        for(let i = 1; i <= 4; i++) {
+            projects['cardumen'].images.push(`img/Concept/Crd_${i.toString().padStart(3, '0')}.jpg`);
+        }
+
+        // Funciones para la galería principal
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+            resetInterval();
+        }
+
+        function autoSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function startInterval() {
+            slideInterval = setInterval(autoSlide, 4500);
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startInterval();
+        }
+
+        // Funciones para lightbox
+        function openLightbox(projectKey) {
+            currentProject = projectKey;
+            currentLightboxSlide = 0;
+            const project = projects[projectKey];
+            
+            document.getElementById('lightbox-title').textContent = project.title;
+            
+            const slidesContainer = document.getElementById('lightbox-slides');
+            slidesContainer.innerHTML = '';
+            
+            project.images.forEach((src, index) => {
+                const slide = document.createElement('div');
+                slide.className = `lightbox-slide ${index === 0 ? 'active' : ''}`;
+                slide.innerHTML = `<img src="${src}" alt="${project.title}">`;
+                slidesContainer.appendChild(slide);
             });
             
-            section.addEventListener('mouseleave', () => {
-                startAutoSlide(section);
-            });
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function changeLightboxSlide(direction) {
+            const project = projects[currentProject];
+            const lightboxSlides = document.querySelectorAll('#lightbox-slides .lightbox-slide');
+            
+            lightboxSlides[currentLightboxSlide].classList.remove('active');
+            currentLightboxSlide = (currentLightboxSlide + direction + project.images.length) % project.images.length;
+            lightboxSlides[currentLightboxSlide].classList.add('active');
+        }
+
+        // Cerrar lightbox al hacer clic fuera del contenido
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
         });
 
-        // Inicializar cuando se carga la página
-        document.addEventListener('DOMContentLoaded', initializeGallery);
+        // Navegación con teclado
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                switch(e.key) {
+                    case 'Escape':
+                        closeLightbox();
+                        break;
+                    case 'ArrowLeft':
+                        changeLightboxSlide(-1);
+                        break;
+                    case 'ArrowRight':
+                        changeLightboxSlide(1);
+                        break;
+                }
+            } else {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        changeSlide(-1);
+                        break;
+                    case 'ArrowRight':
+                        changeSlide(1);
+                        break;
+                }
+            }
+        });
+
+        // Inicializar la galería principal
+        startInterval();
+
+        // Pausar la galería cuando el usuario está navegando
+        document.querySelector('.main-gallery').addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+
+        document.querySelector('.main-gallery').addEventListener('mouseleave', () => {
+            startInterval();
+        });
     </script>
 </body>
 </html>
