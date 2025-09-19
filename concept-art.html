@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="img/Icon.png">
     <link rel="stylesheet" href="css/estilos.css">
     <style>
-        /* Estilos para la galería principal */
+        /* Estilos optimizados para la galería principal */
         .main-gallery {
             position: relative;
             width: 100vw;
@@ -29,7 +29,8 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 1.2s ease-in-out;
+            transition: opacity 0.8s ease-in-out;
+            will-change: opacity; /* Optimización GPU */
         }
 
         .gallery-slide.active {
@@ -40,6 +41,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            /* Lazy loading nativo para navegadores compatibles */
+            loading: lazy;
         }
 
         .gallery-title {
@@ -53,9 +56,10 @@
             letter-spacing: 3px;
             z-index: 10;
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8), 0 8px 16px rgba(0, 0, 0, 0.4);
+            will-change: transform; /* Optimización GPU */
         }
 
-        /* Estilos para la galería de proyectos */
+        /* Estilos optimizados para la galería de proyectos */
         .projects-gallery {
             width: 100vw;
             margin: 0;
@@ -75,7 +79,8 @@
             height: 300px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
+            will-change: transform; /* Optimización GPU */
         }
 
         .project-item:hover {
@@ -87,6 +92,8 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
+            will-change: transform; /* Optimización GPU */
+            loading: lazy; /* Lazy loading nativo */
         }
 
         .project-item::after {
@@ -123,9 +130,10 @@
             text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7), 0 6px 12px rgba(0, 0, 0, 0.3);
             letter-spacing: 1px;
             transition: opacity 0.3s ease;
+            will-change: transform; /* Optimización GPU */
         }
 
-        /* Lightbox para proyectos */
+        /* Lightbox optimizado */
         .lightbox {
             display: none;
             position: fixed;
@@ -203,7 +211,6 @@
             right: 50px;
         }
 
-        /* Hitbox grande invisible para las flechas */
         .lightbox-nav::before {
             content: '';
             position: absolute;
@@ -247,7 +254,31 @@
             z-index: 1010;
         }
 
-        /* Responsive */
+        /* Loading spinner para lazy loading */
+        .loading-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: #f0f0f0;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #333;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive optimizado */
         @media (max-width: 768px) {
             .main-gallery {
                 height: 40vh;
@@ -277,7 +308,7 @@
         <section class="main-gallery">
             <div class="gallery-container">
                 <div class="gallery-slide active">
-                    <img src="img/Concept/Hunt_001.jpg" alt="Hunt">
+                    <img src="img/Concept/Hunt_001.jpg" alt="Hunt" loading="eager">
                     <div class="gallery-title">CONCEPT ART</div>
                 </div>
                 <div class="gallery-slide">
@@ -297,50 +328,47 @@
                     <div class="gallery-title">CONCEPT ART</div>
                 </div>
             </div>
-            
-            <button class="gallery-nav prev" onclick="changeSlide(-1)" style="display: none;">‹</button>
-            <button class="gallery-nav next" onclick="changeSlide(1)" style="display: none;">›</button>
         </section>
 
         <!-- Galería de Proyectos -->
         <section class="projects-gallery">
             <div class="projects-grid">
-                <div class="project-item" onclick="openLightbox('sagrado-micelio')">
+                <div class="project-item" data-project="sagrado-micelio">
                     <img src="img/Concept/SM_001.jpg" alt="Sagrado Micelio">
                     <div class="project-title">Sagrado Micelio</div>
                 </div>
                 
-                <div class="project-item" onclick="openLightbox('nubes')">
+                <div class="project-item" data-project="nubes">
                     <img src="img/Nubes/4.jpg" alt="Nubes">
                     <div class="project-title">Nubes</div>
                 </div>
                 
-                <div class="project-item" onclick="openLightbox('stupid-luv')">
+                <div class="project-item" data-project="stupid-luv">
                     <img src="img/Concept/SLS_001.jpg" alt="Stupid Luv Series">
                     <div class="project-title">Stupid Luv Series</div>
                 </div>
                 
-                <div class="project-item" onclick="openLightbox('ratan')">
+                <div class="project-item" data-project="ratan">
                     <img src="img/BgDesign/Ratan1_001.jpg" alt="Ratán">
                     <div class="project-title">Ratán</div>
                 </div>
                 
-                <div class="project-item" onclick="openLightbox('robopez')">
+                <div class="project-item" data-project="robopez">
                     <img src="img/Concept/Robopez_001.png" alt="Robopez">
                     <div class="project-title">Robopez</div>
                 </div>
                 
-                <div class="project-item" onclick="openLightbox('hunt')">
+                <div class="project-item" data-project="hunt">
                     <img src="img/Concept/Hunt_001.jpg" alt="Hunt">
                     <div class="project-title">Hunt</div>
                 </div>
                 
-                <div class="project-item" onclick="openLightbox('cardumen')">
+                <div class="project-item" data-project="cardumen">
                     <img src="img/Concept/Crd_001.jpg" alt="Cardumen">
                     <div class="project-title">Cardumen</div>
                 </div>
                 
-                <div class="project-item" onclick="openLightbox('animaux')">
+                <div class="project-item" data-project="animaux">
                     <img src="img/Concept/Coco_001.jpg" alt="Animaux">
                     <div class="project-title">Animaux</div>
                 </div>
@@ -348,12 +376,12 @@
         </section>
     </main>
 
-    <!-- Lightboxes para cada proyecto -->
+    <!-- Lightbox optimizado -->
     <div id="lightbox" class="lightbox">
         <div class="lightbox-content">
-            <button class="lightbox-close" onclick="closeLightbox()">×</button>
-            <button class="lightbox-nav prev" onclick="changeLightboxSlide(-1)">‹</button>
-            <button class="lightbox-nav next" onclick="changeLightboxSlide(1)">›</button>
+            <button class="lightbox-close" onclick="GalleryManager.closeLightbox()">×</button>
+            <button class="lightbox-nav prev" onclick="GalleryManager.changeLightboxSlide(-1)">‹</button>
+            <button class="lightbox-nav next" onclick="GalleryManager.changeLightboxSlide(1)">›</button>
             <div id="lightbox-slides"></div>
             <div class="lightbox-title" id="lightbox-title"></div>
         </div>
@@ -363,166 +391,428 @@
 
     <script src="js/menu.js"></script>
     <script>
-        // Variables globales para la galería principal
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.gallery-slide');
-        let slideInterval;
+        // Gestor optimizado de la galería
+        const GalleryManager = {
+            // Variables de estado
+            currentSlide: 0,
+            slideInterval: null,
+            currentLightboxSlide: 0,
+            currentProject: '',
+            isVisible: true,
+            keyboardHandler: null,
+            lightboxClickHandler: null,
+            
+            // Configuración
+            config: {
+                slideInterval: 6000, // Aumentado para reducir carga
+                transitionDuration: 800, // Reducido
+                preloadCount: 2 // Cuántas imágenes precargar
+            },
 
-        // Variables globales para lightbox
-        let currentLightboxSlide = 0;
-        let currentProject = '';
-        let projectImages = {};
+            // Definición de proyectos (lazy loading)
+            projects: {
+                'sagrado-micelio': {
+                    title: 'Sagrado Micelio',
+                    count: 9,
+                    pattern: 'img/Concept/SM_{index}.jpg',
+                    images: null // Se carga bajo demanda
+                },
+                'nubes': {
+                    title: 'Nubes',
+                    images: null, // Se define después
+                    custom: true
+                },
+                'stupid-luv': {
+                    title: 'Stupid Luv Series',
+                    count: 13,
+                    pattern: 'img/Concept/SLS_{index}.jpg',
+                    images: null
+                },
+                'ratan': {
+                    title: 'Ratán',
+                    images: null,
+                    custom: true
+                },
+                'robopez': {
+                    title: 'Robopez',
+                    count: 5,
+                    pattern: 'img/Concept/Robopez_{index}.png',
+                    images: null
+                },
+                'hunt': {
+                    title: 'Hunt',
+                    images: ['img/Concept/Hunt_001.jpg', 'img/Concept/Hunt_002.jpg']
+                },
+                'cardumen': {
+                    title: 'Cardumen',
+                    count: 4,
+                    pattern: 'img/Concept/Crd_{index}.jpg',
+                    images: null
+                },
+                'animaux': {
+                    title: 'Animaux',
+                    images: ['img/Concept/Coco_001.jpg']
+                }
+            },
 
-        // Definir las imágenes de cada proyecto
-        const projects = {
-            'sagrado-micelio': {
-                title: 'Sagrado Micelio',
-                images: []
+            // Inicialización
+            init() {
+                this.slides = document.querySelectorAll('.gallery-slide');
+                this.setupProjectGrid();
+                this.setupVisibilityObserver();
+                this.preloadMainImages();
+                this.startAutoSlide();
+                
+                // Definir proyectos custom
+                this.defineCustomProjects();
             },
-            'nubes': {
-                title: 'Nubes',
-                images: []
+
+            // Definir proyectos con patrones custom
+            defineCustomProjects() {
+                // Nubes (proyecto grande - se carga bajo demanda)
+                this.projects['nubes'].generateImages = () => {
+                    const images = [];
+                    for(let i = 4; i <= 17; i++) {
+                        images.push(`img/Nubes/${i}.jpg`);
+                    }
+                    images.push('img/BgDesign/Bg1_001.jpg');
+                    for(let i = 1; i <= 4; i++) {
+                        images.push(`img/BgDesign/Bg2_${i.toString().padStart(3, '0')}.jpg`);
+                    }
+                    for(let i = 1; i <= 8; i++) {
+                        images.push(`img/BgDesign/Bg3_${i.toString().padStart(3, '0')}.jpg`);
+                    }
+                    return images;
+                };
+
+                // Ratán
+                this.projects['ratan'].generateImages = () => {
+                    const images = [];
+                    for(let i = 1; i <= 2; i++) {
+                        images.push(`img/BgDesign/Ratan1_${i.toString().padStart(3, '0')}.jpg`);
+                    }
+                    for(let i = 1; i <= 5; i++) {
+                        images.push(`img/BgDesign/Ratan2_${i.toString().padStart(3, '0')}.jpg`);
+                    }
+                    for(let i = 1; i <= 2; i++) {
+                        images.push(`img/BgDesign/Ratan3_${i.toString().padStart(3, '0')}.jpg`);
+                    }
+                    return images;
+                };
             },
-            'stupid-luv': {
-                title: 'Stupid Luv Series',
-                images: []
+
+            // Configurar grid de proyectos con event delegation
+            setupProjectGrid() {
+                const grid = document.querySelector('.projects-grid');
+                if (grid) {
+                    grid.addEventListener('click', (e) => {
+                        const projectItem = e.target.closest('.project-item');
+                        if (projectItem) {
+                            const projectKey = projectItem.dataset.project;
+                            this.openLightbox(projectKey);
+                        }
+                    });
+                }
             },
-            'ratan': {
-                title: 'Ratán',
-                images: []
+
+            // Observer para pausar cuando no es visible
+            setupVisibilityObserver() {
+                // Pause/resume autoSlide based on visibility
+                document.addEventListener('visibilitychange', () => {
+                    this.isVisible = !document.hidden;
+                    if (this.isVisible) {
+                        this.startAutoSlide();
+                    } else {
+                        this.pauseAutoSlide();
+                    }
+                });
+
+                // Pause autoSlide when lightbox is open
+                const lightbox = document.getElementById('lightbox');
+                if (lightbox) {
+                    const observer = new MutationObserver(() => {
+                        const isOpen = lightbox.classList.contains('active');
+                        if (isOpen) {
+                            this.pauseAutoSlide();
+                        } else {
+                            this.startAutoSlide();
+                        }
+                    });
+                    
+                    observer.observe(lightbox, { 
+                        attributes: true, 
+                        attributeFilter: ['class'] 
+                    });
+                }
             },
-            'robopez': {
-                title: 'Robopez',
-                images: ['img/Concept/Robopez_001.png', 'img/Concept/Robopez_002.png', 'img/Concept/Robopez_003.png', 'img/Concept/Robopez_004.png', 'img/Concept/Robopez_005.png']
+
+            // Precargar imágenes principales
+            preloadMainImages() {
+                // Precargar solo las primeras imágenes para mejorar rendimiento inicial
+                const imagesToPreload = Array.from(this.slides)
+                    .slice(0, 3)
+                    .map(slide => slide.querySelector('img').src);
+
+                imagesToPreload.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                });
             },
-            'hunt': {
-                title: 'Hunt',
-                images: ['img/Concept/Hunt_001.jpg', 'img/Concept/Hunt_002.jpg']
+
+            // Funciones de slideshow optimizadas
+            showSlide(n) {
+                if (!this.slides.length) return;
+                
+                this.slides[this.currentSlide].classList.remove('active');
+                this.currentSlide = (n + this.slides.length) % this.slides.length;
+                this.slides[this.currentSlide].classList.add('active');
+
+                // Precargar siguiente imagen
+                this.preloadNextSlide();
             },
-            'cardumen': {
-                title: 'Cardumen',
-                images: []
+
+            preloadNextSlide() {
+                const nextIndex = (this.currentSlide + 1) % this.slides.length;
+                const nextImg = this.slides[nextIndex].querySelector('img');
+                if (nextImg && !nextImg.complete) {
+                    nextImg.loading = 'eager';
+                }
             },
-            'animaux': {
-                title: 'Animaux',
-                images: ['img/Concept/Coco_001.jpg']
+
+            startAutoSlide() {
+                if (!this.isVisible) return;
+                
+                this.pauseAutoSlide();
+                this.slideInterval = setInterval(() => {
+                    this.showSlide(this.currentSlide + 1);
+                }, this.config.slideInterval);
+            },
+
+            pauseAutoSlide() {
+                if (this.slideInterval) {
+                    clearInterval(this.slideInterval);
+                    this.slideInterval = null;
+                }
+            },
+
+            // Generar imágenes bajo demanda
+            getProjectImages(projectKey) {
+                const project = this.projects[projectKey];
+                if (!project) return [];
+
+                // Si ya están cargadas, retornarlas
+                if (project.images) {
+                    return project.images;
+                }
+
+                // Generar imágenes
+                if (project.generateImages) {
+                    project.images = project.generateImages();
+                } else if (project.pattern && project.count) {
+                    project.images = [];
+                    for (let i = 1; i <= project.count; i++) {
+                        const index = i.toString().padStart(3, '0');
+                        project.images.push(project.pattern.replace('{index}', index));
+                    }
+                }
+
+                return project.images || [];
+            },
+
+            // Lightbox optimizado con lazy loading
+            openLightbox(projectKey) {
+                this.currentProject = projectKey;
+                this.currentLightboxSlide = 0;
+                
+                const project = this.projects[projectKey];
+                const images = this.getProjectImages(projectKey);
+                
+                if (!images.length) return;
+
+                document.getElementById('lightbox-title').textContent = project.title;
+                
+                const slidesContainer = document.getElementById('lightbox-slides');
+                slidesContainer.innerHTML = '';
+                
+                // Crear slides con lazy loading
+                images.forEach((src, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = `lightbox-slide ${index === 0 ? 'active' : ''}`;
+                    
+                    if (index === 0 || index <= this.config.preloadCount) {
+                        // Cargar inmediatamente la primera imagen y algunas más
+                        slide.innerHTML = `<img src="${src}" alt="${project.title}">`;
+                    } else {
+                        // Lazy loading para el resto
+                        slide.innerHTML = `
+                            <div class="loading-placeholder">
+                                <div class="spinner"></div>
+                            </div>
+                        `;
+                        slide.dataset.src = src;
+                        slide.dataset.title = project.title;
+                    }
+                    
+                    slidesContainer.appendChild(slide);
+                });
+                
+                document.getElementById('lightbox').classList.add('active');
+                this.setupLightboxEvents();
+            },
+
+            // Cargar imagen bajo demanda
+            loadLightboxImage(slideIndex) {
+                const slides = document.querySelectorAll('#lightbox-slides .lightbox-slide');
+                const slide = slides[slideIndex];
+                
+                if (slide && slide.dataset.src) {
+                    const img = new Image();
+                    img.onload = () => {
+                        slide.innerHTML = `<img src="${slide.dataset.src}" alt="${slide.dataset.title}">`;
+                        delete slide.dataset.src;
+                        delete slide.dataset.title;
+                    };
+                    img.onerror = () => {
+                        slide.innerHTML = '<div style="color: white; text-align: center;">Error al cargar imagen</div>';
+                    };
+                    img.src = slide.dataset.src;
+                }
+            },
+
+            changeLightboxSlide(direction) {
+                const images = this.getProjectImages(this.currentProject);
+                const lightboxSlides = document.querySelectorAll('#lightbox-slides .lightbox-slide');
+                
+                if (!images.length) return;
+                
+                lightboxSlides[this.currentLightboxSlide].classList.remove('active');
+                this.currentLightboxSlide = (this.currentLightboxSlide + direction + images.length) % images.length;
+                lightboxSlides[this.currentLightboxSlide].classList.add('active');
+                
+                // Cargar imagen actual si es necesario
+                this.loadLightboxImage(this.currentLightboxSlide);
+                
+                // Precargar imágenes adyacentes
+                const nextIndex = (this.currentLightboxSlide + 1) % images.length;
+                const prevIndex = (this.currentLightboxSlide - 1 + images.length) % images.length;
+                this.loadLightboxImage(nextIndex);
+                this.loadLightboxImage(prevIndex);
+            },
+
+            closeLightbox() {
+                document.getElementById('lightbox').classList.remove('active');
+                this.removeLightboxEvents();
+                
+                // Limpiar memoria - remover imágenes no visibles
+                setTimeout(() => {
+                    this.cleanupLightboxImages();
+                }, 1000);
+            },
+
+            // Limpiar imágenes del lightbox para liberar memoria
+            cleanupLightboxImages() {
+                const slidesContainer = document.getElementById('lightbox-slides');
+                if (slidesContainer) {
+                    slidesContainer.innerHTML = '';
+                }
+            },
+
+            // Event handlers optimizados
+            setupLightboxEvents() {
+                // Keyboard navigation con debouncing
+                this.keyboardHandler = this.debounce((e) => {
+                    if (!document.getElementById('lightbox').classList.contains('active')) return;
+                    
+                    switch(e.key) {
+                        case 'Escape':
+                            this.closeLightbox();
+                            break;
+                        case 'ArrowLeft':
+                            this.changeLightboxSlide(-1);
+                            break;
+                        case 'ArrowRight':
+                            this.changeLightboxSlide(1);
+                            break;
+                    }
+                }, 150);
+
+                // Click outside to close
+                this.lightboxClickHandler = (e) => {
+                    if (e.target === document.getElementById('lightbox')) {
+                        this.closeLightbox();
+                    }
+                };
+
+                document.addEventListener('keydown', this.keyboardHandler);
+                document.getElementById('lightbox').addEventListener('click', this.lightboxClickHandler);
+            },
+
+            removeLightboxEvents() {
+                if (this.keyboardHandler) {
+                    document.removeEventListener('keydown', this.keyboardHandler);
+                    this.keyboardHandler = null;
+                }
+                if (this.lightboxClickHandler) {
+                    document.getElementById('lightbox').removeEventListener('click', this.lightboxClickHandler);
+                    this.lightboxClickHandler = null;
+                }
+            },
+
+            // Utility function para debouncing
+            debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            },
+
+            // Cleanup cuando se sale de la página
+            destroy() {
+                this.pauseAutoSlide();
+                this.removeLightboxEvents();
+                
+                // Remover otros event listeners
+                const grid = document.querySelector('.projects-grid');
+                if (grid) {
+                    grid.removeEventListener('click', this.handleProjectClick);
+                }
+                
+                // Limpiar memoria
+                this.slides = null;
+                Object.keys(this.projects).forEach(key => {
+                    this.projects[key].images = null;
+                });
             }
         };
 
-        // Generar arrays de imágenes
-        // Sagrado Micelio
-        for(let i = 1; i <= 9; i++) {
-            projects['sagrado-micelio'].images.push(`img/Concept/SM_${i.toString().padStart(3, '0')}.jpg`);
+        // Inicializar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => GalleryManager.init());
+        } else {
+            GalleryManager.init();
         }
 
-        // Nubes
-        for(let i = 4; i <= 17; i++) {
-            projects['nubes'].images.push(`img/Nubes/${i}.jpg`);
-        }
-        projects['nubes'].images.push('img/BgDesign/Bg1_001.jpg');
-        for(let i = 1; i <= 4; i++) {
-            projects['nubes'].images.push(`img/BgDesign/Bg2_${i.toString().padStart(3, '0')}.jpg`);
-        }
-        for(let i = 1; i <= 8; i++) {
-            projects['nubes'].images.push(`img/BgDesign/Bg3_${i.toString().padStart(3, '0')}.jpg`);
-        }
-
-        // Stupid Luv Series
-        for(let i = 1; i <= 13; i++) {
-            projects['stupid-luv'].images.push(`img/Concept/SLS_${i.toString().padStart(3, '0')}.jpg`);
-        }
-
-        // Ratán
-        for(let i = 1; i <= 2; i++) {
-            projects['ratan'].images.push(`img/BgDesign/Ratan1_${i.toString().padStart(3, '0')}.jpg`);
-        }
-        for(let i = 1; i <= 5; i++) {
-            projects['ratan'].images.push(`img/BgDesign/Ratan2_${i.toString().padStart(3, '0')}.jpg`);
-        }
-        for(let i = 1; i <= 2; i++) {
-            projects['ratan'].images.push(`img/BgDesign/Ratan3_${i.toString().padStart(3, '0')}.jpg`);
-        }
-
-        // Cardumen
-        for(let i = 1; i <= 4; i++) {
-            projects['cardumen'].images.push(`img/Concept/Crd_${i.toString().padStart(3, '0')}.jpg`);
-        }
-
-        // Funciones para la galería principal
-        function showSlide(n) {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (n + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-
-        function autoSlide() {
-            showSlide(currentSlide + 1);
-        }
-
-        function startInterval() {
-            slideInterval = setInterval(autoSlide, 4500);
-        }
-
-        // Funciones para lightbox
-        function openLightbox(projectKey) {
-            currentProject = projectKey;
-            currentLightboxSlide = 0;
-            const project = projects[projectKey];
-            
-            document.getElementById('lightbox-title').textContent = project.title;
-            
-            const slidesContainer = document.getElementById('lightbox-slides');
-            slidesContainer.innerHTML = '';
-            
-            project.images.forEach((src, index) => {
-                const slide = document.createElement('div');
-                slide.className = `lightbox-slide ${index === 0 ? 'active' : ''}`;
-                slide.innerHTML = `<img src="${src}" alt="${project.title}">`;
-                slidesContainer.appendChild(slide);
-            });
-            
-            document.getElementById('lightbox').classList.add('active');
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
-        }
-
-        function changeLightboxSlide(direction) {
-            const project = projects[currentProject];
-            const lightboxSlides = document.querySelectorAll('#lightbox-slides .lightbox-slide');
-            
-            lightboxSlides[currentLightboxSlide].classList.remove('active');
-            currentLightboxSlide = (currentLightboxSlide + direction + project.images.length) % project.images.length;
-            lightboxSlides[currentLightboxSlide].classList.add('active');
-        }
-
-        // Cerrar lightbox al hacer clic fuera del contenido
-        document.getElementById('lightbox').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeLightbox();
-            }
+        // Cleanup al salir de la página
+        window.addEventListener('beforeunload', () => {
+            GalleryManager.destroy();
         });
 
-        // Navegación con teclado
-        document.addEventListener('keydown', function(e) {
-            if (document.getElementById('lightbox').classList.contains('active')) {
-                switch(e.key) {
-                    case 'Escape':
-                        closeLightbox();
-                        break;
-                    case 'ArrowLeft':
-                        changeLightboxSlide(-1);
-                        break;
-                    case 'ArrowRight':
-                        changeLightboxSlide(1);
-                        break;
-                }
-            }
+        // Pausar al perder foco de la ventana
+        window.addEventListener('blur', () => {
+            GalleryManager.pauseAutoSlide();
         });
 
-        // Inicializar la galería principal
-        startInterval();
+        window.addEventListener('focus', () => {
+            GalleryManager.startAutoSlide();
+        });
+
+        // Exposer métodos necesarios globalmente para onclick handlers
+        window.GalleryManager = GalleryManager;
     </script>
 </body>
 </html>
