@@ -15,7 +15,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 20px 40px;
+            padding: 40px 20px;
             position: relative;
         }
 
@@ -30,25 +30,22 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.7; /* Aumentado de 0.3 a 0.5 para más visibilidad */
+            opacity: 0.7;
             z-index: 0;
         }
 
         .welcome-content {
             position: relative;
             z-index: 1;
-        }
-
-        .welcome-content {
             max-width: 1000px;
             width: 100%;
         }
 
         .options-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Solo 4 columnas */
+            grid-template-columns: repeat(5, 1fr);
             gap: 40px;
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
@@ -61,43 +58,38 @@
             transition: all 0.3s ease;
             padding: 30px 20px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.15); /* Más claro, de 0.08 a 0.15 */
-            backdrop-filter: blur(10px); /* Efecto de cristal */
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .option-card:hover,
-        .logo-card:hover,
-        .florilegio-card:hover {
-            background: rgba(255, 255, 255, 0.3); /* Hover más visible */
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* Sombra en hover */
+        .option-card:hover {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .option-card:hover .option-icon,
-        .logo-card:hover .logo-container,
-        .florilegio-card:hover .florilegio-container {
+        .option-card:hover .image-container {
             transform: scale(1.1);
         }
 
-        .option-icon {
+        .image-container {
             width: 90px;
             height: 90px;
-            background: white;
             border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            font-size: 2.4rem;
-            color: #2c3e50;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .option-card:hover .option-icon {
-            background: #2c3e50;
-            color: white;
-            transform: scale(1.1);
+        .card-image {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
         }
 
         .option-text {
@@ -113,9 +105,10 @@
             align-items: center;
             justify-content: center;
             min-height: 40px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra en texto */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
+        /* Estilos especiales para el logo (Quién es Rodrigo) */
         .logo-card {
             display: flex;
             flex-direction: column;
@@ -177,116 +170,18 @@
             opacity: 1;
         }
 
-        /* Iconos */
-        .icon-blog::before { content: "✍️"; }
-
-        .option-icon::before {
-            font-size: 2.4rem;
-        }
-
-        /* Estilos para el botón de Florilegio */
-        .florilegio-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            padding: 30px 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .florilegio-card:hover {
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .florilegio-container {
-            width: 90px;
-            height: 90px;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .florilegio-card:hover .florilegio-container {
-            transform: scale(1.1);
-        }
-
-        .florilegio-image {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Estilos para Linktree */
-        .linktree-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            padding: 30px 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .linktree-card:hover {
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .linktree-container {
-            width: 90px;
-            height: 90px;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .linktree-card:hover .linktree-container {
-            transform: scale(1.1);
-        }
-
-        .linktree-image {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-        }
-
         /* Responsive */
-        @media (max-width: 1000px) {
+        @media (max-width: 1200px) {
             .options-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 40px 30px;
-                max-width: 600px;
+                max-width: 800px;
             }
         }
 
         @media (max-width: 768px) {
             .welcome-screen {
-                padding: 100px 20px 40px;
+                padding: 40px 20px;
             }
             
             .options-grid {
@@ -295,7 +190,7 @@
                 max-width: 500px;
             }
             
-            .option-icon, .logo-container, .florilegio-container, .linktree-container {
+            .image-container, .logo-container {
                 width: 80px;
                 height: 80px;
             }
@@ -306,21 +201,17 @@
         }
 
         @media (max-width: 480px) {
-            .welcome-screen {
-                padding: 90px 20px 40px;
-            }
-            
             .options-grid {
                 grid-template-columns: 1fr;
                 gap: 25px;
                 max-width: 300px;
             }
             
-            .option-card, .logo-card, .florilegio-card, .linktree-card {
+            .option-card, .logo-card {
                 padding: 25px 15px;
             }
             
-            .option-icon, .logo-container, .florilegio-container, .linktree-container {
+            .image-container, .logo-container {
                 width: 70px;
                 height: 70px;
                 margin-bottom: 15px;
@@ -329,11 +220,30 @@
     </style>
 </head>
 <body>
-    <!-- El menú se inserta automáticamente aquí -->
-
     <main class="welcome-screen">
         <div class="welcome-content">
             <div class="options-grid">
+                <a href="3d.html" class="option-card">
+                    <div class="image-container">
+                        <img src="img/PersefoneIcon.png" alt="3D" class="card-image">
+                    </div>
+                    <div class="option-text">3D</div>
+                </a>
+                
+                <a href="concept-art.html" class="option-card">
+                    <div class="image-container">
+                        <img src="img/ChurroIcono2.png" alt="Concept Art" class="card-image">
+                    </div>
+                    <div class="option-text">Concept Art</div>
+                </a>
+                
+                <a href="diseño.html" class="option-card">
+                    <div class="image-container">
+                        <img src="img/LadJitsuIcono.png" alt="Diseño" class="card-image">
+                    </div>
+                    <div class="option-text">Diseño</div>
+                </a>
+                
                 <a href="sobre-mi.html" class="logo-card">
                     <div class="logo-container">
                         <img src="img/Logo.png" alt="Logo especial" class="special-logo-image">
@@ -342,21 +252,9 @@
                     <div class="option-text">¿Quién es<br>Rodrigo Mondragón?</div>
                 </a>
                 
-                <a href="https://heyzine.com/flip-book/52b9428d33.html" target="_blank" class="florilegio-card">
-                    <div class="florilegio-container">
-                        <img src="img/Anna17.png" alt="Florilegio" class="florilegio-image">
-                    </div>
-                    <div class="option-text">Florilegio</div>
-                </a>
-                
-                <a href="https://medium.com/@roy.mondragon" target="_blank" class="option-card">
-                    <div class="option-icon icon-blog"></div>
-                    <div class="option-text">Blog</div>
-                </a>
-                
-                <a href="https://linktr.ee/roy.mondragon" target="_blank" class="linktree-card">
-                    <div class="linktree-container">
-                        <img src="img/LinktreeLogo.png" alt="Linktree Logo" class="linktree-image">
+                <a href="https://linktr.ee/roy.mondragon" target="_blank" class="option-card">
+                    <div class="image-container">
+                        <img src="img/LinktreeLogo.png" alt="Linktree Logo" class="card-image">
                     </div>
                     <div class="option-text">Linktree</div>
                 </a>
@@ -366,10 +264,9 @@
 
     <!-- El footer se inserta automáticamente aquí -->
     
-    <script src="js/menu.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.option-card, .logo-card, .florilegio-card, .linktree-card');
+            const cards = document.querySelectorAll('.option-card, .logo-card');
             
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
