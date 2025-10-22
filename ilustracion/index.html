@@ -446,18 +446,18 @@
             });
         }
 
-        // Barra de búsqueda
-        document.getElementById('searchBar').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
+        // Toggle del contenedor de tags
+        document.getElementById('filterToggleBtn').addEventListener('click', function() {
+            const tagsContainer = document.getElementById('tagsContainer');
+            const btn = this;
             
-            // Resaltar etiquetas que coincidan
-            document.querySelectorAll('.tag-btn').forEach(btn => {
-                if (btn.textContent.toLowerCase().includes(searchTerm)) {
-                    btn.style.opacity = '1';
-                } else {
-                    btn.style.opacity = searchTerm ? '0.3' : '1';
-                }
-            });
+            if (tagsContainer.classList.contains('visible')) {
+                tagsContainer.classList.remove('visible');
+                btn.classList.remove('active');
+            } else {
+                tagsContainer.classList.add('visible');
+                btn.classList.add('active');
+            }
         });
 
         function renderProjects() {

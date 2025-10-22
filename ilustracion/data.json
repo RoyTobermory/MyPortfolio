@@ -32,44 +32,44 @@
     {
       "name": "Joto de Diamantes",
       "img": "../img/james/Deck/0.jpg",
-      "description": "Baraja ilustrada completa"
-	"tags": ["juegos de mesa","personajes", "personas"]
+      "description": "Baraja ilustrada completa",
+      "tags": ["juegos de mesa", "personajes", "personas"]
     },
     {
       "name": "Rey de Espadas",
       "img": "../img/james/Deck/1.jpg",
-      "description": ""
-"tags": ["juegos de mesa","personajes", "personas"]
+      "description": "",
+      "tags": ["juegos de mesa", "personajes", "personas"]
     },
-  {
+    {
       "name": "Reina de Diamantes",
-     "img": "../img/james/Deck/2.jpg",
-      "description": ""
-"tags": ["juegos de mesa","personajes", "personas"]
+      "img": "../img/james/Deck/2.jpg",
+      "description": "",
+      "tags": ["juegos de mesa", "personajes", "personas"]
     },
-  {
+    {
       "name": "Joto de espadas",
-     "img": "../img/james/Deck/3.jpg",
-      "description": ""
-"tags": ["juegos de mesa","personajes", "personas"]
+      "img": "../img/james/Deck/3.jpg",
+      "description": "",
+      "tags": ["juegos de mesa", "personajes", "personas"]
     },
- {
+    {
       "name": "Joto de corazones",
-     "img": "../img/james/Deck/4.jpg",
-      "description": ""
-"tags": ["juegos de mesa","personajes", "personas"]
+      "img": "../img/james/Deck/4.jpg",
+      "description": "",
+      "tags": ["juegos de mesa", "personajes", "personas"]
     },
- {
+    {
       "name": "Reina de Tréboles",
-     "img": "../img/james/Deck/8.jpg",
-      "description": ""
-"tags": ["juegos de mesa","personajes", "personas"]
+      "img": "../img/james/Deck/8.jpg",
+      "description": "",
+      "tags": ["juegos de mesa", "personajes", "personas"]
     },
- {
+    {
       "name": "Joto de Tréboles",
-     "img": "../img/james/Deck/9.jpg",
-      "description": ""
-"tags": ["juegos de mesa","personajes", "personas"]
+      "img": "../img/james/Deck/9.jpg",
+      "description": "",
+      "tags": ["juegos de mesa", "personajes", "personas"]
     }
   ],
   "Lotería": [
