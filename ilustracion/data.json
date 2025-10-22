@@ -114,9 +114,10 @@
   ],
   "Sagrado Micelio": [
     {
-      "name": "Hongos Mágicos",
-      "img": "images/micelio/hongos.jpg",
+      "name": "Arbol Sagrado",
+      "img": "../img/Forest-background2.jpg",
       "description": "Exploración micológica"
+      "tags": ["fondos"]
     }
   ],
   "Inktober": [
