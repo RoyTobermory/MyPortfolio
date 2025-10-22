@@ -200,6 +200,13 @@
             margin-bottom: 5px;
         }
 
+        .project-description {
+            color: #888;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
         .project-count {
             color: #aaa;
             font-size: 0.9em;
@@ -268,6 +275,8 @@
             padding: 30px;
             max-width: 900px;
             width: 100%;
+            max-height: 95vh;
+            overflow-y: auto;
             position: relative;
         }
 
@@ -287,6 +296,7 @@
             justify-content: center;
             border-radius: 50%;
             transition: background-color 0.3s ease;
+            z-index: 10;
         }
 
         .modal-close:hover {
@@ -295,6 +305,8 @@
 
         .modal-image {
             width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
             border-radius: 15px;
             margin-bottom: 20px;
         }
@@ -330,6 +342,18 @@
             font-size: 0.85em;
         }
 
+        .project-header {
+            max-width: 1400px;
+            margin: 0 auto 30px;
+        }
+
+        .project-header-description {
+            color: #aaa;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
         .hidden {
             display: none;
         }
@@ -338,7 +362,7 @@
 <body>
     <header>
         <a href="../index.html" class="back-btn">← Inicio</a>
-        <img src="../Logo.png" alt="Roy Mondragón" class="profile-img">
+        <img src="../img/Logo.png" alt="Roy Mondragón" class="profile-img">
         <h1>Roy Mondragón</h1>
         <p class="description">Ilustrador creando mundos visuales únicos. Especializado en diseño de personajes, ilustración editorial y proyectos creativos.</p>
     </header>
@@ -394,7 +418,7 @@
         // Extraer todas las etiquetas únicas
         function extractAllTags() {
             Object.keys(portfolioData).forEach(project => {
-                portfolioData[project].forEach(img => {
+                portfolioData[project].images.forEach(img => {
                     if (img.tags) {
                         img.tags.forEach(tag => allTags.add(tag));
                     }
@@ -466,7 +490,8 @@
             const grid = content.querySelector('.projects-grid');
 
             Object.keys(portfolioData).forEach(project => {
-                const images = portfolioData[project];
+                const projectData = portfolioData[project];
+                const images = projectData.images;
                 const filteredImages = filterImagesByTags(images);
                 
                 // Solo mostrar proyecto si tiene imágenes que coinciden con filtros
@@ -478,6 +503,7 @@
                     <img src="${images[0].img}" alt="${project}">
                     <div class="project-info">
                         <div class="project-title">${project}</div>
+                        <div class="project-description">${projectData.description || ''}</div>
                         <div class="project-count">${filteredImages.length || images.length} ${(filteredImages.length || images.length) === 1 ? 'imagen' : 'imágenes'}</div>
                     </div>
                 `;
@@ -493,7 +519,7 @@
 
             let allImages = [];
             Object.keys(portfolioData).forEach(project => {
-                portfolioData[project].forEach(img => {
+                portfolioData[project].images.forEach(img => {
                     allImages.push({ ...img, project });
                 });
             });
@@ -515,17 +541,19 @@
         }
 
         function showProjectImages(projectName) {
+            const projectData = portfolioData[projectName];
             const content = document.getElementById('content-area');
             content.innerHTML = `
-                <div style="max-width: 1400px; margin: 0 auto 30px;">
+                <div class="project-header">
                     <button onclick="renderProjects()" style="background: #2a2a2a; color: #fff; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-size: 16px;">← Volver a Proyectos</button>
                     <h2 style="margin-top: 20px; font-size: 2em;">${projectName}</h2>
+                    <p class="project-header-description">${projectData.description || ''}</p>
                 </div>
                 <div class="masonry-grid"></div>
             `;
             const grid = content.querySelector('.masonry-grid');
 
-            let images = portfolioData[projectName];
+            let images = projectData.images;
             
             // Filtrar por etiquetas si hay filtros activos
             if (activeFilters.length > 0) {

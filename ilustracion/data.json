@@ -1,142 +1,175 @@
 {
-  "Flores": [
-    {
-      "name": "Rosa Azul",
-      "img": "images/flores/rosa-azul.jpg",
-      "description": "Yo que sé"
-    },
-    {
-      "name": "Girasol",
-      "img": "images/flores/girasol.jpg",
-      "description": ""
-    },
-    {
-      "name": "Lirio",
-      "img": "images/flores/lirio.jpg",
-      "description": "Serie de flores mexicanas"
-    }
-  ],
-  "Ajolotes": [
-    {
-      "name": "Ajolote Rosa",
-      "img": "images/ajolotes/rosa.jpg",
-      "description": "El ajolote de Xochimilco"
-    },
-    {
-      "name": "Ajolote Dorado",
-      "img": "images/ajolotes/dorado.jpg",
-      "description": ""
-    }
-  ],
-  "Deck": [
-    {
-      "name": "Joto de Diamantes",
-      "img": "../img/james/Deck/0.jpg",
-      "description": "Baraja ilustrada completa",
-      "tags": ["juegos de mesa", "personajes", "personas"]
-    },
-    {
-      "name": "Rey de Espadas",
-      "img": "../img/james/Deck/1.jpg",
-      "description": "",
-      "tags": ["juegos de mesa", "personajes", "personas"]
-    },
-    {
-      "name": "Reina de Diamantes",
-      "img": "../img/james/Deck/2.jpg",
-      "description": "",
-      "tags": ["juegos de mesa", "personajes", "personas"]
-    },
-    {
-      "name": "Joto de espadas",
-      "img": "../img/james/Deck/3.jpg",
-      "description": "",
-      "tags": ["juegos de mesa", "personajes", "personas"]
-    },
-    {
-      "name": "Joto de corazones",
-      "img": "../img/james/Deck/4.jpg",
-      "description": "",
-      "tags": ["juegos de mesa", "personajes", "personas"]
-    },
-    {
-      "name": "Reina de Tréboles",
-      "img": "../img/james/Deck/8.jpg",
-      "description": "",
-      "tags": ["juegos de mesa", "personajes", "personas"]
-    },
-    {
-      "name": "Joto de Tréboles",
-      "img": "../img/james/Deck/9.jpg",
-      "description": "",
-      "tags": ["juegos de mesa", "personajes", "personas"]
-    }
-  ],
-  "Lotería": [
-    {
-      "name": "El Sol",
-      "img": "images/loteria/sol.jpg",
-      "description": "Lotería mexicana reimaginada"
-    },
-    {
-      "name": "La Luna",
-      "img": "images/loteria/luna.jpg",
-      "description": ""
-    }
-  ],
-  "Quetzales": [
-    {
-      "name": "Quetzal Volando",
-      "img": "images/quetzales/volando.jpg",
-      "description": "Ave sagrada de Mesoamérica"
-    }
-  ],
-  "UNO": [
-    {
-      "name": "Cartas UNO Custom",
-      "img": "images/uno/custom.jpg",
-      "description": "Diseño personalizado de UNO"
-    }
-  ],
-  "Nubes": [
-    {
-      "name": "Nubes al Atardecer",
-      "img": "images/nubes/atardecer.jpg",
-      "description": "Estudio de cielos"
-    }
-  ],
-  "Conos": [
-    {
-      "name": "Cono de Helado",
-      "img": "images/conos/helado.jpg",
-      "description": "Serie dulce"
-    }
-  ],
-  "Sagrado Micelio": [
-    {
-      "name": "Arbol Sagrado",
-      "img": "../img/Forest-background2.jpg",
-      "description": "Exploración micológica",
-      "tags": ["fondos"]
-    }
-  ],
-  "Inktober": [
-    {
-      "name": "Día 1",
-      "img": "images/inktober/dia1.jpg",
-      "description": "Inktober 2024"
-    },
-    {
-      "name": "Día 2",
-      "img": "images/inktober/dia2.jpg",
-      "description": ""
-    }
-  ],
-  "Otros": [
-    {
-      "name": "Experimento 1",
-      "img": "images/otros/exp1.jpg",
-      "description": "Ilustraciones varias"
-    }
-  ]
+  "Flores": {
+    "description": "Colección de ilustraciones florales con un toque vibrante y contemporáneo",
+    "images": [
+      {
+        "name": "Rosa Azul",
+        "img": "images/flores/rosa-azul.jpg",
+        "description": "Yo que sé"
+      },
+      {
+        "name": "Girasol",
+        "img": "images/flores/girasol.jpg",
+        "description": ""
+      },
+      {
+        "name": "Lirio",
+        "img": "images/flores/lirio.jpg",
+        "description": "Serie de flores mexicanas"
+      }
+    ]
+  },
+  "Ajolotes": {
+    "description": "Representaciones artísticas del emblemático ajolote mexicano",
+    "images": [
+      {
+        "name": "Ajolote Rosa",
+        "img": "images/ajolotes/rosa.jpg",
+        "description": "El ajolote de Xochimilco"
+      },
+      {
+        "name": "Ajolote Dorado",
+        "img": "images/ajolotes/dorado.jpg",
+        "description": ""
+      }
+    ]
+  },
+  "Deck": {
+    "description": "Baraja ilustrada completa con diseños de personajes originales",
+    "images": [
+      {
+        "name": "Joto de Diamantes",
+        "img": "../img/james/Deck/0.jpg",
+        "description": "Baraja ilustrada completa",
+        "tags": ["juegos de mesa", "personajes", "personas"]
+      },
+      {
+        "name": "Rey de Espadas",
+        "img": "../img/james/Deck/1.jpg",
+        "description": "",
+        "tags": ["juegos de mesa", "personajes", "personas"]
+      },
+      {
+        "name": "Reina de Diamantes",
+        "img": "../img/james/Deck/2.jpg",
+        "description": "",
+        "tags": ["juegos de mesa", "personajes", "personas"]
+      },
+      {
+        "name": "Joto de espadas",
+        "img": "../img/james/Deck/3.jpg",
+        "description": "",
+        "tags": ["juegos de mesa", "personajes", "personas"]
+      },
+      {
+        "name": "Joto de corazones",
+        "img": "../img/james/Deck/4.jpg",
+        "description": "",
+        "tags": ["juegos de mesa", "personajes", "personas"]
+      },
+      {
+        "name": "Reina de Tréboles",
+        "img": "../img/james/Deck/8.jpg",
+        "description": "",
+        "tags": ["juegos de mesa", "personajes", "personas"]
+      },
+      {
+        "name": "Joto de Tréboles",
+        "img": "../img/james/Deck/9.jpg",
+        "description": "",
+        "tags": ["juegos de mesa", "personajes", "personas"]
+      }
+    ]
+  },
+  "Lotería": {
+    "description": "Lotería mexicana reimaginada con un estilo visual moderno",
+    "images": [
+      {
+        "name": "El Sol",
+        "img": "images/loteria/sol.jpg",
+        "description": "Lotería mexicana reimaginada"
+      },
+      {
+        "name": "La Luna",
+        "img": "images/loteria/luna.jpg",
+        "description": ""
+      }
+    ]
+  },
+  "Quetzales": {
+    "description": "Ilustraciones del ave sagrada de Mesoamérica",
+    "images": [
+      {
+        "name": "Quetzal Volando",
+        "img": "images/quetzales/volando.jpg",
+        "description": "Ave sagrada de Mesoamérica"
+      }
+    ]
+  },
+  "UNO": {
+    "description": "Diseño personalizado de cartas UNO con estilo único",
+    "images": [
+      {
+        "name": "Cartas UNO Custom",
+        "img": "images/uno/custom.jpg",
+        "description": "Diseño personalizado de UNO"
+      }
+    ]
+  },
+  "Nubes": {
+    "description": "Estudio atmosférico de cielos y formaciones nubosas",
+    "images": [
+      {
+        "name": "Nubes al Atardecer",
+        "img": "images/nubes/atardecer.jpg",
+        "description": "Estudio de cielos"
+      }
+    ]
+  },
+  "Conos": {
+    "description": "Serie dulce de ilustraciones gastronómicas",
+    "images": [
+      {
+        "name": "Cono de Helado",
+        "img": "images/conos/helado.jpg",
+        "description": "Serie dulce"
+      }
+    ]
+  },
+  "Sagrado Micelio": {
+    "description": "Exploración artística del mundo micológico y sus conexiones",
+    "images": [
+      {
+        "name": "Arbol Sagrado",
+        "img": "../img/Forest-background2.jpg",
+        "description": "Exploración micológica",
+        "tags": ["fondos"]
+      }
+    ]
+  },
+  "Inktober": {
+    "description": "Desafío Inktober 2024 - Ilustraciones diarias a tinta",
+    "images": [
+      {
+        "name": "Día 1",
+        "img": "images/inktober/dia1.jpg",
+        "description": "Inktober 2024"
+      },
+      {
+        "name": "Día 2",
+        "img": "images/inktober/dia2.jpg",
+        "description": ""
+      }
+    ]
+  },
+  "Otros": {
+    "description": "Ilustraciones experimentales y trabajos diversos",
+    "images": [
+      {
+        "name": "Experimento 1",
+        "img": "images/otros/exp1.jpg",
+        "description": "Ilustraciones varias"
+      }
+    ]
+  }
 }
