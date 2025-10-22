@@ -26,23 +26,14 @@
             position: relative;
         }
 
-        .back-btn {
-            position: absolute;
-            left: 20px;
-            top: 40px;
-            background-color: #2a2a2a;
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: 2px solid #444;
-            transition: all 0.3s ease;
-            font-size: 16px;
+        .logo-link {
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        .back-btn:hover {
-            background-color: #3a3a3a;
-            border-color: #666;
+        .logo-link:hover {
+            transform: scale(1.05);
         }
 
         .profile-img {
@@ -51,6 +42,7 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 20px;
+            transition: opacity 0.3s ease;
         }
 
         h1 {
@@ -198,13 +190,6 @@
         .project-title {
             font-size: 1.3em;
             margin-bottom: 5px;
-        }
-
-        .project-description {
-            color: #888;
-            font-size: 0.85em;
-            margin-bottom: 8px;
-            line-height: 1.4;
         }
 
         .project-count {
@@ -361,8 +346,14 @@
 </head>
 <body>
     <header>
-        <a href="../index.html" class="back-btn">← Inicio</a>
-        <img src="../img/Logo.png" alt="Roy Mondragón" class="profile-img">
+        <a href="../index.html" class="logo-link">
+            <img src="../img/Logo.png" 
+                 alt="Roy Mondragón" 
+                 class="profile-img" 
+                 id="logoImg"
+                 onmouseover="this.src='../img/LogoHover.png'" 
+                 onmouseout="this.src='../img/Logo.png'">
+        </a>
         <h1>Roy Mondragón</h1>
         <p class="description">Ilustrador creando mundos visuales únicos. Especializado en diseño de personajes, ilustración editorial y proyectos creativos.</p>
     </header>
@@ -503,7 +494,6 @@
                     <img src="${images[0].img}" alt="${project}">
                     <div class="project-info">
                         <div class="project-title">${project}</div>
-                        <div class="project-description">${projectData.description || ''}</div>
                         <div class="project-count">${filteredImages.length || images.length} ${(filteredImages.length || images.length) === 1 ? 'imagen' : 'imágenes'}</div>
                     </div>
                 `;
