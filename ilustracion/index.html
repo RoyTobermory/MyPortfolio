@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roy Mondragón - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 40px;
+            background-color: #2a2a2a;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid #444;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .back-btn:hover {
+            background-color: #3a3a3a;
+            border-color: #666;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: #2a2a2a;
+            color: #fff;
+            border: 2px solid #444;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background-color: #3a3a3a;
+            border-color: #666;
+        }
+
+        .filter-btn.active {
+            background-color: #e60023;
+            border-color: #e60023;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 15px;
+        }
+
+        .project-title {
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .project-count {
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        .masonry-grid {
+            column-count: 4;
+            column-gap: 15px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1200px) {
+            .masonry-grid { column-count: 3; }
+        }
+
+        @media (max-width: 768px) {
+            .masonry-grid { column-count: 2; }
+        }
+
+        @media (max-width: 480px) {
+            .masonry-grid { column-count: 1; }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 15px;
+            cursor: pointer;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .masonry-item:hover {
+            transform: scale(1.02);
+        }
+
+        .masonry-item img {
+            width: 100%;
+            display: block;
+            border-radius: 15px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: #2a2a2a;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background-color: #444;
+        }
+
+        .modal-image {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .modal-project {
+            color: #e60023;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .modal-description {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-btn">← Inicio</a>
+        <img src="../Logo.png" alt="Roy Mondragón" class="profile-img">
+        <h1>Roy Mondragón</h1>
+        <p class="description">Ilustrador creando mundos visuales únicos. Especializado en diseño de personajes, ilustración editorial y proyectos creativos.</p>
+    </header>
+
+    <div class="filters">
+        <button class="filter-btn active" data-view="projects">Proyectos</button>
+        <button class="filter-btn" data-view="images">Imágenes</button>
+        <button class="filter-btn" data-view="random">Aleatorio</button>
+    </div>
+
+    <div id="content-area"></div>
+
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-project" id="modalProject"></p>
+            <p class="modal-description" id="modalDescription"></p>
+        </div>
+    </div>
+
+    <script>
+        let portfolioData = {};
+        let currentView = 'projects';
+
+        // Cargar datos desde data.json
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                portfolioData = await response.json();
+                renderProjects();
+            } catch (error) {
+                console.error('Error cargando data.json:', error);
+                document.getElementById('content-area').innerHTML = '<p style="text-align:center; color:#aaa;">Error cargando el portfolio. Verifica que data.json existe.</p>';
+            }
+        }
+
+        function renderProjects() {
+            const content = document.getElementById('content-area');
+            content.innerHTML = '<div class="projects-grid"></div>';
+            const grid = content.querySelector('.projects-grid');
+
+            Object.keys(portfolioData).forEach(project => {
+                const images = portfolioData[project];
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <img src="${images[0].img}" alt="${project}">
+                    <div class="project-info">
+                        <div class="project-title">${project}</div>
+                        <div class="project-count">${images.length} ${images.length === 1 ? 'imagen' : 'imágenes'}</div>
+                    </div>
+                `;
+                card.onclick = () => showProjectImages(project);
+                grid.appendChild(card);
+            });
+        }
+
+        function renderImages(randomize = false) {
+            const content = document.getElementById('content-area');
+            content.innerHTML = '<div class="masonry-grid"></div>';
+            const grid = content.querySelector('.masonry-grid');
+
+            let allImages = [];
+            Object.keys(portfolioData).forEach(project => {
+                portfolioData[project].forEach(img => {
+                    allImages.push({ ...img, project });
+                });
+            });
+
+            if (randomize) {
+                allImages = allImages.sort(() => Math.random() - 0.5);
+            }
+
+            allImages.forEach(img => {
+                const item = document.createElement('div');
+                item.className = 'masonry-item';
+                item.innerHTML = `<img src="${img.img}" alt="${img.name}">`;
+                item.onclick = () => openModal(img.name, img.project, img.img, img.description);
+                grid.appendChild(item);
+            });
+        }
+
+        function showProjectImages(projectName) {
+            const content = document.getElementById('content-area');
+            content.innerHTML = `
+                <div style="max-width: 1400px; margin: 0 auto 30px;">
+                    <button onclick="renderProjects()" style="background: #2a2a2a; color: #fff; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-size: 16px;">← Volver a Proyectos</button>
+                    <h2 style="margin-top: 20px; font-size: 2em;">${projectName}</h2>
+                </div>
+                <div class="masonry-grid"></div>
+            `;
+            const grid = content.querySelector('.masonry-grid');
+
+            portfolioData[projectName].forEach(img => {
+                const item = document.createElement('div');
+                item.className = 'masonry-item';
+                item.innerHTML = `<img src="${img.img}" alt="${img.name}">`;
+                item.onclick = () => openModal(img.name, projectName, img.img, img.description);
+                grid.appendChild(item);
+            });
+        }
+
+        function openModal(title, project, imgSrc, description) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalProject').textContent = `Proyecto: ${project}`;
+            document.getElementById('modalImage').src = imgSrc;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('imageModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const view = btn.dataset.view;
+                currentView = view;
+
+                if (view === 'projects') {
+                    renderProjects();
+                } else if (view === 'images') {
+                    renderImages(false);
+                } else if (view === 'random') {
+                    renderImages(true);
+                }
+            });
+        });
+
+        // Cerrar modal al hacer click fuera
+        document.getElementById('imageModal').addEventListener('click', (e) => {
+            if (e.target.id === 'imageModal') {
+                closeModal();
+            }
+        });
+
+        // Inicializar cargando los datos
+        loadData();
+    </script>
+</body>
+</html>

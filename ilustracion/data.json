@@ -1,0 +1,109 @@
+{
+  "Flores": [
+    {
+      "name": "Rosa Azul",
+      "img": "images/flores/rosa-azul.jpg",
+      "description": "Yo que sé"
+    },
+    {
+      "name": "Girasol",
+      "img": "images/flores/girasol.jpg",
+      "description": ""
+    },
+    {
+      "name": "Lirio",
+      "img": "images/flores/lirio.jpg",
+      "description": "Serie de flores mexicanas"
+    }
+  ],
+  "Ajolotes": [
+    {
+      "name": "Ajolote Rosa",
+      "img": "images/ajolotes/rosa.jpg",
+      "description": "El ajolote de Xochimilco"
+    },
+    {
+      "name": "Ajolote Dorado",
+      "img": "images/ajolotes/dorado.jpg",
+      "description": ""
+    }
+  ],
+  "Deck": [
+    {
+      "name": "As de Corazones",
+      "img": "images/deck/as-corazones.jpg",
+      "description": "Baraja ilustrada completa"
+    },
+    {
+      "name": "Rey de Espadas",
+      "img": "images/deck/rey-espadas.jpg",
+      "description": ""
+    }
+  ],
+  "Lotería": [
+    {
+      "name": "El Sol",
+      "img": "images/loteria/sol.jpg",
+      "description": "Lotería mexicana reimaginada"
+    },
+    {
+      "name": "La Luna",
+      "img": "images/loteria/luna.jpg",
+      "description": ""
+    }
+  ],
+  "Quetzales": [
+    {
+      "name": "Quetzal Volando",
+      "img": "images/quetzales/volando.jpg",
+      "description": "Ave sagrada de Mesoamérica"
+    }
+  ],
+  "UNO": [
+    {
+      "name": "Cartas UNO Custom",
+      "img": "images/uno/custom.jpg",
+      "description": "Diseño personalizado de UNO"
+    }
+  ],
+  "Nubes": [
+    {
+      "name": "Nubes al Atardecer",
+      "img": "images/nubes/atardecer.jpg",
+      "description": "Estudio de cielos"
+    }
+  ],
+  "Conos": [
+    {
+      "name": "Cono de Helado",
+      "img": "images/conos/helado.jpg",
+      "description": "Serie dulce"
+    }
+  ],
+  "Sagrado Micelio": [
+    {
+      "name": "Hongos Mágicos",
+      "img": "images/micelio/hongos.jpg",
+      "description": "Exploración micológica"
+    }
+  ],
+  "Inktober": [
+    {
+      "name": "Día 1",
+      "img": "images/inktober/dia1.jpg",
+      "description": "Inktober 2024"
+    },
+    {
+      "name": "Día 2",
+      "img": "images/inktober/dia2.jpg",
+      "description": ""
+    }
+  ],
+  "Otros": [
+    {
+      "name": "Experimento 1",
+      "img": "images/otros/exp1.jpg",
+      "description": "Ilustraciones varias"
+    }
+  ]
+}
