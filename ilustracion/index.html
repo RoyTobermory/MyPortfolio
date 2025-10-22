@@ -65,12 +65,83 @@
             line-height: 1.6;
         }
 
+        .filter-toggle-btn {
+            background-color: #2a2a2a;
+            color: #fff;
+            border: 2px solid #444;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-toggle-btn:hover {
+            background-color: #3a3a3a;
+            border-color: #666;
+        }
+
+        .filter-toggle-btn.active {
+            background-color: #3a3a3a;
+            border-color: #e60023;
+        }
+
+        .tags-container {
+            display: none;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            animation: slideDown 0.3s ease;
+        }
+
+        .tags-container.visible {
+            display: flex;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tag-btn {
+            background-color: #2a2a2a;
+            color: #fff;
+            border: 2px solid #444;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .tag-btn:hover {
+            background-color: #3a3a3a;
+            border-color: #666;
+        }
+
+        .tag-btn.active {
+            background-color: #e60023;
+            border-color: #e60023;
+        }
+
         .filters {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-bottom: 40px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .filter-btn {
@@ -198,8 +269,6 @@
             max-width: 900px;
             width: 100%;
             position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
         }
 
         .modal-close {
@@ -226,8 +295,6 @@
 
         .modal-image {
             width: 100%;
-            max-height: 70vh;
-            object-fit: contain;
             border-radius: 15px;
             margin-bottom: 20px;
         }
@@ -241,18 +308,26 @@
             color: #e60023;
             font-size: 1.1em;
             margin-bottom: 10px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .modal-project:hover {
-            color: #ff1744;
-            text-decoration: underline;
         }
 
         .modal-description {
             color: #aaa;
             line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .modal-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .modal-tag {
+            background-color: #3a3a3a;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
         }
 
         .hidden {
@@ -263,15 +338,24 @@
 <body>
     <header>
         <a href="../index.html" class="back-btn">← Inicio</a>
-        <img src="../img/Logo.png" alt="Roy Mondragón" class="profile-img">
+        <img src="../Logo.png" alt="Roy Mondragón" class="profile-img">
         <h1>Roy Mondragón</h1>
         <p class="description">Ilustrador creando mundos visuales únicos. Especializado en diseño de personajes, ilustración editorial y proyectos creativos.</p>
     </header>
 
     <div class="filters">
+        <button class="filter-toggle-btn" id="filterToggleBtn">🔍</button>
         <button class="filter-btn active" data-view="projects">Proyectos</button>
         <button class="filter-btn" data-view="images">Imágenes</button>
         <button class="filter-btn" data-view="random">Aleatorio</button>
+    </div>
+
+    <div class="tags-container" id="tagsContainer">
+        <button class="tag-btn" data-tag="personajes">Personajes</button>
+        <button class="tag-btn" data-tag="fondos">Fondos</button>
+        <button class="tag-btn" data-tag="juegos de mesa">Juegos de Mesa</button>
+        <button class="tag-btn" data-tag="animales">Animales</button>
+        <button class="tag-btn" data-tag="personas">Personas</button>
     </div>
 
     <div id="content-area"></div>
@@ -283,24 +367,98 @@
             <h2 class="modal-title" id="modalTitle"></h2>
             <p class="modal-project" id="modalProject"></p>
             <p class="modal-description" id="modalDescription"></p>
+            <div class="modal-tags" id="modalTags"></div>
         </div>
     </div>
 
     <script>
         let portfolioData = {};
         let currentView = 'projects';
+        let activeFilters = [];
+        let allTags = new Set();
 
         // Cargar datos desde data.json
         async function loadData() {
             try {
                 const response = await fetch('data.json');
                 portfolioData = await response.json();
+                extractAllTags();
+                renderTagButtons();
                 renderProjects();
             } catch (error) {
                 console.error('Error cargando data.json:', error);
                 document.getElementById('content-area').innerHTML = '<p style="text-align:center; color:#aaa;">Error cargando el portfolio. Verifica que data.json existe.</p>';
             }
         }
+
+        // Extraer todas las etiquetas únicas
+        function extractAllTags() {
+            Object.keys(portfolioData).forEach(project => {
+                portfolioData[project].forEach(img => {
+                    if (img.tags) {
+                        img.tags.forEach(tag => allTags.add(tag));
+                    }
+                });
+            });
+        }
+
+        // Renderizar botones de etiquetas
+        function renderTagButtons() {
+            const container = document.getElementById('tagsContainer');
+            container.innerHTML = '';
+            
+            allTags.forEach(tag => {
+                const btn = document.createElement('button');
+                btn.className = 'tag-btn';
+                btn.textContent = tag;
+                btn.onclick = () => toggleTag(tag, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        // Activar/desactivar etiqueta
+        function toggleTag(tag, btnElement) {
+            if (activeFilters.includes(tag)) {
+                activeFilters = activeFilters.filter(t => t !== tag);
+                btnElement.classList.remove('active');
+            } else {
+                activeFilters.push(tag);
+                btnElement.classList.add('active');
+            }
+            
+            // Re-renderizar según la vista actual
+            if (currentView === 'projects') {
+                renderProjects();
+            } else if (currentView === 'images') {
+                renderImages(false);
+            } else {
+                renderImages(true);
+            }
+        }
+
+        // Filtrar imágenes por etiquetas activas
+        function filterImagesByTags(images) {
+            if (activeFilters.length === 0) return images;
+            
+            return images.filter(img => {
+                if (!img.tags) return false;
+                return activeFilters.some(filter => img.tags.includes(filter));
+            });
+        }
+
+        // Barra de búsqueda
+        document.getElementById('searchBar').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            // Resaltar etiquetas que coincidan
+            document.querySelectorAll('.tag-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(searchTerm)) {
+                    btn.style.opacity = '1';
+                } else {
+                    btn.style.opacity = searchTerm ? '0.3' : '1';
+                }
+            });
+        });
 
         function renderProjects() {
             const content = document.getElementById('content-area');
@@ -309,13 +467,18 @@
 
             Object.keys(portfolioData).forEach(project => {
                 const images = portfolioData[project];
+                const filteredImages = filterImagesByTags(images);
+                
+                // Solo mostrar proyecto si tiene imágenes que coinciden con filtros
+                if (filteredImages.length === 0 && activeFilters.length > 0) return;
+                
                 const card = document.createElement('div');
                 card.className = 'project-card';
                 card.innerHTML = `
                     <img src="${images[0].img}" alt="${project}">
                     <div class="project-info">
                         <div class="project-title">${project}</div>
-                        <div class="project-count">${images.length} ${images.length === 1 ? 'imagen' : 'imágenes'}</div>
+                        <div class="project-count">${filteredImages.length || images.length} ${(filteredImages.length || images.length) === 1 ? 'imagen' : 'imágenes'}</div>
                     </div>
                 `;
                 card.onclick = () => showProjectImages(project);
@@ -335,6 +498,9 @@
                 });
             });
 
+            // Filtrar por etiquetas
+            allImages = filterImagesByTags(allImages);
+
             if (randomize) {
                 allImages = allImages.sort(() => Math.random() - 0.5);
             }
@@ -343,7 +509,7 @@
                 const item = document.createElement('div');
                 item.className = 'masonry-item';
                 item.innerHTML = `<img src="${img.img}" alt="${img.name}">`;
-                item.onclick = () => openModal(img.name, img.project, img.img, img.description);
+                item.onclick = () => openModal(img.name, img.project, img.img, img.description, img.tags);
                 grid.appendChild(item);
             });
         }
@@ -359,25 +525,40 @@
             `;
             const grid = content.querySelector('.masonry-grid');
 
-            portfolioData[projectName].forEach(img => {
+            let images = portfolioData[projectName];
+            
+            // Filtrar por etiquetas si hay filtros activos
+            if (activeFilters.length > 0) {
+                images = filterImagesByTags(images);
+            }
+
+            images.forEach(img => {
                 const item = document.createElement('div');
                 item.className = 'masonry-item';
                 item.innerHTML = `<img src="${img.img}" alt="${img.name}">`;
-                item.onclick = () => openModal(img.name, projectName, img.img, img.description);
+                item.onclick = () => openModal(img.name, projectName, img.img, img.description, img.tags);
                 grid.appendChild(item);
             });
         }
 
-        function openModal(title, project, imgSrc, description) {
+        function openModal(title, project, imgSrc, description, tags) {
             document.getElementById('modalTitle').textContent = title;
-            const projectElement = document.getElementById('modalProject');
-            projectElement.textContent = `Proyecto: ${project}`;
-            projectElement.onclick = () => {
-                closeModal();
-                showProjectImages(project);
-            };
+            document.getElementById('modalProject').textContent = `Proyecto: ${project}`;
             document.getElementById('modalImage').src = imgSrc;
             document.getElementById('modalDescription').textContent = description;
+            
+            // Mostrar etiquetas
+            const tagsContainer = document.getElementById('modalTags');
+            tagsContainer.innerHTML = '';
+            if (tags && tags.length > 0) {
+                tags.forEach(tag => {
+                    const tagEl = document.createElement('span');
+                    tagEl.className = 'modal-tag';
+                    tagEl.textContent = tag;
+                    tagsContainer.appendChild(tagEl);
+                });
+            }
+            
             document.getElementById('imageModal').classList.add('active');
         }
 
