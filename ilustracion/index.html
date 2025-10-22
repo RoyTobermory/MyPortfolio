@@ -198,6 +198,8 @@
             max-width: 900px;
             width: 100%;
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-close {
@@ -224,6 +226,8 @@
 
         .modal-image {
             width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
             border-radius: 15px;
             margin-bottom: 20px;
         }
@@ -237,6 +241,13 @@
             color: #e60023;
             font-size: 1.1em;
             margin-bottom: 10px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-project:hover {
+            color: #ff1744;
+            text-decoration: underline;
         }
 
         .modal-description {
@@ -359,7 +370,12 @@
 
         function openModal(title, project, imgSrc, description) {
             document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalProject').textContent = `Proyecto: ${project}`;
+            const projectElement = document.getElementById('modalProject');
+            projectElement.textContent = `Proyecto: ${project}`;
+            projectElement.onclick = () => {
+                closeModal();
+                showProjectImages(project);
+            };
             document.getElementById('modalImage').src = imgSrc;
             document.getElementById('modalDescription').textContent = description;
             document.getElementById('imageModal').classList.add('active');
@@ -398,5 +414,4 @@
         loadData();
     </script>
 </body>
-
 </html>
