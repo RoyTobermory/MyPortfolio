@@ -31,37 +31,37 @@
   "Deck": [
     {
       "name": "Joto de Diamantes",
-      "img": "img/james/Deck/0.jpg",
+      "img": "../img/james/Deck/0.jpg",
       "description": "Baraja ilustrada completa"
     },
     {
       "name": "Rey de Espadas",
-      "img": "img/james/Deck/1.jpg",
+      "img": "../img/james/Deck/1.jpg",
       "description": ""
     },
   {
       "name": "Reina de Diamantes",
-     "img": "img/james/Deck/2.jpg",
+     "img": "../img/james/Deck/2.jpg",
       "description": ""
     },
   {
       "name": "Joto de espadas",
-     "img": "img/james/Deck/3.jpg",
+     "img": "../img/james/Deck/3.jpg",
       "description": ""
     },
  {
       "name": "Joto de corazones",
-     "img": "img/james/Deck/4.jpg",
+     "img": "../img/james/Deck/4.jpg",
       "description": ""
     },
  {
       "name": "Reina de Tréboles",
-     "img": "img/james/Deck/8.jpg",
+     "img": "../img/james/Deck/8.jpg",
       "description": ""
     },
  {
       "name": "Joto de Tréboles",
-     "img": "img/james/Deck/9.jpg",
+     "img": "../img/james/Deck/9.jpg",
       "description": ""
     }
   ],
