@@ -1,22 +1,175 @@
 {
-  "Flores": {
-    "description": "Colección de ilustraciones florales con un toque vibrante y contemporáneo",
+  "Florilegio": {
+    "description": "Colección de ilustraciones florales que formaron parte de un libro ilustrado con información introductoria a la herbología.",
     "images": [
       {
-        "name": "Rosa Azul",
-        "img": "images/flores/rosa-azul.jpg",
-        "description": "Yo que sé"
-      },
-      {
-        "name": "Girasol",
-        "img": "images/flores/girasol.jpg",
-        "description": ""
-      },
-      {
-        "name": "Lirio",
-        "img": "images/flores/lirio.jpg",
-        "description": "Serie de flores mexicanas"
-      }
+    "name": "Peonía - Peony",
+    "img": "../img/flores/flor1.jpg",
+    "description": "Familia: Paeoniaceae. Género: Paeonia.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Rosa Gálica - Gallic Rose",
+    "img": "../img/flores/flor2.jpg",
+    "description": "Familia: Rosaceae. Género: Rosa. Especie: Rosa gallica.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Hortensia - Hydrangea",
+    "img": "../img/flores/flor3.jpg",
+    "description": "Familia: Hydrangeaceae. Género: Hydrangea.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Camelia japónica - Japanese Camellia",
+    "img": "../img/flores/flor4.jpg",
+    "description": "Familia: Theaceae. Género: Camellia. Especie: Camellia japonica.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Hibisco - Hibiscus",
+    "img": "../img/flores/flor5.jpg",
+    "description": "Familia: Malvaceae. Género: Hibiscus.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Dahlia - Dahlia",
+    "img": "../img/flores/flor6.jpg",
+    "description": "Familia: Asteraceae. Género: Dahlia.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Girasol - Sunflower",
+    "img": "../img/flores/flor7.jpg",
+    "description": "Familia: Asteraceae. Género: Helianthus. Especie: Helianthus annuus.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Flor de loto - Lotus Flower",
+    "img": "../img/flores/flor8.jpg",
+    "description": "Familia: Nelumbonaceae. Género: Nelumbo.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Orquídea - Orchid",
+    "img": "../img/flores/flor9.jpg",
+    "description": "Familia: Orchidaceae.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Tulipán - Tulip",
+    "img": "../img/flores/flor10.jpg",
+    "description": "Familia: Liliaceae. Género: Tulipa.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Sakura - Cherry Blossom",
+    "img": "../img/flores/flor11.jpg",
+    "description": "Familia: Rosaceae. Género: Prunus. Especie: Prunus serrulata.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Margarita - Daisy",
+    "img": "../img/flores/flor12.jpg",
+    "description": "Familia: Asteraceae. Género: Bellis.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Lavanda - Lavender",
+    "img": "../img/flores/flor13.jpg",
+    "description": "Familia: Lamiaceae. Género: Lavandula.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Narciso - Daffodil",
+    "img": "../img/flores/flor14.jpg",
+    "description": "Familia: Amaryllidaceae. Género: Narcissus.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Lirio - Lily",
+    "img": "../img/flores/flor15.jpg",
+    "description": "Familia: Liliaceae. Género: Lilium.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Gardenia - Gardenia",
+    "img": "../img/flores/flor16.jpg",
+    "description": "Familia: Rubiaceae. Género: Gardenia.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Clavel - Carnation",
+    "img": "../img/flores/flor17.jpg",
+    "description": "Familia: Caryophyllaceae. Género: Dianthus.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Gerbera - Gerbera",
+    "img": "../img/flores/flor18.jpg",
+    "description": "Familia: Asteraceae. Género: Gerbera.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Gladiolo - Gladiolus",
+    "img": "../img/flores/flor19.jpg",
+    "description": "Familia: Iridaceae. Género: Gladiolus.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Magnolia - Magnolia",
+    "img": "../img/flores/flor20.jpg",
+    "description": "Familia: Magnoliaceae. Género: Magnolia.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Fresia - Freesia",
+    "img": "../img/flores/flor21.jpg",
+    "description": "Familia: Iridaceae. Género: Freesia.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Jacinto - Hyacinth",
+    "img": "../img/flores/flor22.jpg",
+    "description": "Familia: Asparagaceae. Género: Hyacinthus.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Crisantemo - Chrysanthemum",
+    "img": "../img/flores/flor23.jpg",
+    "description": "Familia: Asteraceae. Género: Chrysanthemum.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Pensamiento - Pansy",
+    "img": "../img/flores/flor24.jpg",
+    "description": "Familia: Violaceae. Género: Viola. Especie: Viola tricolor var. hortensis.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Nomeolvides - Forget-me-not",
+    "img": "../img/flores/flor25.jpg",
+    "description": "Familia: Boraginaceae. Género: Myosotis.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Zinnia - Zinnia",
+    "img": "../img/flores/flor26.jpg",
+    "description": "Familia: Asteraceae. Género: Zinnia.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Flor de chocolate - Chocolate Cosmos",
+    "img": "../img/flores/flor27.jpg",
+    "description": "Familia: Asteraceae. Género: Cosmos. Especie: Cosmos atrosanguineus.",
+    "tags": ["flores"]
+  },
+  {
+    "name": "Lirios del valle - Lily of the Valley",
+    "img": "../img/flores/flor28.jpg",
+    "description": "Familia: Asparagaceae. Género: Convallaria. Especie: Convallaria majalis.",
+    "tags": ["flores"]
+  }
     ]
   },
   "Ajolotes": {
