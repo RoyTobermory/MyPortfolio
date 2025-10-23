@@ -172,21 +172,9 @@
   }
     ]
   },
-  "Ajolotes": {
-    "description": "Representaciones artísticas del emblemático ajolote mexicano",
-    "images": [
-      {
-        "name": "Ajolote Rosa",
-        "img": "images/ajolotes/rosa.jpg",
-        "description": "El ajolote de Xochimilco"
-      },
-      {
-        "name": "Ajolote Dorado",
-        "img": "images/ajolotes/dorado.jpg",
-        "description": ""
-      }
-    ]
-  },
+
+
+
 
 
 
@@ -249,25 +237,6 @@
 
 
 
-
-
-  "Lotería": {
-    "description": "Lotería mexicana reimaginada con un estilo visual moderno",
-    "images": [
-      {
-        "name": "El Sol",
-        "img": "images/loteria/sol.jpg",
-        "description": "Lotería mexicana reimaginada"
-      },
-      {
-        "name": "La Luna",
-        "img": "images/loteria/luna.jpg",
-        "description": ""
-      }
-    ]
-  },
- 
-  
 
 
 
