@@ -319,10 +319,41 @@
     "description": "Ilustraciones experimentales y trabajos diversos",
     "images": [
       {
-        "name": "Experimento 1",
-        "img": "images/otros/exp1.jpg",
-        "description": "Ilustraciones varias"
-      }
+      "name": "Satanic Plushie",
+      "img": "../img/james/pines/1.png",
+      "description": "",
+      "tags": ["animales", "personajes"]
+    },
+    {
+      "name": "Bop1",
+      "img": "../img/james/pines/2.png",
+      "description": "",
+      "tags": ["animales", "personajes"]
+    },
+    {
+      "name": "Bop2",
+      "img": "../img/james/pines/3.png",
+      "description": "",
+      "tags": ["animales", "personajes"]
+    },
+    {
+      "name": "Unos pedillos",
+      "img": "../img/james/pines/4.png",
+      "description": "",
+      "tags": ["animales", "personajes"]
+    },
+    {
+      "name": "Hámster \"Vamoequipo\"",
+      "img": "../img/james/pines/5.png",
+      "description": "",
+      "tags": ["animales", "personajes"]
+    },
+    {
+      "name": "Chihuahua",
+      "img": "../img/james/pines/6.png",
+      "description": "",
+      "tags": ["animales", "personajes"]
+    }
     ]
   }
 }
