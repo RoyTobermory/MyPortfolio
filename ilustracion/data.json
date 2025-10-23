@@ -266,29 +266,8 @@
       }
     ]
   },
-  "Quetzales": {
-    "description": "Ilustraciones del ave sagrada de Mesoamérica",
-    "images": [
-      {
-        "name": "Quetzal Volando",
-        "img": "images/quetzales/volando.jpg",
-        "description": "Ave sagrada de Mesoamérica"
-      }
-    ]
-  },
-  "UNO": {
-    "description": "Diseño personalizado de cartas UNO con estilo único",
-    "images": [
-      {
-        "name": "Cartas UNO Custom",
-        "img": "images/uno/custom.jpg",
-        "description": "Diseño personalizado de UNO"
-      }
-    ]
-  },
-
-
-
+ 
+  
 
 
 
@@ -299,7 +278,7 @@
 
 
   "Nubes": {
-    "description": "Estudio atmosférico de cielos y formaciones nubosas",
+    "description": "Cortometraje animado combinación de 2D y 3D dirigido por Rodrigo Mondragón.",
     "images": [
     {
       "name": "Nubes BgDesign1",
@@ -486,16 +465,7 @@
 
 
 
-  "Conos": {
-    "description": "Serie dulce de ilustraciones gastronómicas",
-    "images": [
-      {
-        "name": "Cono de Helado",
-        "img": "images/conos/helado.jpg",
-        "description": "Serie dulce"
-      }
-    ]
-  },
+ 
   "Sagrado Micelio": {
     "description": "Exploración artística del mundo micológico y sus conexiones",
     "images": [
@@ -504,21 +474,6 @@
         "img": "../img/Forest-background2.jpg",
         "description": "Exploración micológica",
         "tags": ["fondos"]
-      }
-    ]
-  },
-  "Inktober": {
-    "description": "Desafío Inktober 2024 - Ilustraciones diarias a tinta",
-    "images": [
-      {
-        "name": "Día 1",
-        "img": "images/inktober/dia1.jpg",
-        "description": "Inktober 2024"
-      },
-      {
-        "name": "Día 2",
-        "img": "images/inktober/dia2.jpg",
-        "description": ""
       }
     ]
   },
