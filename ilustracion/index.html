@@ -12,8 +12,8 @@
         }
 
         body {
-            background-color: #1a1a1a;
-            color: #ffffff;
+            background-color: #f5f5f5;
+            color: #2c2c2c;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             padding: 20px;
         }
@@ -21,9 +21,11 @@
         header {
             text-align: center;
             padding: 40px 20px;
-            border-bottom: 1px solid #333;
+            border-bottom: 2px solid #e0e0e0;
             margin-bottom: 30px;
             position: relative;
+            background-color: #ffffff;
+            border-radius: 15px;
         }
 
         .logo-link {
@@ -43,24 +45,26 @@
             object-fit: cover;
             margin-bottom: 20px;
             transition: opacity 0.3s ease;
+            border: 3px solid #e0e0e0;
         }
 
         h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
+            color: #1a1a1a;
         }
 
         .description {
-            color: #aaa;
+            color: #666;
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
         }
 
         .filter-toggle-btn {
-            background-color: #2a2a2a;
-            color: #fff;
-            border: 2px solid #444;
+            background-color: #ffffff;
+            color: #2c2c2c;
+            border: 2px solid #d0d0d0;
             width: 50px;
             height: 50px;
             border-radius: 10px;
@@ -70,16 +74,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .filter-toggle-btn:hover {
-            background-color: #3a3a3a;
-            border-color: #666;
+            background-color: #f9f9f9;
+            border-color: #a0a0a0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
         .filter-toggle-btn.active {
-            background-color: #3a3a3a;
-            border-color: #e60023;
+            background-color: #d97706;
+            border-color: #d97706;
+            color: #ffffff;
         }
 
         .tags-container {
@@ -107,24 +114,27 @@
         }
 
         .tag-btn {
-            background-color: #2a2a2a;
-            color: #fff;
-            border: 2px solid #444;
+            background-color: #ffffff;
+            color: #2c2c2c;
+            border: 2px solid #d0d0d0;
             padding: 12px 25px;
             border-radius: 25px;
             cursor: pointer;
             font-size: 16px;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .tag-btn:hover {
-            background-color: #3a3a3a;
-            border-color: #666;
+            background-color: #f9f9f9;
+            border-color: #a0a0a0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
         .tag-btn.active {
-            background-color: #e60023;
-            border-color: #e60023;
+            background-color: #d97706;
+            border-color: #d97706;
+            color: #ffffff;
         }
 
         .filters {
@@ -137,24 +147,27 @@
         }
 
         .filter-btn {
-            background-color: #2a2a2a;
-            color: #fff;
-            border: 2px solid #444;
+            background-color: #ffffff;
+            color: #2c2c2c;
+            border: 2px solid #d0d0d0;
             padding: 12px 30px;
             border-radius: 25px;
             cursor: pointer;
             font-size: 16px;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .filter-btn:hover {
-            background-color: #3a3a3a;
-            border-color: #666;
+            background-color: #f9f9f9;
+            border-color: #a0a0a0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
         .filter-btn.active {
-            background-color: #e60023;
-            border-color: #e60023;
+            background-color: #d97706;
+            border-color: #d97706;
+            color: #ffffff;
         }
 
         .projects-grid {
@@ -166,15 +179,17 @@
         }
 
         .project-card {
-            background-color: #2a2a2a;
+            background-color: #ffffff;
             border-radius: 15px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .project-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .project-card img {
@@ -190,43 +205,52 @@
         .project-title {
             font-size: 1.3em;
             margin-bottom: 5px;
+            color: #1a1a1a;
         }
 
         .project-count {
-            color: #aaa;
+            color: #666;
             font-size: 0.9em;
         }
 
         .masonry-grid {
-            column-count: 4;
-            column-gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         @media (max-width: 1200px) {
-            .masonry-grid { column-count: 3; }
+            .masonry-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
         }
 
         @media (max-width: 768px) {
-            .masonry-grid { column-count: 2; }
+            .masonry-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
         }
 
         @media (max-width: 480px) {
-            .masonry-grid { column-count: 1; }
+            .masonry-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .masonry-item {
-            break-inside: avoid;
-            margin-bottom: 15px;
             cursor: pointer;
             border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.2s ease;
+            transition: all 0.3s ease;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .masonry-item:hover {
             transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .masonry-item img {
@@ -242,7 +266,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(0, 0, 0, 0.85);
             z-index: 1000;
             overflow-y: auto;
         }
@@ -255,7 +279,7 @@
         }
 
         .modal-content {
-            background-color: #2a2a2a;
+            background-color: #ffffff;
             border-radius: 20px;
             padding: 30px;
             max-width: 900px;
@@ -263,6 +287,7 @@
             max-height: 95vh;
             overflow-y: auto;
             position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         .modal-close {
@@ -270,7 +295,7 @@
             top: 15px;
             right: 20px;
             font-size: 30px;
-            color: #fff;
+            color: #2c2c2c;
             cursor: pointer;
             background: none;
             border: none;
@@ -285,7 +310,7 @@
         }
 
         .modal-close:hover {
-            background-color: #444;
+            background-color: #e0e0e0;
         }
 
         .modal-image {
@@ -299,16 +324,18 @@
         .modal-title {
             font-size: 1.8em;
             margin-bottom: 10px;
+            color: #1a1a1a;
         }
 
         .modal-project {
-            color: #e60023;
+            color: #d97706;
             font-size: 1.1em;
             margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .modal-description {
-            color: #aaa;
+            color: #666;
             line-height: 1.6;
             margin-bottom: 15px;
         }
@@ -320,11 +347,12 @@
         }
 
         .modal-tag {
-            background-color: #3a3a3a;
-            color: #fff;
+            background-color: #f0f0f0;
+            color: #2c2c2c;
             padding: 5px 12px;
             border-radius: 15px;
             font-size: 0.85em;
+            border: 1px solid #d0d0d0;
         }
 
         .project-header {
@@ -333,7 +361,7 @@
         }
 
         .project-header-description {
-            color: #aaa;
+            color: #666;
             font-size: 1.1em;
             line-height: 1.6;
             margin-top: 10px;
@@ -341,6 +369,28 @@
 
         .hidden {
             display: none;
+        }
+
+        .back-button {
+            background: #ffffff;
+            color: #2c2c2c;
+            border: 2px solid #d0d0d0;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .back-button:hover {
+            background-color: #f9f9f9;
+            border-color: #a0a0a0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .project-header h2 {
+            color: #1a1a1a;
         }
     </style>
 </head>
@@ -402,7 +452,7 @@
                 renderProjects();
             } catch (error) {
                 console.error('Error cargando data.json:', error);
-                document.getElementById('content-area').innerHTML = '<p style="text-align:center; color:#aaa;">Error cargando el portfolio. Verifica que data.json existe.</p>';
+                document.getElementById('content-area').innerHTML = '<p style="text-align:center; color:#666;">Error cargando el portfolio. Verifica que data.json existe.</p>';
             }
         }
 
@@ -535,7 +585,7 @@
             const content = document.getElementById('content-area');
             content.innerHTML = `
                 <div class="project-header">
-                    <button onclick="renderProjects()" style="background: #2a2a2a; color: #fff; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-size: 16px;">← Volver a Proyectos</button>
+                    <button onclick="renderProjects()" class="back-button">← Volver a Proyectos</button>
                     <h2 style="margin-top: 20px; font-size: 2em;">${projectName}</h2>
                     <p class="project-header-description">${projectData.description || ''}</p>
                 </div>
