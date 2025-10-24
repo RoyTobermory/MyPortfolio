@@ -462,6 +462,65 @@
       }
     ]
   },
+"España, decí Alpiste": {
+  "description": "Diseño de personajes para un cortometraje 2D sobre la migración.",
+  "images": [
+    {
+      "name": "España1",
+      "img": "../img/james/España/España1.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "España2",
+      "img": "../img/james/España/España2.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "España3",
+      "img": "../img/james/España/España3.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "España4",
+      "img": "../img/james/España/España4.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "España5",
+      "img": "../img/james/España/España5.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "España6",
+      "img": "../img/james/España/España6.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "España7",
+      "img": "../img/james/España/España7.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "España8",
+      "img": "../img/james/España/España8.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "España9",
+      "img": "../img/james/España/España9.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    }
+  ]
+},
   "Sagrado Micelio": {
     "description": "Exploración artística del mundo micológico y sus conexiones",
     "images": [
