@@ -470,6 +470,18 @@
         "img": "../img/Forest-background2.jpg",
         "description": "Exploración micológica",
         "tags": ["fondos"]
+      },
+  {
+        "name": "Fosa",
+        "img": "../img/Concept/SM_002.jpg",
+        "description": "Exploración de fondo para la película El Sagrado Micelio",
+        "tags": ["fondos"]
+      },
+{
+        "name": "Bosque Azul",
+        "img": "../img/Concept/SM_003.jpg",
+        "description": "Exploración de fondo para la película El Sagrado Micelio",
+        "tags": ["fondos", "personajes"]
       }
     ]
   },
@@ -535,6 +547,12 @@
   "Otros": {
     "description": "Ilustraciones experimentales y trabajos diversos",
     "images": [
+  {
+        "name": "Coco",
+        "img": "../img/Concept/Coco_001.jpg",
+        "description": "",
+        "tags": ["animales", "personajes"]
+      },
       {
         "name": "Satanic Plushie",
         "img": "../img/james/Pines/1.png",
@@ -570,6 +588,12 @@
         "img": "../img/james/Pines/6.png",
         "description": "",
         "tags": ["animales", "personajes"]
+      },
+{
+        "name": "Lily Pad ground",
+        "img": "../img/Concept/Hunt_001.jpg",
+        "description": "Exploración de fondo para videojuego independiente",
+        "tags": ["fondos"]
       }
     ]
   }
