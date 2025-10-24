@@ -26,21 +26,32 @@
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 15px 20px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             z-index: 100;
             border-bottom: 1px solid rgba(208, 208, 208, 0.3);
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .sticky-header:hover {
-            background-color: rgba(255, 255, 255, 0.98);
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            transition: opacity 0.3s ease;
         }
 
         .sticky-header h1 {
             font-size: 1.5em;
             color: #2c2c2c;
             font-weight: 400;
+            margin: 0;
         }
 
         .sticky-header h1 span {
@@ -100,6 +111,9 @@
 
         .filter-menu {
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .filter-menu-btn {
@@ -122,6 +136,12 @@
 
         .filter-menu-btn.active {
             color: #6b9b37;
+        }
+
+        .active-filter-label {
+            color: #6b9b37;
+            font-size: 16px;
+            font-weight: 500;
         }
 
         .filter-dropdown {
@@ -343,6 +363,50 @@
             overflow-y: auto;
             position: relative;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-main-content {
+            flex-shrink: 0;
+        }
+
+        .modal-other-images {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .modal-other-images h3 {
+            color: #2c2c2c;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .modal-images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .modal-thumb {
+            cursor: pointer;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-thumb:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-thumb img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
         }
 
         .modal-close {
@@ -447,7 +511,10 @@
     </style>
 </head>
 <body>
-    <div class="sticky-header" onclick="scrollToTop()">
+    <div class="sticky-header">
+        <a href="../index.html" class="logo-link">
+            <img src="../img/Logo.png" alt="Logo" class="logo" id="logoImg">
+        </a>
         <h1>Portfolio de ilustración <span>- Roy Mondragón</span></h1>
     </div>
 
@@ -456,13 +523,14 @@
         <button class="filter-btn" data-view="images">Imágenes</button>
         <div class="filter-menu">
             <button class="filter-menu-btn" id="filterMenuBtn">🏷️</button>
+            <span class="active-filter-label" id="activeFilterLabel"></span>
             <div class="filter-dropdown" id="filterDropdown"></div>
         </div>
     </div>
 
     <div class="order-controls" id="orderControls">
         <button class="order-btn active" data-order="random">Aleatorio</button>
-        <button class="order-btn" data-order="original">Orden original</button>
+        <button class="order-btn" data-order="original">Orden por columnas</button>
     </div>
 
     <div id="content-area"></div>
@@ -470,11 +538,14 @@
     <div class="modal" id="imageModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">&times;</button>
-            <img class="modal-image" id="modalImage" src="" alt="">
-            <h2 class="modal-title" id="modalTitle"></h2>
-            <p class="modal-project" id="modalProject"></p>
-            <p class="modal-description" id="modalDescription"></p>
-            <div class="modal-tags" id="modalTags"></div>
+            <div class="modal-main-content">
+                <img class="modal-image" id="modalImage" src="" alt="">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-project" id="modalProject"></p>
+                <p class="modal-description" id="modalDescription"></p>
+                <div class="modal-tags" id="modalTags"></div>
+            </div>
+            <div class="modal-other-images" id="modalOtherImages"></div>
         </div>
     </div>
 
@@ -482,11 +553,22 @@
         let portfolioData = {};
         let currentView = 'projects';
         let currentOrder = 'random';
-        let activeFilters = [];
+        let activeFilter = null;
         let allTags = new Set();
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Hover del logo
+        const logoImg = document.getElementById('logoImg');
+        if (logoImg) {
+            logoImg.addEventListener('mouseenter', () => {
+                logoImg.src = '../img/LogoHover.png';
+            });
+            logoImg.addEventListener('mouseleave', () => {
+                logoImg.src = '../img/Logo.png';
+            });
         }
 
         // Cargar datos desde data.json
@@ -536,7 +618,7 @@
             
             if (dropdown.classList.contains('visible')) {
                 dropdown.classList.remove('visible');
-                if (activeFilters.length === 0) {
+                if (!activeFilter) {
                     btn.classList.remove('active');
                 }
             } else {
@@ -551,29 +633,36 @@
             const btn = document.getElementById('filterMenuBtn');
             if (!e.target.closest('.filter-menu')) {
                 dropdown.classList.remove('visible');
-                if (activeFilters.length === 0) {
+                if (!activeFilter) {
                     btn.classList.remove('active');
                 }
             }
         });
 
-        // Activar/desactivar etiqueta
+        // Activar/desactivar etiqueta (solo una a la vez)
         function toggleTag(tag, btnElement) {
-            if (activeFilters.includes(tag)) {
-                activeFilters = activeFilters.filter(t => t !== tag);
-                btnElement.classList.remove('active');
-            } else {
-                activeFilters.push(tag);
-                btnElement.classList.add('active');
-            }
-
-            // Mantener el botón del menú activo si hay filtros
+            const dropdown = document.getElementById('filterDropdown');
             const menuBtn = document.getElementById('filterMenuBtn');
-            if (activeFilters.length > 0) {
-                menuBtn.classList.add('active');
-            } else {
+            const label = document.getElementById('activeFilterLabel');
+            
+            // Remover active de todos los botones
+            document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+            
+            if (activeFilter === tag) {
+                // Desactivar el filtro actual
+                activeFilter = null;
+                label.textContent = '';
                 menuBtn.classList.remove('active');
+            } else {
+                // Activar nuevo filtro
+                activeFilter = tag;
+                btnElement.classList.add('active');
+                label.textContent = tag;
+                menuBtn.classList.add('active');
             }
+            
+            // Cerrar dropdown
+            dropdown.classList.remove('visible');
             
             // Re-renderizar según la vista actual
             if (currentView === 'projects') {
@@ -583,13 +672,13 @@
             }
         }
 
-        // Filtrar imágenes por etiquetas activas
+        // Filtrar imágenes por etiqueta activa
         function filterImagesByTags(images) {
-            if (activeFilters.length === 0) return images;
+            if (!activeFilter) return images;
             
             return images.filter(img => {
                 if (!img.tags) return false;
-                return activeFilters.some(filter => img.tags.includes(filter));
+                return img.tags.includes(activeFilter);
             });
         }
 
@@ -604,7 +693,7 @@
                 const filteredImages = filterImagesByTags(images);
                 
                 // Solo mostrar proyecto si tiene imágenes que coinciden con filtros
-                if (filteredImages.length === 0 && activeFilters.length > 0) return;
+                if (filteredImages.length === 0 && activeFilter) return;
                 
                 const card = document.createElement('div');
                 card.className = 'project-card';
@@ -664,8 +753,8 @@
 
             let images = projectData.images;
             
-            // Filtrar por etiquetas si hay filtros activos
-            if (activeFilters.length > 0) {
+            // Filtrar por etiquetas si hay filtro activo
+            if (activeFilter) {
                 images = filterImagesByTags(images);
             }
 
@@ -694,6 +783,25 @@
                     tagEl.textContent = tag;
                     tagsContainer.appendChild(tagEl);
                 });
+            }
+            
+            // Mostrar otras imágenes del proyecto
+            const otherImagesContainer = document.getElementById('modalOtherImages');
+            const projectImages = portfolioData[project].images.filter(img => img.img !== imgSrc);
+            
+            if (projectImages.length > 0) {
+                otherImagesContainer.innerHTML = '<h3>Más imágenes de este proyecto</h3><div class="modal-images-grid"></div>';
+                const grid = otherImagesContainer.querySelector('.modal-images-grid');
+                
+                projectImages.forEach(img => {
+                    const thumb = document.createElement('div');
+                    thumb.className = 'modal-thumb';
+                    thumb.innerHTML = `<img src="${img.img}" alt="${img.name}">`;
+                    thumb.onclick = () => openModal(img.name, project, img.img, img.description, img.tags);
+                    grid.appendChild(thumb);
+                });
+            } else {
+                otherImagesContainer.innerHTML = '';
             }
             
             document.getElementById('imageModal').classList.add('active');
