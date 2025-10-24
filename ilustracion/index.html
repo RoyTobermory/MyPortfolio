@@ -15,90 +15,134 @@
             background-color: #f5f5f5;
             color: #2c2c2c;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            padding: 20px;
+            padding-top: 70px;
+        }
+
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            text-align: center;
+            z-index: 100;
+            border-bottom: 1px solid rgba(208, 208, 208, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sticky-header:hover {
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+
+        .sticky-header h1 {
+            font-size: 1.5em;
+            color: #2c2c2c;
+            font-weight: 400;
+        }
+
+        .sticky-header h1 span {
+            font-weight: 600;
         }
 
         header {
-            text-align: center;
-            padding: 40px 20px;
-            margin-bottom: 30px;
+            display: none;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .filter-btn {
+            background: none;
+            color: #888;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 17px;
+            transition: all 0.3s ease;
+            font-weight: 400;
             position: relative;
         }
 
-        .logo-link {
-            display: inline-block;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+        .filter-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #6b9b37;
+            transition: width 0.3s ease;
         }
 
-        .logo-link:hover {
-            transform: scale(1.05);
-        }
-
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            transition: opacity 0.3s ease;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        .filter-btn:hover {
             color: #2c2c2c;
         }
 
-        .description {
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
+        .filter-btn.active {
+            color: #2c2c2c;
+            font-weight: 500;
         }
 
-        .filter-toggle-btn {
-            background-color: #ffffff;
-            color: #2c2c2c;
-            border: 2px solid #d0d0d0;
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
+        .filter-btn.active::after {
+            width: 80%;
+        }
+
+        .filter-menu {
+            position: relative;
+        }
+
+        .filter-menu-btn {
+            background: none;
+            color: #888;
+            border: none;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             font-size: 20px;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
-        .filter-toggle-btn:hover {
-            background-color: #f9f9f9;
-            border-color: #a0a0a0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        .filter-menu-btn:hover {
+            color: #2c2c2c;
         }
 
-        .filter-toggle-btn.active {
-            background-color: #6b9b37;
-            border-color: #6b9b37;
-            color: #ffffff;
+        .filter-menu-btn.active {
+            color: #6b9b37;
         }
 
-        .tags-container {
+        .filter-dropdown {
             display: none;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            animation: slideDown 0.3s ease;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            z-index: 50;
+            animation: fadeIn 0.2s ease;
         }
 
-        .tags-container.visible {
-            display: flex;
+        .filter-dropdown.visible {
+            display: block;
         }
 
-        @keyframes slideDown {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(-10px);
@@ -109,61 +153,63 @@
             }
         }
 
-        .tag-btn {
-            background-color: #ffffff;
-            color: #2c2c2c;
-            border: 2px solid #d0d0d0;
-            padding: 12px 25px;
-            border-radius: 25px;
+        .filter-dropdown .tag-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 8px;
+            background-color: #f5f5f5;
+            border: 1px solid #d0d0d0;
+            padding: 10px 15px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
-        .tag-btn:hover {
-            background-color: #f9f9f9;
-            border-color: #a0a0a0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        .filter-dropdown .tag-btn:last-child {
+            margin-bottom: 0;
         }
 
-        .tag-btn.active {
+        .filter-dropdown .tag-btn:hover {
+            background-color: #e8e8e8;
+        }
+
+        .filter-dropdown .tag-btn.active {
             background-color: #6b9b37;
             border-color: #6b9b37;
             color: #ffffff;
         }
 
-        .filters {
-            display: flex;
+        .order-controls {
+            display: none;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 0 20px;
         }
 
-        .filter-btn {
-            background-color: #ffffff;
-            color: #2c2c2c;
-            border: 2px solid #d0d0d0;
-            padding: 12px 30px;
-            border-radius: 25px;
+        .order-controls.visible {
+            display: flex;
+        }
+
+        .order-btn {
+            background: none;
+            color: #888;
+            border: none;
+            padding: 8px 20px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            font-weight: 400;
         }
 
-        .filter-btn:hover {
-            background-color: #f9f9f9;
-            border-color: #a0a0a0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        .order-btn:hover {
+            color: #2c2c2c;
         }
 
-        .filter-btn.active {
-            background-color: #6b9b37;
-            border-color: #6b9b37;
-            color: #ffffff;
+        .order-btn.active {
+            color: #6b9b37;
+            font-weight: 500;
         }
 
         .projects-grid {
@@ -172,6 +218,7 @@
             gap: 20px;
             max-width: 1400px;
             margin: 0 auto;
+            padding: 0 20px;
         }
 
         .project-card {
@@ -214,6 +261,7 @@
             column-gap: 15px;
             max-width: 1400px;
             margin: 0 auto;
+            padding: 0 20px;
         }
 
         @media (max-width: 1200px) {
@@ -225,6 +273,16 @@
         @media (max-width: 768px) {
             .masonry-grid {
                 column-count: 2;
+            }
+            
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-content {
+                align-items: center;
+                text-align: center;
             }
         }
 
@@ -355,6 +413,7 @@
         .project-header {
             max-width: 1400px;
             margin: 0 auto 30px;
+            padding: 0 20px;
         }
 
         .project-header-description {
@@ -362,10 +421,6 @@
             font-size: 1.1em;
             line-height: 1.6;
             margin-top: 10px;
-        }
-
-        .hidden {
-            display: none;
         }
 
         .back-button {
@@ -392,32 +447,22 @@
     </style>
 </head>
 <body>
-    <header>
-        <a href="../index.html" class="logo-link">
-            <img src="../img/Logo.png" 
-                 alt="Roy Mondragón" 
-                 class="profile-img" 
-                 id="logoImg"
-                 onmouseover="this.src='../img/LogoHover.png'" 
-                 onmouseout="this.src='../img/Logo.png'">
-        </a>
-        <h1>Roy Mondragón<br>Portfolio de ilustración</h1>
-        <p class="description">Ilustrador creando mundos visuales únicos. Especializado en diseño de personajes, ilustración editorial y proyectos creativos.</p>
-    </header>
-
-    <div class="filters">
-        <button class="filter-toggle-btn" id="filterToggleBtn">🔍</button>
-        <button class="filter-btn active" data-view="projects">Proyectos</button>
-        <button class="filter-btn" data-view="images">Imágenes</button>
-        <button class="filter-btn" data-view="random">Aleatorio</button>
+    <div class="sticky-header" onclick="scrollToTop()">
+        <h1>Portfolio de ilustración <span>- Roy Mondragón</span></h1>
     </div>
 
-    <div class="tags-container" id="tagsContainer">
-        <button class="tag-btn" data-tag="personajes">Personajes</button>
-        <button class="tag-btn" data-tag="fondos">Fondos</button>
-        <button class="tag-btn" data-tag="juegos de mesa">Juegos de Mesa</button>
-        <button class="tag-btn" data-tag="animales">Animales</button>
-        <button class="tag-btn" data-tag="personas">Personas</button>
+    <div class="filters">
+        <button class="filter-btn active" data-view="projects">Proyectos</button>
+        <button class="filter-btn" data-view="images">Imágenes</button>
+        <div class="filter-menu">
+            <button class="filter-menu-btn" id="filterMenuBtn">🏷️</button>
+            <div class="filter-dropdown" id="filterDropdown"></div>
+        </div>
+    </div>
+
+    <div class="order-controls" id="orderControls">
+        <button class="order-btn active" data-order="random">Aleatorio</button>
+        <button class="order-btn" data-order="original">Orden original</button>
     </div>
 
     <div id="content-area"></div>
@@ -436,8 +481,13 @@
     <script>
         let portfolioData = {};
         let currentView = 'projects';
+        let currentOrder = 'random';
         let activeFilters = [];
         let allTags = new Set();
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         // Cargar datos desde data.json
         async function loadData() {
@@ -464,19 +514,48 @@
             });
         }
 
-        // Renderizar botones de etiquetas
+        // Renderizar botones de etiquetas en el dropdown
         function renderTagButtons() {
-            const container = document.getElementById('tagsContainer');
-            container.innerHTML = '';
+            const dropdown = document.getElementById('filterDropdown');
+            dropdown.innerHTML = '';
             
             allTags.forEach(tag => {
                 const btn = document.createElement('button');
                 btn.className = 'tag-btn';
                 btn.textContent = tag;
                 btn.onclick = () => toggleTag(tag, btn);
-                container.appendChild(btn);
+                dropdown.appendChild(btn);
             });
         }
+
+        // Toggle del menú de filtros
+        document.getElementById('filterMenuBtn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('filterDropdown');
+            const btn = this;
+            
+            if (dropdown.classList.contains('visible')) {
+                dropdown.classList.remove('visible');
+                if (activeFilters.length === 0) {
+                    btn.classList.remove('active');
+                }
+            } else {
+                dropdown.classList.add('visible');
+                btn.classList.add('active');
+            }
+        });
+
+        // Cerrar dropdown al hacer click fuera
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('filterDropdown');
+            const btn = document.getElementById('filterMenuBtn');
+            if (!e.target.closest('.filter-menu')) {
+                dropdown.classList.remove('visible');
+                if (activeFilters.length === 0) {
+                    btn.classList.remove('active');
+                }
+            }
+        });
 
         // Activar/desactivar etiqueta
         function toggleTag(tag, btnElement) {
@@ -487,14 +566,20 @@
                 activeFilters.push(tag);
                 btnElement.classList.add('active');
             }
+
+            // Mantener el botón del menú activo si hay filtros
+            const menuBtn = document.getElementById('filterMenuBtn');
+            if (activeFilters.length > 0) {
+                menuBtn.classList.add('active');
+            } else {
+                menuBtn.classList.remove('active');
+            }
             
             // Re-renderizar según la vista actual
             if (currentView === 'projects') {
                 renderProjects();
             } else if (currentView === 'images') {
-                renderImages(false);
-            } else {
-                renderImages(true);
+                renderImages();
             }
         }
 
@@ -507,20 +592,6 @@
                 return activeFilters.some(filter => img.tags.includes(filter));
             });
         }
-
-        // Toggle del contenedor de tags
-        document.getElementById('filterToggleBtn').addEventListener('click', function() {
-            const tagsContainer = document.getElementById('tagsContainer');
-            const btn = this;
-            
-            if (tagsContainer.classList.contains('visible')) {
-                tagsContainer.classList.remove('visible');
-                btn.classList.remove('active');
-            } else {
-                tagsContainer.classList.add('visible');
-                btn.classList.add('active');
-            }
-        });
 
         function renderProjects() {
             const content = document.getElementById('content-area');
@@ -549,7 +620,7 @@
             });
         }
 
-        function renderImages(randomize = false) {
+        function renderImages() {
             const content = document.getElementById('content-area');
             content.innerHTML = '<div class="masonry-grid"></div>';
             const grid = content.querySelector('.masonry-grid');
@@ -564,7 +635,8 @@
             // Filtrar por etiquetas
             allImages = filterImagesByTags(allImages);
 
-            if (randomize) {
+            // Aplicar orden
+            if (currentOrder === 'random') {
                 allImages = allImages.sort(() => Math.random() - 0.5);
             }
 
@@ -631,6 +703,7 @@
             document.getElementById('imageModal').classList.remove('active');
         }
 
+        // Controles de vista
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -639,13 +712,26 @@
                 const view = btn.dataset.view;
                 currentView = view;
 
+                const orderControls = document.getElementById('orderControls');
+                
                 if (view === 'projects') {
+                    orderControls.classList.remove('visible');
                     renderProjects();
                 } else if (view === 'images') {
-                    renderImages(false);
-                } else if (view === 'random') {
-                    renderImages(true);
+                    orderControls.classList.add('visible');
+                    renderImages();
                 }
+            });
+        });
+
+        // Controles de orden
+        document.querySelectorAll('.order-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.order-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                currentOrder = btn.dataset.order;
+                renderImages();
             });
         });
 
