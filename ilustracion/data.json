@@ -2,189 +2,176 @@
   "Florilegio": {
     "description": "Colección de ilustraciones florales que formaron parte de un libro ilustrado con información introductoria a la herbología.",
     "images": [
-     {
-    "name": "Peonía - Peony",
-    "img": "../img/james/flores/flor1.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Saxifragales. Familia: Paeoniaceae. Género: Paeonia.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Rosa Gálica - Gallic Rose",
-    "img": "../img/james/flores/flor2.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Rosales. Familia: Rosaceae. Género: Rosa. Especie: Rosa gallica.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Hortensia - Hydrangea",
-    "img": "../img/james/flores/flor3.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Cornales. Familia: Hydrangeaceae. Género: Hydrangea.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Camelia japónica - Japanese Camellia",
-    "img": "../img/james/flores/flor4.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Ericales. Familia: Theaceae. Género: Camellia. Especie: Camellia japonica.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Hibisco - Hibiscus",
-    "img": "../img/james/flores/flor5.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Malvales. Familia: Malvaceae. Género: Hibiscus.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Dahlia - Dahlia",
-    "img": "../img/james/flores/flor6.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Dahlia.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Girasol - Sunflower",
-    "img": "../img/james/flores/flor7.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Helianthus. Especie: Helianthus annuus.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Flor de loto - Lotus Flower",
-    "img": "../img/james/flores/flor8.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Proteales. Familia: Nelumbonaceae. Género: Nelumbo.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Orquídea - Orchid",
-    "img": "../img/james/flores/flor9.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Orchidaceae.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Tulipán - Tulip",
-    "img": "../img/james/flores/flor10.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Liliales. Familia: Liliaceae. Género: Tulipa.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Sakura - Cherry Blossom",
-    "img": "../img/james/flores/flor11.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Rosales. Familia: Rosaceae. Género: Prunus. Especie: Prunus serrulata.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Margarita - Daisy",
-    "img": "../img/james/flores/flor12.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Bellis.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Lavanda - Lavender",
-    "img": "../img/james/flores/flor13.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Lamiales. Familia: Lamiaceae. Género: Lavandula.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Narciso - Daffodil",
-    "img": "../img/james/flores/flor14.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Amaryllidaceae. Género: Narcissus.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Lirio - Lily",
-    "img": "../img/james/flores/flor15.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Liliales. Familia: Liliaceae. Género: Lilium.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Gardenia - Gardenia",
-    "img": "../img/james/flores/flor16.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Gentianales. Familia: Rubiaceae. Género: Gardenia.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Clavel - Carnation",
-    "img": "../img/james/flores/flor17.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Caryophyllales. Familia: Caryophyllaceae. Género: Dianthus.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Gerbera - Gerbera",
-    "img": "../img/james/flores/flor18.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Gerbera.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Gladiolo - Gladiolus",
-    "img": "../img/james/flores/flor19.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Iridaceae. Género: Gladiolus.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Magnolia - Magnolia",
-    "img": "../img/james/flores/flor20.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Magnoliales. Familia: Magnoliaceae. Género: Magnolia.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Fresia - Freesia",
-    "img": "../img/james/flores/flor21.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Iridaceae. Género: Freesia.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Jacinto - Hyacinth",
-    "img": "../img/james/flores/flor22.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Asparagaceae. Género: Hyacinthus.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Crisantemo - Chrysanthemum",
-    "img": "../img/james/flores/flor23.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Chrysanthemum.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Pensamiento - Pansy",
-    "img": "../img/james/flores/flor24.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Malpighiales. Familia: Violaceae. Género: Viola. Especie: Viola tricolor var. hortensis.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Nomeolvides - Forget-me-not",
-    "img": "../img/james/flores/flor25.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Boraginales. Familia: Boraginaceae. Género: Myosotis.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Zinnia - Zinnia",
-    "img": "../img/james/flores/flor26.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Zinnia.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Flor de chocolate - Chocolate Cosmos",
-    "img": "../img/james/flores/flor27.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Cosmos. Especie: Cosmos atrosanguineus.",
-    "tags": ["flores"]
-  },
-  {
-    "name": "Lirios del valle - Lily of the Valley",
-    "img": "../img/james/flores/flor28.jpg",
-    "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Asparagaceae. Género: Convallaria. Especie: Convallaria majalis.",
-    "tags": ["flores"]
-  }
+      {
+        "name": "Peonía - Peony",
+        "img": "../img/james/flores/flor1.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Saxifragales. Familia: Paeoniaceae. Género: Paeonia.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Rosa Gálica - Gallic Rose",
+        "img": "../img/james/flores/flor2.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Rosales. Familia: Rosaceae. Género: Rosa. Especie: Rosa gallica.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Hortensia - Hydrangea",
+        "img": "../img/james/flores/flor3.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Cornales. Familia: Hydrangeaceae. Género: Hydrangea.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Camelia japónica - Japanese Camellia",
+        "img": "../img/james/flores/flor4.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Ericales. Familia: Theaceae. Género: Camellia. Especie: Camellia japonica.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Hibisco - Hibiscus",
+        "img": "../img/james/flores/flor5.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Malvales. Familia: Malvaceae. Género: Hibiscus.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Dahlia - Dahlia",
+        "img": "../img/james/flores/flor6.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Dahlia.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Girasol - Sunflower",
+        "img": "../img/james/flores/flor7.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Helianthus. Especie: Helianthus annuus.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Flor de loto - Lotus Flower",
+        "img": "../img/james/flores/flor8.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Proteales. Familia: Nelumbonaceae. Género: Nelumbo.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Orquídea - Orchid",
+        "img": "../img/james/flores/flor9.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Orchidaceae.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Tulipán - Tulip",
+        "img": "../img/james/flores/flor10.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Liliales. Familia: Liliaceae. Género: Tulipa.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Sakura - Cherry Blossom",
+        "img": "../img/james/flores/flor11.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Rosales. Familia: Rosaceae. Género: Prunus. Especie: Prunus serrulata.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Margarita - Daisy",
+        "img": "../img/james/flores/flor12.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Bellis.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Lavanda - Lavender",
+        "img": "../img/james/flores/flor13.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Lamiales. Familia: Lamiaceae. Género: Lavandula.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Narciso - Daffodil",
+        "img": "../img/james/flores/flor14.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Amaryllidaceae. Género: Narcissus.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Lirio - Lily",
+        "img": "../img/james/flores/flor15.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Liliales. Familia: Liliaceae. Género: Lilium.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Gardenia - Gardenia",
+        "img": "../img/james/flores/flor16.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Gentianales. Familia: Rubiaceae. Género: Gardenia.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Clavel - Carnation",
+        "img": "../img/james/flores/flor17.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Caryophyllales. Familia: Caryophyllaceae. Género: Dianthus.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Gerbera - Gerbera",
+        "img": "../img/james/flores/flor18.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Gerbera.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Gladiolo - Gladiolus",
+        "img": "../img/james/flores/flor19.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Iridaceae. Género: Gladiolus.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Magnolia - Magnolia",
+        "img": "../img/james/flores/flor20.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Magnoliales. Familia: Magnoliaceae. Género: Magnolia.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Fresia - Freesia",
+        "img": "../img/james/flores/flor21.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Iridaceae. Género: Freesia.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Jacinto - Hyacinth",
+        "img": "../img/james/flores/flor22.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Asparagaceae. Género: Hyacinthus.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Crisantemo - Chrysanthemum",
+        "img": "../img/james/flores/flor23.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Chrysanthemum.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Pensamiento - Pansy",
+        "img": "../img/james/flores/flor24.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Malpighiales. Familia: Violaceae. Género: Viola. Especie: Viola tricolor var. hortensis.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Nomeolvides - Forget-me-not",
+        "img": "../img/james/flores/flor25.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Boraginales. Familia: Boraginaceae. Género: Myosotis.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Zinnia - Zinnia",
+        "img": "../img/james/flores/flor26.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Zinnia.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Flor de chocolate - Chocolate Cosmos",
+        "img": "../img/james/flores/flor27.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Magnoliopsida. Orden: Asterales. Familia: Asteraceae. Género: Cosmos. Especie: Cosmos atrosanguineus.",
+        "tags": ["flores"]
+      },
+      {
+        "name": "Lirios del valle - Lily of the Valley",
+        "img": "../img/james/flores/flor28.jpg",
+        "description": "Reino: Plantae. División: Magnoliophyta. Clase: Liliopsida. Orden: Asparagales. Familia: Asparagaceae. Género: Convallaria. Especie: Convallaria majalis.",
+        "tags": ["flores"]
+      }
     ]
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
   "Deck": {
     "description": "Baraja ilustrada completa con diseños de personajes originales",
     "images": [
@@ -232,274 +219,249 @@
       }
     ]
   },
-
-
-
-
-
-
-"Lotería Pomelo": {
-  "description": "Juego de lotería ilustrado con personajes originales creados para la colección Pomelo.",
-  "images": [
-    {
-      "name": "El gallo",
-      "img": "../img/james/LoteriaRoy/1.jpg",
-      "description": "",
-      "tags": ["juegos de mesa", "personajes", "animales"]
-    },
-    {
-      "name": "La Sirena",
-      "img": "../img/james/LoteriaRoy/6.jpg",
-      "description": "",
-      "tags": ["juegos de mesa", "personajes", "animales"]
-    },
-    {
-      "name": "El negrito",
-      "img": "../img/james/LoteriaRoy/26.jpg",
-      "description": "",
-      "tags": ["juegos de mesa"]
-    },
-    {
-      "name": "La rana",
-      "img": "../img/james/LoteriaRoy/54.jpg",
-      "description": "",
-      "tags": ["juegos de mesa", "personajes", "animales"]
-    },
-    {
-      "name": "Tabla 1",
-      "img": "../img/james/LoteriaRoy/Tabla1.jpg",
-      "description": "",
-      "tags": ["juegos de mesa"]
-    },
-    {
-      "name": "Tabla 2",
-      "img": "../img/james/LoteriaRoy/Tabla2.jpg",
-      "description": "",
-      "tags": ["juegos de mesa"]
-    },
-    {
-      "name": "Tabla 3",
-      "img": "../img/james/LoteriaRoy/Tabla3.jpg",
-      "description": "",
-      "tags": ["juegos de mesa"]
-    },
-    {
-      "name": "Tabla 4",
-      "img": "../img/james/LoteriaRoy/Tabla4.jpg",
-      "description": "",
-      "tags": ["juegos de mesa"]
-    },
-    {
-      "name": "Tabla 5",
-      "img": "../img/james/LoteriaRoy/Tabla5.jpg",
-      "description": "",
-      "tags": ["juegos de mesa"]
-    },
-    {
-      "name": "Tabla 6",
-      "img": "../img/james/LoteriaRoy/Tabla6.jpg",
-      "description": "",
-      "tags": ["juegos de mesa"]
-    }
-  ]
-}
-
-
-
-
-
-
-
-
+  "Lotería Pomelo": {
+    "description": "Juego de lotería ilustrado con personajes originales creados para la colección Pomelo.",
+    "images": [
+      {
+        "name": "El gallo",
+        "img": "../img/james/LoteriaRoy/1.jpg",
+        "description": "",
+        "tags": ["juegos de mesa", "personajes", "animales"]
+      },
+      {
+        "name": "La Sirena",
+        "img": "../img/james/LoteriaRoy/6.jpg",
+        "description": "",
+        "tags": ["juegos de mesa", "personajes", "animales"]
+      },
+      {
+        "name": "El negrito",
+        "img": "../img/james/LoteriaRoy/26.jpg",
+        "description": "",
+        "tags": ["juegos de mesa"]
+      },
+      {
+        "name": "La rana",
+        "img": "../img/james/LoteriaRoy/54.jpg",
+        "description": "",
+        "tags": ["juegos de mesa", "personajes", "animales"]
+      },
+      {
+        "name": "Tabla 1",
+        "img": "../img/james/LoteriaRoy/Tabla1.jpg",
+        "description": "",
+        "tags": ["juegos de mesa"]
+      },
+      {
+        "name": "Tabla 2",
+        "img": "../img/james/LoteriaRoy/Tabla2.jpg",
+        "description": "",
+        "tags": ["juegos de mesa"]
+      },
+      {
+        "name": "Tabla 3",
+        "img": "../img/james/LoteriaRoy/Tabla3.jpg",
+        "description": "",
+        "tags": ["juegos de mesa"]
+      },
+      {
+        "name": "Tabla 4",
+        "img": "../img/james/LoteriaRoy/Tabla4.jpg",
+        "description": "",
+        "tags": ["juegos de mesa"]
+      },
+      {
+        "name": "Tabla 5",
+        "img": "../img/james/LoteriaRoy/Tabla5.jpg",
+        "description": "",
+        "tags": ["juegos de mesa"]
+      },
+      {
+        "name": "Tabla 6",
+        "img": "../img/james/LoteriaRoy/Tabla6.jpg",
+        "description": "",
+        "tags": ["juegos de mesa"]
+      }
+    ]
+  },
   "Nubes": {
     "description": "Cortometraje animado combinación de 2D y 3D dirigido por Rodrigo Mondragón.",
     "images": [
-    {
-      "name": "Nubes BgDesign1",
-      "img": "../img/BgDesign/Bg1_001.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign2",
-      "img": "../img/BgDesign/Bg2_001.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign3",
-      "img": "../img/BgDesign/Bg2_002.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign4",
-      "img": "../img/BgDesign/Bg2_003.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign5",
-      "img": "../img/BgDesign/Bg2_004.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign6",
-      "img": "../img/BgDesign/Bg3_001.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign7",
-      "img": "../img/BgDesign/Bg3_002.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign8",
-      "img": "../img/BgDesign/Bg3_003.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign9",
-      "img": "../img/BgDesign/Bg3_004.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign10",
-      "img": "../img/BgDesign/Bg3_005.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign11",
-      "img": "../img/BgDesign/Bg3_006.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign12",
-      "img": "../img/BgDesign/Bg3_007.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
-    },
-    {
-      "name": "Nubes BgDesign13",
-      "img": "../img/BgDesign/Bg3_008.jpg",
-      "description": "Fondos ilustrados para el cortometraje",
-      "tags": ["fondos"]
- },
- {
-      "name": "Colorboard1",
-      "img": "../img/Nubes/1.jpg",
-      "description": "Primer colorboard para el cortometraje."
-    },
-    {
-      "name": "Colorboard2",
-      "img": "../img/Nubes/2.jpg",
-      "description": "Segundo colorboard para el cortometraje."
-    },
-    {
-      "name": "Colorboard3",
-      "img": "../img/Nubes/3.jpg",
-      "description": "Tercer colorboard para el cortometraje."
-    },
-    {
-      "name": "Concept de personajes",
-      "img": "../img/Nubes/4.jpg",
-      "description": "Concept art de los personajes principales.",
-      "tags": ["personajes"]
-    },
-    {
-      "name": "Still de prueba visual",
-      "img": "../img/Nubes/5.jpg",
-      "description": "Still de prueba visual del cortometraje."
-    },
-    {
-      "name": "Concept banderas",
-      "img": "../img/Nubes/6.jpg",
-      "description": "Concept art de las banderas utilizadas en el cortometraje."
-    },
-    {
-      "name": "Concept nubes 1",
-      "img": "../img/Nubes/7.jpg",
-      "description": "Concept art de las nubes.",
-      "tags": ["animales"]
-    },
-    {
-      "name": "Concept nubes 2",
-      "img": "../img/Nubes/8.jpg",
-      "description": "Concept art de las nubes.",
-      "tags": ["animales"]
-    },
-    {
-      "name": "Concept nubes 3",
-      "img": "../img/Nubes/9.jpg",
-      "description": "Concept art de las nubes.",
-      "tags": ["animales"]
-    },
-    {
-      "name": "Concept nubes 4",
-      "img": "../img/Nubes/10.jpg",
-      "description": "Concept art de las nubes.",
-      "tags": ["animales"]
-    },
-    {
-      "name": "Concept nubes 5",
-      "img": "../img/Nubes/11.jpg",
-      "description": "Concept art de las nubes.",
-      "tags": ["animales"]
-    },
-    {
-      "name": "Concept nubes 6",
-      "img": "../img/Nubes/12.jpg",
-      "description": "Concept art de las nubes.",
-      "tags": ["animales"]
-    },
-    {
-      "name": "Concept nubes 7",
-      "img": "../img/Nubes/13.jpg",
-      "description": "Concept art de las nubes.",
-      "tags": ["animales"]
-    },
-    {
-      "name": "Concept nubes 8",
-      "img": "../img/Nubes/14.jpg",
-      "description": "Concept art de las nubes.",
-      "tags": ["animales"]
-    },
-    {
-      "name": "Concept nubes 9",
-      "img": "../img/Nubes/15.jpg",
-      "description": "Concept art de las nubes.",
-      "tags": ["animales"]
-    },
-    {
-      "name": "Concept nubes 10",
-      "img": "../img/Nubes/16.jpg",
-      "description": "Concept art de las nubes."
-    },
-    {
-      "name": "Concept nubes 11",
-      "img": "../img/Nubes/17.jpg",
-      "description": "Concept art de las nubes."
-    }
+      {
+        "name": "Nubes BgDesign1",
+        "img": "../img/BgDesign/Bg1_001.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign2",
+        "img": "../img/BgDesign/Bg2_001.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign3",
+        "img": "../img/BgDesign/Bg2_002.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign4",
+        "img": "../img/BgDesign/Bg2_003.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign5",
+        "img": "../img/BgDesign/Bg2_004.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign6",
+        "img": "../img/BgDesign/Bg3_001.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign7",
+        "img": "../img/BgDesign/Bg3_002.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign8",
+        "img": "../img/BgDesign/Bg3_003.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign9",
+        "img": "../img/BgDesign/Bg3_004.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign10",
+        "img": "../img/BgDesign/Bg3_005.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign11",
+        "img": "../img/BgDesign/Bg3_006.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign12",
+        "img": "../img/BgDesign/Bg3_007.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Nubes BgDesign13",
+        "img": "../img/BgDesign/Bg3_008.jpg",
+        "description": "Fondos ilustrados para el cortometraje",
+        "tags": ["fondos"]
+      },
+      {
+        "name": "Colorboard1",
+        "img": "../img/Nubes/1.jpg",
+        "description": "Primer colorboard para el cortometraje."
+      },
+      {
+        "name": "Colorboard2",
+        "img": "../img/Nubes/2.jpg",
+        "description": "Segundo colorboard para el cortometraje."
+      },
+      {
+        "name": "Colorboard3",
+        "img": "../img/Nubes/3.jpg",
+        "description": "Tercer colorboard para el cortometraje."
+      },
+      {
+        "name": "Concept de personajes",
+        "img": "../img/Nubes/4.jpg",
+        "description": "Concept art de los personajes principales.",
+        "tags": ["personajes"]
+      },
+      {
+        "name": "Still de prueba visual",
+        "img": "../img/Nubes/5.jpg",
+        "description": "Still de prueba visual del cortometraje."
+      },
+      {
+        "name": "Concept banderas",
+        "img": "../img/Nubes/6.jpg",
+        "description": "Concept art de las banderas utilizadas en el cortometraje."
+      },
+      {
+        "name": "Concept nubes 1",
+        "img": "../img/Nubes/7.jpg",
+        "description": "Concept art de las nubes.",
+        "tags": ["animales"]
+      },
+      {
+        "name": "Concept nubes 2",
+        "img": "../img/Nubes/8.jpg",
+        "description": "Concept art de las nubes.",
+        "tags": ["animales"]
+      },
+      {
+        "name": "Concept nubes 3",
+        "img": "../img/Nubes/9.jpg",
+        "description": "Concept art de las nubes.",
+        "tags": ["animales"]
+      },
+      {
+        "name": "Concept nubes 4",
+        "img": "../img/Nubes/10.jpg",
+        "description": "Concept art de las nubes.",
+        "tags": ["animales"]
+      },
+      {
+        "name": "Concept nubes 5",
+        "img": "../img/Nubes/11.jpg",
+        "description": "Concept art de las nubes.",
+        "tags": ["animales"]
+      },
+      {
+        "name": "Concept nubes 6",
+        "img": "../img/Nubes/12.jpg",
+        "description": "Concept art de las nubes.",
+        "tags": ["animales"]
+      },
+      {
+        "name": "Concept nubes 7",
+        "img": "../img/Nubes/13.jpg",
+        "description": "Concept art de las nubes.",
+        "tags": ["animales"]
+      },
+      {
+        "name": "Concept nubes 8",
+        "img": "../img/Nubes/14.jpg",
+        "description": "Concept art de las nubes.",
+        "tags": ["animales"]
+      },
+      {
+        "name": "Concept nubes 9",
+        "img": "../img/Nubes/15.jpg",
+        "description": "Concept art de las nubes.",
+        "tags": ["animales"]
+      },
+      {
+        "name": "Concept nubes 10",
+        "img": "../img/Nubes/16.jpg",
+        "description": "Concept art de las nubes."
+      },
+      {
+        "name": "Concept nubes 11",
+        "img": "../img/Nubes/17.jpg",
+        "description": "Concept art de las nubes."
+      }
     ]
   },
-
-
-
-
-
-
-
-
-
-
- 
   "Sagrado Micelio": {
     "description": "Exploración artística del mundo micológico y sus conexiones",
     "images": [
@@ -511,111 +473,104 @@
       }
     ]
   },
-
-
-
-"Inktober2025": {
-  "description": "Serie de ilustraciones realizadas para el reto Inktober 2025.",
-  "images": [
-    {
-      "name": "Mustache",
-      "img": "../img/james/Inktober2025/Inktober1.jpg",
-      "description": "",
-      "tags": ["personajes", "personas"]
-    },
-    {
-      "name": "Weave",
-      "img": "../img/james/Inktober2025/Inktober2.jpg",
-      "description": "",
-      "tags": ["personajes", "personas"]
-    },
-    {
-      "name": "Crown",
-      "img": "../img/james/Inktober2025/Inktober3.jpg",
-      "description": "",
-      "tags": ["personajes", "personas"]
-    },
-    {
-      "name": "Murky",
-      "img": "../img/james/Inktober2025/Inktober4.jpg",
-      "description": "",
-      "tags": ["personajes"]
-    },
-    {
-      "name": "Deer",
-      "img": "../img/james/Inktober2025/Inktober5.jpg",
-      "description": "",
-      "tags": ["personajes", "animales"]
-    },
-    {
-      "name": "Pierce",
-      "img": "../img/james/Inktober2025/Inktober6.jpg",
-      "description": "",
-      "tags": ["personajes", "animales"]
-    },
-    {
-      "name": "Starfish",
-      "img": "../img/james/Inktober2025/Inktober7.jpg",
-      "description": "",
-      "tags": ["personajes", "personas"]
-    },
-    {
-      "name": "Reckless",
-      "img": "../img/james/Inktober2025/Inktober8.jpg",
-      "description": "",
-      "tags": ["personajes", "animales"]
-    },
-    {
-      "name": "Heavy",
-      "img": "../img/james/Inktober2025/Inktober9.jpg",
-      "description": "",
-      "tags": ["personajes", "personas"]
-    }
-  ]
-}
-
-
-
-
+  "Inktober2025": {
+    "description": "Serie de ilustraciones realizadas para el reto Inktober 2025.",
+    "images": [
+      {
+        "name": "Mustache",
+        "img": "../img/james/Inktober2025/Inktober1.jpg",
+        "description": "",
+        "tags": ["personajes", "personas"]
+      },
+      {
+        "name": "Weave",
+        "img": "../img/james/Inktober2025/Inktober2.jpg",
+        "description": "",
+        "tags": ["personajes", "personas"]
+      },
+      {
+        "name": "Crown",
+        "img": "../img/james/Inktober2025/Inktober3.jpg",
+        "description": "",
+        "tags": ["personajes", "personas"]
+      },
+      {
+        "name": "Murky",
+        "img": "../img/james/Inktober2025/Inktober4.jpg",
+        "description": "",
+        "tags": ["personajes"]
+      },
+      {
+        "name": "Deer",
+        "img": "../img/james/Inktober2025/Inktober5.jpg",
+        "description": "",
+        "tags": ["personajes", "animales"]
+      },
+      {
+        "name": "Pierce",
+        "img": "../img/james/Inktober2025/Inktober6.jpg",
+        "description": "",
+        "tags": ["personajes", "animales"]
+      },
+      {
+        "name": "Starfish",
+        "img": "../img/james/Inktober2025/Inktober7.jpg",
+        "description": "",
+        "tags": ["personajes", "personas"]
+      },
+      {
+        "name": "Reckless",
+        "img": "../img/james/Inktober2025/Inktober8.jpg",
+        "description": "",
+        "tags": ["personajes", "animales"]
+      },
+      {
+        "name": "Heavy",
+        "img": "../img/james/Inktober2025/Inktober9.jpg",
+        "description": "",
+        "tags": ["personajes", "personas"]
+      }
+    ]
+  },
   "Otros": {
     "description": "Ilustraciones experimentales y trabajos diversos",
     "images": [
-     {
-      "name": "Satanic Plushie",
-      "img": "../img/james/Pines/1.png",
-      "description": "",
-      "tags": ["animales", "personajes"]
-    },
-    {
-      "name": "Bop1",
-      "img": "../img/james/Pines/2.png",
-      "description": "",
-      "tags": ["animales", "personajes"]
-    },
-    {
-      "name": "Bop2",
-      "img": "../img/james/Pines/3.png",
-      "description": "",
-      "tags": ["animales", "personajes"]
-    },
-    {
-      "name": "Unos pedillos",
-      "img": "../img/james/Pines/4.png",
-      "description": "",
-      "tags": ["animales", "personajes"]
-    },
-    {
-      "name": "Hámster \"Vamoequipo\"",
-      "img": "../img/james/Pines/5.png",
-      "description": "",
-      "tags": ["animales", "personajes"]
-    },
-    {
-      "name": "Chihuahua",
-      "img": "../img/james/Pines/6.png",
-      "description": "",
-      "tags": ["animales", "personajes"]
-    }
+      {
+        "name": "Satanic Plushie",
+        "img": "../img/james/Pines/1.png",
+        "description": "",
+        "tags": ["animales", "personajes"]
+      },
+      {
+        "name": "Bop1",
+        "img": "../img/james/Pines/2.png",
+        "description": "",
+        "tags": ["animales", "personajes"]
+      },
+      {
+        "name": "Bop2",
+        "img": "../img/james/Pines/3.png",
+        "description": "",
+        "tags": ["animales", "personajes"]
+      },
+      {
+        "name": "Unos pedillos",
+        "img": "../img/james/Pines/4.png",
+        "description": "",
+        "tags": ["animales", "personajes"]
+      },
+      {
+        "name": "Hámster \"Vamoequipo\"",
+        "img": "../img/james/Pines/5.png",
+        "description": "",
+        "tags": ["animales", "personajes"]
+      },
+      {
+        "name": "Chihuahua",
+        "img": "../img/james/Pines/6.png",
+        "description": "",
+        "tags": ["animales", "personajes"]
+      }
     ]
   }
 }
