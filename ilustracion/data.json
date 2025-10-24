@@ -238,6 +238,71 @@
 
 
 
+"Lotería Pomelo": {
+  "description": "Juego de lotería ilustrado con personajes originales creados para la colección Pomelo.",
+  "images": [
+    {
+      "name": "El gallo",
+      "img": "../img/james/LoteriaRoy/1.jpg",
+      "description": "",
+      "tags": ["juegos de mesa", "personajes", "animales"]
+    },
+    {
+      "name": "La Sirena",
+      "img": "../img/james/LoteriaRoy/6.jpg",
+      "description": "",
+      "tags": ["juegos de mesa", "personajes", "animales"]
+    },
+    {
+      "name": "El negrito",
+      "img": "../img/james/LoteriaRoy/26.jpg",
+      "description": "",
+      "tags": ["juegos de mesa"]
+    },
+    {
+      "name": "La rana",
+      "img": "../img/james/LoteriaRoy/54.jpg",
+      "description": "",
+      "tags": ["juegos de mesa", "personajes", "animales"]
+    },
+    {
+      "name": "Tabla 1",
+      "img": "../img/james/LoteriaRoy/Tabla1.jpg",
+      "description": "",
+      "tags": ["juegos de mesa"]
+    },
+    {
+      "name": "Tabla 2",
+      "img": "../img/james/LoteriaRoy/Tabla2.jpg",
+      "description": "",
+      "tags": ["juegos de mesa"]
+    },
+    {
+      "name": "Tabla 3",
+      "img": "../img/james/LoteriaRoy/Tabla3.jpg",
+      "description": "",
+      "tags": ["juegos de mesa"]
+    },
+    {
+      "name": "Tabla 4",
+      "img": "../img/james/LoteriaRoy/Tabla4.jpg",
+      "description": "",
+      "tags": ["juegos de mesa"]
+    },
+    {
+      "name": "Tabla 5",
+      "img": "../img/james/LoteriaRoy/Tabla5.jpg",
+      "description": "",
+      "tags": ["juegos de mesa"]
+    },
+    {
+      "name": "Tabla 6",
+      "img": "../img/james/LoteriaRoy/Tabla6.jpg",
+      "description": "",
+      "tags": ["juegos de mesa"]
+    }
+  ]
+}
 
 
 
@@ -446,6 +511,72 @@
       }
     ]
   },
+
+
+
+"Inktober2025": {
+  "description": "Serie de ilustraciones realizadas para el reto Inktober 2025.",
+  "images": [
+    {
+      "name": "Mustache",
+      "img": "../img/james/Inktober2025/Inktober1.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "Weave",
+      "img": "../img/james/Inktober2025/Inktober2.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "Crown",
+      "img": "../img/james/Inktober2025/Inktober3.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "Murky",
+      "img": "../img/james/Inktober2025/Inktober4.jpg",
+      "description": "",
+      "tags": ["personajes"]
+    },
+    {
+      "name": "Deer",
+      "img": "../img/james/Inktober2025/Inktober5.jpg",
+      "description": "",
+      "tags": ["personajes", "animales"]
+    },
+    {
+      "name": "Pierce",
+      "img": "../img/james/Inktober2025/Inktober6.jpg",
+      "description": "",
+      "tags": ["personajes", "animales"]
+    },
+    {
+      "name": "Starfish",
+      "img": "../img/james/Inktober2025/Inktober7.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    },
+    {
+      "name": "Reckless",
+      "img": "../img/james/Inktober2025/Inktober8.jpg",
+      "description": "",
+      "tags": ["personajes", "animales"]
+    },
+    {
+      "name": "Heavy",
+      "img": "../img/james/Inktober2025/Inktober9.jpg",
+      "description": "",
+      "tags": ["personajes", "personas"]
+    }
+  ]
+}
+
+
+
+
   "Otros": {
     "description": "Ilustraciones experimentales y trabajos diversos",
     "images": [
