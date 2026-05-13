@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de páginas de Roy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&display=swap');
+
+  :root {
+    --bg: #f5f0e8;
+    --bg2: #ede8df;
+    --bg3: #e0d9ce;
+    --ink: #1a1612;
+    --ink2: #4a3f35;
+    --ink3: #7a6a5a;
+    --accent: #c0392b;
+    --accent2: #e8a020;
+    --page-bg: #faf7f2;
+    --border: #c8bfb0;
+    --shadow: rgba(26,22,18,0.12);
+    --blank: #d5cfc6;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1612;
+      --bg2: #221e19;
+      --bg3: #2a2520;
+      --ink: #f0ebe2;
+      --ink2: #c8bfb0;
+      --ink3: #8a7a6a;
+      --accent: #e05040;
+      --accent2: #f0b040;
+      --page-bg: #2e2820;
+      --border: #3a3228;
+      --shadow: rgba(0,0,0,0.35);
+      --blank: #3a3228;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding: 2rem 2.5rem 1.5rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .brand-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 0.25rem;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+
+  .input-zone {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .input-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .page-input-wrap {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--ink);
+    background: var(--page-bg);
+  }
+
+  .page-input-wrap input {
+    width: 70px;
+    padding: 0.5rem 0.75rem;
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    border: none;
+    background: transparent;
+    color: var(--ink);
+    outline: none;
+    -moz-appearance: textfield;
+  }
+  .page-input-wrap input::-webkit-outer-spin-button,
+  .page-input-wrap input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+  .spin-btns {
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid var(--ink);
+  }
+  .spin-btns button {
+    width: 32px;
+    height: 24px;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--ink2);
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: background 0.1s;
+  }
+  .spin-btns button:last-child { border-bottom: none; }
+  .spin-btns button:hover { background: var(--accent); color: #fff; }
+
+  .info-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--ink3);
+  }
+
+  .info-badge span { color: var(--accent); font-weight: 500; }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    border-bottom: 2px solid var(--ink);
+    overflow-x: auto;
+  }
+
+  .tab {
+    padding: 0.9rem 1.8rem;
+    border: none;
+    border-right: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--ink3);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    position: relative;
+  }
+
+  .tab:hover { background: var(--bg3); color: var(--ink); }
+
+  .tab.active {
+    background: var(--page-bg);
+    color: var(--ink);
+    border-bottom: 2px solid var(--page-bg);
+    margin-bottom: -2px;
+  }
+
+  .tab .tab-num {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.6rem;
+    margin-right: 0.5rem;
+    font-weight: 500;
+  }
+
+  /* ── PANELS ── */
+  .panel { display: none; padding: 2rem 2.5rem; }
+  .panel.active { display: block; }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 0.75rem;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── PANEL 1: LÓGICA ── */
+  .sheets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .sheet-card {
+    border: 2px solid var(--ink);
+    background: var(--page-bg);
+    overflow: hidden;
+  }
+
+  .sheet-card-header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.5rem 1rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sheet-number {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--bg);
+    line-height: 1;
+  }
+
+  .sheet-card-body { padding: 1rem; }
+
+  .side-row {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--border);
+    margin-bottom: 0.5rem;
+  }
+
+  .side-label {
+    padding: 0.5rem 0.6rem;
+    background: var(--bg3);
+    border-right: 1px solid var(--border);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+  }
+
+  .side-pages {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .page-slot {
+    padding: 0.6rem 0.75rem;
+    text-align: center;
+    border-right: 1px dashed var(--border);
+  }
+  .page-slot:last-child { border-right: none; }
+
+  .page-slot .slot-pos {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+
+  .page-slot .slot-num {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    display: block;
+  }
+
+  .page-slot.blank .slot-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--blank);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── PANEL 2: TABLA ── */
+  .impo-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+
+  .impo-table th {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.7rem 1rem;
+    text-align: left;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .impo-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .impo-table tr:nth-child(even) td { background: var(--bg2); }
+  .impo-table tr:hover td { background: var(--bg3); }
+
+  .sheet-id {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .side-tag {
+    display: inline-block;
+    padding: 0.15rem 0.45rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-right: 0.4rem;
+    font-weight: 500;
+  }
+
+  .side-a { background: var(--accent); color: #fff; }
+  .side-b { background: var(--accent2); color: var(--ink); }
+
+  .pages-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Fraunces', serif;
+  }
+
+  .pnum {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--border);
+    font-size: 0.9rem;
+    font-weight: 700;
+    background: var(--page-bg);
+  }
+
+  .pnum.blank-p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--ink3);
+    background: var(--blank);
+    border-color: var(--blank);
+  }
+
+  .separator { color: var(--ink3); font-size: 0.8rem; }
+
+  /* ── PANEL 3: FLIPBOOK ── */
+  .flipbook-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .spread-counter {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .spread-counter strong {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* Imposition info tag — overlay on top of the spread */
+  .book-stage {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .spread {
+    display: flex;
+    width: 100%;
+    min-height: 280px;
+    border: 2px solid var(--ink);
+    background: var(--page-bg);
+    box-shadow: 6px 6px 0 var(--shadow);
+  }
+
+  .book-page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5rem 1rem 1rem;
+    position: relative;
+    min-height: 260px;
+  }
+
+  .book-page.left-page {
+    border-right: 2px solid var(--ink);
+  }
+
+  .book-page.spine-shadow-left::after,
+  .book-page.spine-shadow-right::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 20px;
+    pointer-events: none;
+  }
+
+  .book-page.left-page::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0,0,0,0.06), transparent);
+  }
+
+  .book-page.right-page::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.06), transparent);
+  }
+
+  .book-page.cover-page {
+    background: var(--ink);
+  }
+
+  .book-page.cover-page .page-num-display {
+    color: var(--bg);
+  }
+
+  .book-page.cover-page .page-label {
+    color: var(--ink3);
+  }
+
+  .book-page.back-cover {
+    background: var(--bg3);
+  }
+
+  .book-page.blank-page {
+    background: var(--blank);
+    opacity: 0.5;
+  }
+
+  .hidden-page-placeholder {
+    flex: 1;
+    background: var(--bg2);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .page-corner-num {
+    position: absolute;
+    top: 0.6rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: var(--ink3);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .book-page.left-page .page-corner-num { left: 0.8rem; }
+  .book-page.right-page .page-corner-num { right: 0.8rem; }
+  .book-page.cover-page .page-corner-num { color: rgba(255,255,255,0.4); }
+
+  .page-num-display {
+    font-family: 'Fraunces', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .page-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    text-align: center;
+  }
+
+  .blank-icon {
+    font-size: 2rem;
+    opacity: 0.3;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Imposition info tag — overlay on top of the spread */
+  .book-stage {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .impo-tag {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(26,22,18,0.82);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .impo-tag {
+      background: rgba(0,0,0,0.72);
+    }
+  }
+
+  .impo-tag-icon {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  .impo-tag-text {
+    font-size: 0.68rem;
+    color: rgba(240,235,226,0.85);
+    line-height: 1.4;
+  }
+
+  .impo-tag-text strong {
+    color: #e05040;
+    font-weight: 500;
+  }
+
+  .impo-tag-text .side-info {
+    color: #f0b040;
+  }
+
+  /* Nav buttons */
+  .flipbook-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    border: 2px solid var(--ink);
+    background: var(--page-bg);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .nav-btn:hover:not(:disabled) {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .nav-btn svg { width: 14px; height: 14px; }
+
+  .spread-dots {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 300px;
+  }
+
+  .spread-dot {
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    border-radius: 0;
+  }
+
+  .spread-dot.active { background: var(--accent); border-color: var(--accent); }
+  .spread-dot:hover:not(.active) { background: var(--ink3); border-color: var(--ink3); }
+
+  /* responsive */
+  @media (max-width: 600px) {
+    header { padding: 1.5rem; gap: 1rem; }
+    .panel { padding: 1.25rem 1.25rem; }
+    .page-num-display { font-size: 2.5rem; }
+    .spread { min-height: 200px; }
+    .book-page { min-height: 180px; padding: 1rem 0.75rem 0.75rem; }
+    .impo-table { font-size: 0.75rem; }
+    .impo-table td, .impo-table th { padding: 0.5rem 0.6rem; }
+    .pnum { width: 28px; height: 28px; font-size: 0.8rem; }
+    .tab { padding: 0.7rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-label">Calculadora de imposición</div>
+    <h1>Páginas <em>de</em> Roy</h1>
+  </div>
+  <div class="input-zone">
+    <span class="input-label">Páginas</span>
+    <div class="page-input-wrap">
+      <input type="number" id="pageCount" value="8" min="1" max="200">
+      <div class="spin-btns">
+        <button onclick="adjustPages(1)">▲</button>
+        <button onclick="adjustPages(-1)">▼</button>
+      </div>
+    </div>
+    <div class="info-badge" id="infoBadge">
+      <span id="sheetCount">2</span> hojas · <span id="adjustedCount">8</span> págs totales
+    </div>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab(0)"><span class="tab-num">1</span>Lógica</button>
+  <button class="tab" onclick="switchTab(1)"><span class="tab-num">2</span>Tabla</button>
+  <button class="tab" onclick="switchTab(2)"><span class="tab-num">3</span>Visor Librito</button>
+</div>
+
+<!-- PANEL 1 -->
+<div class="panel active" id="panel-0">
+  <div class="section-title">Distribución física de páginas en hojas</div>
+  <div class="sheets-grid" id="sheetsGrid"></div>
+</div>
+
+<!-- PANEL 2 -->
+<div class="panel" id="panel-1">
+  <div class="section-title">Lista completa de imposición</div>
+  <table class="impo-table">
+    <thead>
+      <tr>
+        <th>Hoja</th>
+        <th>Cara</th>
+        <th>Página izquierda</th>
+        <th>—</th>
+        <th>Página derecha</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+
+<!-- PANEL 3 -->
+<div class="panel" id="panel-2">
+  <div class="section-title">Vista de lectura — flipbook interactivo</div>
+  <div class="flipbook-wrap">
+    <div class="spread-counter">Vista <strong id="spreadCurrent">1</strong> de <strong id="spreadTotal">5</strong></div>
+    <div class="book-stage">
+      <div class="spread" id="spread"></div>
+      <div class="impo-tag" id="impoTag">
+        <span class="impo-tag-icon">📄</span>
+        <span class="impo-tag-text" id="impoTagText"></span>
+      </div>
+    </div>
+    <div class="flipbook-nav">
+      <button class="nav-btn" id="btnPrev" onclick="navigate(-1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        Anterior
+      </button>
+      <div class="spread-dots" id="spreadDots"></div>
+      <button class="nav-btn" id="btnNext" onclick="navigate(1)">
+        Siguiente
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── ESTADO ──────────────────────────────────────────────
+let state = {
+  pages: 8,
+  totalPages: 8,
+  sheets: [],
+  spreads: [],
+  currentSpread: 0,
+  activeTab: 0
+};
+
+// ── LÓGICA DE IMPOSICIÓN ────────────────────────────────
+function calcImposition(n) {
+  const total = Math.ceil(n / 4) * 4;
+  const numSheets = total / 4;
+  const sheets = [];
+
+  for (let s = 0; s < numSheets; s++) {
+    const sheet = s + 1;
+    // Classic saddle-stitch imposition for folded booklets
+    // Sheet s (0-indexed): pages are arranged as:
+    // Side A: [total - 2*s - 1]  [2*s + 2]   (outer left, outer right when looking at front)
+    // Side B: [2*s + 1]          [total - 2*s]
+    // But displayed as spread (left | right):
+    // Side A left = total - 2*s,  Side A right = 2*s + 1   -> this is front face
+    // Side B left = 2*s + 2,      Side B right = total - 2*s - 1
+
+    const sideA_L = total - 2 * s;       // e.g. sheet1: 8
+    const sideA_R = 2 * s + 1;           // e.g. sheet1: 1
+    const sideB_L = 2 * s + 2;           // e.g. sheet1: 2
+    const sideB_R = total - 2 * s - 1;   // e.g. sheet1: 7
+
+    sheets.push({
+      sheet,
+      numSheets,
+      sideA: { left: sideA_L, right: sideA_R },
+      sideB: { left: sideB_L, right: sideB_R }
+    });
+  }
+  return { total, numSheets, sheets };
+}
+
+// Given a page number, find its sheet and side
+function findPage(sheets, pageNum) {
+  for (const sh of sheets) {
+    if (sh.sideA.left === pageNum || sh.sideA.right === pageNum)
+      return { sheet: sh.sheet, numSheets: sh.numSheets, side: 'A' };
+    if (sh.sideB.left === pageNum || sh.sideB.right === pageNum)
+      return { sheet: sh.sheet, numSheets: sh.numSheets, side: 'B' };
+  }
+  return null;
+}
+
+// Build spreads for flipbook
+// Spread 0: cover (page 1) alone on right
+// Spreads 1..n-2: pages 2-3, 4-5, ...
+// Last: back cover (last page) alone on left
+function buildSpreads(total) {
+  const spreads = [];
+  // First spread: cover
+  spreads.push({ type: 'cover', pages: [null, 1] });
+  // Middle spreads
+  for (let p = 2; p < total; p += 2) {
+    spreads.push({ type: 'inner', pages: [p, p + 1] });
+  }
+  // Back cover
+  spreads.push({ type: 'back', pages: [total, null] });
+  return spreads;
+}
+
+// ── RENDER ──────────────────────────────────────────────
+function isBlank(pg, original) { return pg > original; }
+
+function pageLabel(pg, original) {
+  if (pg === null) return null;
+  if (isBlank(pg, original)) return 'BLANK';
+  return pg;
+}
+
+function renderAll() {
+  const n = state.pages;
+  const { total, numSheets, sheets } = calcImposition(n);
+  state.totalPages = total;
+  state.sheets = sheets;
+  state.spreads = buildSpreads(total);
+  state.currentSpread = 0;
+
+  // Update badge
+  document.getElementById('sheetCount').textContent = numSheets;
+  document.getElementById('adjustedCount').textContent = total;
+
+  renderPanel0(sheets, n);
+  renderPanel1(sheets, n);
+  renderFlipbook();
+}
+
+function renderPanel0(sheets, orig) {
+  const grid = document.getElementById('sheetsGrid');
+  grid.innerHTML = '';
+
+  sheets.forEach(sh => {
+    const card = document.createElement('div');
+    card.className = 'sheet-card';
+
+    const sides = [
+      { label: 'Lado A', data: sh.sideA },
+      { label: 'Lado B', data: sh.sideB }
+    ];
+
+    card.innerHTML = `
+      <div class="sheet-card-header">
+        <span style="font-size:0.65rem;letter-spacing:.12em">HOJA</span>
+        <span class="sheet-number">${sh.sheet} / ${sh.numSheets}</span>
+      </div>
+      <div class="sheet-card-body">
+        ${sides.map(s => {
+          const lBlank = isBlank(s.data.left, orig);
+          const rBlank = isBlank(s.data.right, orig);
+          return `
+            <div class="side-row">
+              <div class="side-label">${s.label}</div>
+              <div class="side-pages">
+                <div class="page-slot ${lBlank ? 'blank' : ''}">
+                  <span class="slot-pos">Izq.</span>
+                  <span class="slot-num">${lBlank ? 'BLANK' : s.data.left}</span>
+                </div>
+                <div class="page-slot ${rBlank ? 'blank' : ''}">
+                  <span class="slot-pos">Der.</span>
+                  <span class="slot-num">${rBlank ? 'BLANK' : s.data.right}</span>
+                </div>
+              </div>
+            </div>`;
+        }).join('')}
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function renderPanel1(sheets, orig) {
+  const body = document.getElementById('tableBody');
+  body.innerHTML = '';
+
+  sheets.forEach(sh => {
+    [
+      { side: 'A', tag: 'side-a', data: sh.sideA },
+      { side: 'B', tag: 'side-b', data: sh.sideB }
+    ].forEach(s => {
+      const lBlank = isBlank(s.data.left, orig);
+      const rBlank = isBlank(s.data.right, orig);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><span class="sheet-id">Hoja ${sh.sheet} <span style="opacity:.4;font-weight:300">/ ${sh.numSheets}</span></span></td>
+        <td><span class="side-tag ${s.tag}">Lado ${s.side}</span></td>
+        <td>
+          <div class="pages-display">
+            <span class="pnum ${lBlank ? 'blank-p' : ''}">${lBlank ? 'BLK' : s.data.left}</span>
+          </div>
+        </td>
+        <td><span class="separator">|</span></td>
+        <td>
+          <div class="pages-display">
+            <span class="pnum ${rBlank ? 'blank-p' : ''}">${rBlank ? 'BLK' : s.data.right}</span>
+          </div>
+        </td>`;
+      body.appendChild(tr);
+    });
+  });
+}
+
+function renderFlipbook() {
+  const total = state.spreads.length;
+  document.getElementById('spreadTotal').textContent = total;
+  renderSpread();
+
+  // Dots
+  const dotsEl = document.getElementById('spreadDots');
+  dotsEl.innerHTML = '';
+  state.spreads.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'spread-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => { state.currentSpread = i; renderSpread(); updateDots(); };
+    dotsEl.appendChild(d);
+  });
+}
+
+function renderSpread() {
+  const sp = state.spreads[state.currentSpread];
+  const orig = state.pages;
+  const spread = document.getElementById('spread');
+  spread.innerHTML = '';
+
+  document.getElementById('spreadCurrent').textContent = state.currentSpread + 1;
+
+  const [leftPg, rightPg] = sp.pages;
+
+  function makePageEl(pg, side) {
+    const el = document.createElement('div');
+    const isLeft = side === 'left';
+
+    if (pg === null) {
+      // Hidden page (cover single or back single)
+      el.className = 'hidden-page-placeholder';
+      return el;
+    }
+
+    const blank = isBlank(pg, orig);
+    let classes = `book-page ${isLeft ? 'left-page spine-shadow-left' : 'right-page spine-shadow-right'}`;
+    if (sp.type === 'cover' && pg === 1) classes += ' cover-page';
+    if (sp.type === 'back') classes += ' back-cover';
+    if (blank) classes += ' blank-page';
+    el.className = classes;
+
+    if (blank) {
+      el.innerHTML = `
+        <div class="blank-icon">□</div>
+        <div class="page-label">Página en blanco</div>`;
+    } else {
+      const label = pg === 1 ? 'Portada' : pg === orig ? 'Contraportada' : `Página`;
+      el.innerHTML = `
+        <span class="page-corner-num">pág. ${pg}</span>
+        <div class="page-num-display">${pg}</div>
+        <div class="page-label">${label}</div>`;
+    }
+    return el;
+  }
+
+  spread.appendChild(makePageEl(leftPg, 'left'));
+  spread.appendChild(makePageEl(rightPg, 'right'));
+
+  // Imposition tag
+  updateImpoTag(sp);
+  updateNavButtons();
+  updateDots();
+}
+
+function updateImpoTag(sp) {
+  const orig = state.pages;
+  const tagText = document.getElementById('impoTagText');
+  const [l, r] = sp.pages;
+
+  // Collect non-null pages
+  const visiblePages = [l, r].filter(p => p !== null && !isBlank(p, orig));
+
+  if (visiblePages.length === 0) {
+    tagText.innerHTML = 'Esta vista contiene solo páginas en blanco añadidas para completar el cuaderno.';
+    return;
+  }
+
+  // Find sheet info for each page
+  const infos = visiblePages.map(p => findPage(state.sheets, p));
+
+  if (visiblePages.length === 1) {
+    const info = infos[0];
+    tagText.innerHTML = `La página <strong>${visiblePages[0]}</strong> se imprime en la <strong>Hoja ${info.sheet}</strong> de ${info.numSheets}, <span class="side-info">Lado ${info.side}</span>.`;
+    return;
+  }
+
+  // Both pages exist
+  const [infoL, infoR] = infos;
+  if (infoL.sheet === infoR.sheet && infoL.side === infoR.side) {
+    tagText.innerHTML = `Las páginas <strong>${l}</strong> y <strong>${r}</strong> pertenecen ambas a la <strong>Hoja ${infoL.sheet}</strong> de ${infoL.numSheets}, <span class="side-info">Lado ${infoL.side}</span>.`;
+  } else {
+    tagText.innerHTML = `Pág. <strong>${l}</strong> → <strong>Hoja ${infoL.sheet}</strong>, <span class="side-info">Lado ${infoL.side}</span> &nbsp;·&nbsp; Pág. <strong>${r}</strong> → <strong>Hoja ${infoR.sheet}</strong>, <span class="side-info">Lado ${infoR.side}</span>.`;
+  }
+}
+
+function updateNavButtons() {
+  document.getElementById('btnPrev').disabled = state.currentSpread === 0;
+  document.getElementById('btnNext').disabled = state.currentSpread === state.spreads.length - 1;
+}
+
+function updateDots() {
+  document.querySelectorAll('.spread-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === state.currentSpread);
+  });
+}
+
+// ── CONTROLES ───────────────────────────────────────────
+function navigate(dir) {
+  const next = state.currentSpread + dir;
+  if (next < 0 || next >= state.spreads.length) return;
+  state.currentSpread = next;
+  renderSpread();
+  updateDots();
+}
+
+function adjustPages(delta) {
+  const input = document.getElementById('pageCount');
+  let val = parseInt(input.value) + delta;
+  if (val < 1) val = 1;
+  if (val > 200) val = 200;
+  input.value = val;
+  triggerUpdate();
+}
+
+function triggerUpdate() {
+  const val = parseInt(document.getElementById('pageCount').value);
+  if (isNaN(val) || val < 1) return;
+  state.pages = Math.min(val, 200);
+  renderAll();
+}
+
+function switchTab(idx) {
+  state.activeTab = idx;
+  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  document.querySelectorAll('.panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+}
+
+document.getElementById('pageCount').addEventListener('input', () => {
+  clearTimeout(window._debounce);
+  window._debounce = setTimeout(triggerUpdate, 350);
+});
+
+// ── INIT ────────────────────────────────────────────────
+renderAll();
+</script>
+</body>
+</html>
