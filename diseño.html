@@ -6,19 +6,109 @@
     <title>Nueva Página - R.Mondragon</title>
     <link rel="icon" type="image/png" href="img/Icon.png">
     <link rel="stylesheet" href="css/estilos.css">
+    <style>
+        .nda-overlay {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 400px;
+            padding: 40px 20px;
+            gap: 16px;
+        }
+        .nda-overlay p {
+            max-width: 500px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .nda-overlay input {
+            padding: 10px 14px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 220px;
+        }
+        .nda-overlay button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            background-color: #222;
+            color: #fff;
+            cursor: pointer;
+        }
+        .nda-overlay button:hover {
+            background-color: #444;
+        }
+        .nda-error {
+            color: #c0392b;
+            font-size: 0.9rem;
+            min-height: 1.2em;
+        }
+        .nda-hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <!-- El menú se inserta automáticamente aquí -->
-
     <main class="main-content">
-        <!-- Aquí va tu contenido -->
-        
-    <iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/d5a485e7a0.html" style="border: 1px solid lightgray; width: 100%; height: 600px;"></iframe>
-        
+
+        <div id="ndaGate" class="nda-overlay">
+            <p>Los trabajos en este portfolio de diseño se encuentran bajo NDA, para acceder a ellos comunícate con el diseñador.</p>
+            <input type="password" id="ndaPassword" placeholder="Contraseña">
+            <button id="ndaSubmit">Acceder</button>
+            <div class="nda-error" id="ndaError"></div>
+        </div>
+
+        <div id="ndaContent" class="nda-hidden"></div>
+
     </main>
-
     <!-- El footer se inserta automáticamente aquí -->
-
     <script src="js/menu.js"></script>
+    <script>
+        (async function () {
+            // Hash SHA-256 de la contraseña correcta (no aparece en texto plano)
+            const HASH_ESPERADO = "3d1cf95c2c17cbb2fbe1f0463271bbbb2a70b03d5aacdba9ce3ed3f8cfb1af0";
+            // URL del iframe codificada en Base64 (no visible como texto legible)
+            const SRC_CODIFICADO = "aHR0cHM6Ly9oZXl6aW5lLmNvbS9mbGlwLWJvb2svZDVhNDg1ZTdhMC5odG1s";
+
+            const gate = document.getElementById("ndaGate");
+            const content = document.getElementById("ndaContent");
+            const input = document.getElementById("ndaPassword");
+            const button = document.getElementById("ndaSubmit");
+            const error = document.getElementById("ndaError");
+
+            async function sha256(texto) {
+                const buffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(texto));
+                return Array.from(new Uint8Array(buffer))
+                    .map(b => b.toString(16).padStart(2, "0"))
+                    .join("");
+            }
+
+            async function intentarAcceso() {
+                const hashIngresado = await sha256(input.value);
+                if (hashIngresado === HASH_ESPERADO) {
+                    const src = atob(SRC_CODIFICADO);
+                    content.innerHTML =
+                        '<iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="fp-iframe" src="' +
+                        src +
+                        '" style="border: 1px solid lightgray; width: 100%; height: 600px;"></iframe>';
+                    gate.classList.add("nda-hidden");
+                    content.classList.remove("nda-hidden");
+                } else {
+                    error.textContent = "Contraseña incorrecta. Inténtalo de nuevo.";
+                    input.value = "";
+                    input.focus();
+                }
+            }
+
+            button.addEventListener("click", intentarAcceso);
+            input.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") intentarAcceso();
+            });
+        })();
+    </script>
 </body>
 </html>
