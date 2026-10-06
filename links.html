@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roy Mondragón</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --text: #f4f7f0;
+    --glass: rgba(14, 28, 20, 0.45);
+    --glass-hover: rgba(244, 247, 240, 0.9);
+    --border: rgba(244, 247, 240, 0.35);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: "DM Sans", system-ui, sans-serif;
+    color: var(--text);
+    background: #17261c url("img/Forest-background2.jpg") center / cover fixed no-repeat;
+    display: flex;
+    justify-content: center;
+    padding: 56px 20px 48px;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(8, 18, 12, 0.35), rgba(8, 18, 12, 0.6));
+    z-index: 0;
+  }
+  main {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 460px;
+    text-align: center;
+  }
+  h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 8vw, 2.6rem);
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+  }
+  .sub {
+    margin: 6px 0 32px;
+    font-size: 1rem;
+    opacity: 0.9;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  }
+  ul { list-style: none; padding: 0; display: grid; gap: 14px; }
+  a {
+    display: block;
+    padding: 17px 22px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.05rem;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+  }
+  a:hover, a:focus-visible {
+    background: var(--glass-hover);
+    color: #14261a;
+    transform: scale(1.02);
+    outline: none;
+  }
+  a:focus-visible { box-shadow: 0 0 0 3px rgba(244, 247, 240, 0.6); }
+  @media (prefers-reduced-motion: reduce) {
+    a { transition: none; }
+    a:hover, a:focus-visible { transform: none; }
+  }
+</style>
+</head>
+<body>
+  <main>
+    <h1>Roy Mondragón</h1>
+    <p class="sub">Diseño, ilustración y cine</p>
+    <ul>
+      <li><a href="https://roymondragon.com/concept" target="_blank" rel="noopener">Concept / Ilustración</a></li>
+      <li><a href="https://roymondragon.com/book" target="_blank" rel="noopener">Book de diseño</a></li>
+      <li><a href="https://heyzine.com/flip-book/52b9428d33.html" target="_blank" rel="noopener">Florilegio</a></li>
+      <li><a href="https://www.youtube.com/watch?si=u7judCHu4DDUEgjF&amp;v=sJ2SYzYAWzs&amp;feature=youtu.be" target="_blank" rel="noopener">Ratán ShortFilm</a></li>
+      <li><a href="https://roymondragon.com/Nubes" target="_blank" rel="noopener">Nubes con forma de nube</a></li>
+      <li><a href="https://www.instagram.com/roy.fbx" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+  </main>
+</body>
+</html>
